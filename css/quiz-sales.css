@@ -2,6 +2,11 @@
    PADRÃO INTERROMPIDO™ - QUIZ SALES PAGE
    ============================================ */
 
+/* HIDE HEADER FOR QUIZ PAGE */
+.quiz-page header {
+  display: none;
+}
+
 /* HERO SECTION */
 .quiz-hero {
   background: #000000;
@@ -84,12 +89,19 @@
 .quiz-territories {
   background: #ffffff;
   padding: var(--spacing-xxl) var(--spacing-lg);
+  margin-top: 60px;
 }
 
 .quiz-territories h2 {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   margin-bottom: var(--spacing-sm);
   text-align: left;
+}
+
+.quiz-territories .section__subtitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
 }
 
 .territories-grid {
@@ -732,10 +744,15 @@
   display: inline-block;
 }
 
+.quiz-hero {
+  text-align: center;
+}
+
 .quiz-hero .cta-large {
   background: #ffffff;
   color: #000000;
   margin: var(--spacing-lg) auto;
+  display: inline-block;
 }
 
 .quiz-hero .cta-large:hover {
