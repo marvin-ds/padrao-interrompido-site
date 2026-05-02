@@ -20,6 +20,7 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-lg);
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -84,7 +85,7 @@
   font-size: 0.875rem;
   line-height: 2;
   margin-top: 12px;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: 80px;
 }
 
 /* TERRITORIES SECTION */
@@ -753,7 +754,7 @@
 .quiz-hero .cta-large {
   background: #10b981;
   color: #ffffff;
-  margin: var(--spacing-lg) auto;
+  margin: 20px auto 0;
   display: inline-block;
   font-weight: 700;
   border: none;
