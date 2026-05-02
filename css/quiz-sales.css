@@ -11,7 +11,7 @@
 .quiz-hero {
   background: #000000;
   color: #ffffff;
-  padding: 120px var(--spacing-lg) var(--spacing-xxl);
+  padding: 180px var(--spacing-lg) var(--spacing-xxl);
   text-align: center;
 }
 
@@ -20,7 +20,6 @@
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-lg);
-  margin-top: 40px;
   text-align: center;
 }
 
