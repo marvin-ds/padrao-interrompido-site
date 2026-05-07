@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padrão Interrompido™ - Descubra Seus 3 Segundos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --preto: #000000;
+            --azul-petroleo: #1B4D5C;
+            --branco-gelo: #F5F5F5;
+            --azul-gelo: #E8F1F3;
+            --laranja-interrupcao: #D47A3A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Lato', sans-serif;
+            background-color: var(--branco-gelo);
+            color: var(--preto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Modo Escuro */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, var(--preto) 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            color: var(--branco-gelo);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 122, 58, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color: var(--laranja-interrupcao);
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: rgba(245, 245, 245, 0.85);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .hero-text .microcopy {
+            font-size: 0.95rem;
+            color: var(--laranja-interrupcao);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .hero-text .cta-hero {
+            display: inline-block;
+            padding: 16px 32px;
+            background-color: var(--laranja-interrupcao);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: 2px solid var(--laranja-interrupcao);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .hero-text .cta-hero:hover {
+            background-color: transparent;
+            color: var(--laranja-interrupcao);
+        }
+
+        .hero-text .disclaimer {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8));
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Base */
+        .section {
+            padding: 100px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 50px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            color: var(--preto);
+        }
+
+        .section h2 span {
+            color: var(--laranja-interrupcao);
+        }
+
+        /* Bloco de Identificação */
+        .identification {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .id-card {
+            background-color: var(--azul-gelo);
+            padding: 30px;
+            border: 2px solid transparent;
+            border-left: 4px solid var(--laranja-interrupcao);
+            transition: all 0.3s ease;
+        }
+
+        .id-card:hover {
+            background-color: #dce6eb;
+            border-left-color: var(--preto);
+        }
+
+        .id-card h3 {
+            font-size: 1.4rem;
+            color: var(--preto);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .id-card p {
+            color: var(--azul-petroleo);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .identification-footer {
+            text-align: center;
+            color: var(--preto);
+            font-size: 1.1rem;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Bloco de Quebra de Crença */
+        .belief-break {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            position: relative;
+        }
+
+        .belief-break::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--laranja-interrupcao);
+        }
+
+        .belief-break h3 {
+            font-size: 1.4rem;
+            color: var(--preto);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .belief-break p {
+            color: var(--azul-petroleo);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+            font-size: 0.9rem;
+            color: var(--azul-petroleo);
+        }
+
+        .timeline-item.highlight {
+            color: var(--laranja-interrupcao);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .belief-break .signature {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--preto);
+        }
+
+        /* Bloco de Descobertas */
+        .discoveries {
+            margin-top: 60px;
+        }
+
+        .discoveries h3 {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .discovery-list {
+            list-style: none;
+            display: grid;
+            gap: 20px;
+        }
+
+        .discovery-list li {
+            padding: 20px;
+            background-color: var(--azul-gelo);
+            border-left: 4px solid var(--laranja-interrupcao);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--preto);
+        }
+
+        .discovery-list li::before {
+            content: '✓';
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin-right: 15px;
+            font-size: 1.3rem;
+        }
+
+        .discovery-alert {
+            background-color: rgba(212, 122, 58, 0.1);
+            border: 2px solid var(--laranja-interrupcao);
+            padding: 30px;
+            margin-top: 40px;
+            border-left: 5px solid var(--laranja-interrupcao);
+        }
+
+        .discovery-alert strong {
+            color: var(--laranja-interrupcao);
+            font-size: 1.1rem;
+        }
+
+        .discovery-alert p {
+            color: var(--preto);
+            margin-top: 10px;
+        }
+
+        /* Bloco de Tensão */
+        .tension-block {
+            background: var(--azul-gelo);
+            border: none;
+            padding: 60px;
+        }
+
+        .tension-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--preto);
+        }
+
+        .tension-list {
+            list-style: none;
+            display: grid;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .tension-list li {
+            padding: 15px 20px;
+            color: var(--preto);
+            font-size: 1.05rem;
+        }
+
+        .tension-list li::before {
+            content: '✗';
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .tension-block .closing {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+            font-size: 1.1rem;
+            color: var(--preto);
+            font-style: italic;
+        }
+
+        /* Formulário */
+        .form-section {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            margin-top: 60px;
+        }
+
+        .form-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .form-group {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group input {
+            padding: 14px 16px;
+            background-color: var(--branco-gelo);
+            border: 2px solid var(--azul-petroleo);
+            color: var(--preto);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--laranja-interrupcao);
+            background-color: white;
+        }
+
+        .form-group input::placeholder {
+            color: var(--azul-petroleo);
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--azul-petroleo);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .form-checkbox input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--laranja-interrupcao);
+        }
+
+        .form-checkbox label {
+            margin: 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: var(--preto);
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--laranja-interrupcao);
+            color: white;
+            border: 2px solid var(--laranja-interrupcao);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .form-button:hover {
+            background-color: transparent;
+            color: var(--laranja-interrupcao);
+        }
+
+        /* Bloco de Autoridade */
+        .authority {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .authority h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .authority p {
+            color: var(--azul-petroleo);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .authority .final-phrase {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+            font-size: 1.2rem;
+            color: var(--preto);
+            font-style: italic;
+        }
+
+        /* Rodapé Ético */
+        .ethical-footer {
+            padding: 40px;
+            background-color: var(--preto);
+            border-top: 5px solid var(--laranja-interrupcao);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--branco-gelo);
+            line-height: 1.7;
+        }
+
+        .ethical-footer p {
+            margin-bottom: 15px;
+        }
+
+        .ethical-footer a {
+            color: var(--laranja-interrupcao);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .ethical-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .belief-break {
+                padding: 40px;
+            }
+
+            .form-section {
+                padding: 40px 20px;
+            }
+
+            .authority {
+                padding: 40px 20px;
+            }
+
+            .timeline {
+                flex-direction: column;
+            }
+        }
+
+        /* Divisor sutil */
+        .divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 60px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Você não perde o controle na hora.<br><span>Você perde 3 segundos antes.</span></h1>
+
+                <p>Baixe gratuitamente o e-book <strong>Padrão Interrompido™</strong> e descubra por que você sempre volta ao mesmo ciclo — mesmo sabendo exatamente o que deveria fazer.</p>
+
+                <p class="microcopy">Hipnoterapia aplicada a padrões automáticos: alimentar, financeiro e decisório.</p>
+
+                <button class="cta-hero" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
+                    QUERO ENTENDER MEUS 3 SEGUNDOS
+                </button>
+
+                <p class="disclaimer">Leitura rápida • Sem promessa milagrosa • Sem papo de força de vontade</p>
+            </div>
+
+            <div class="hero-image">
+                <img src="./ebook-mockup.png" alt="Padrão Interrompido - Mockup do E-book" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Bloco de Identificação -->
+    <section class="section">
+        <h2>Talvez o seu padrão não pareça falta de controle.<br><span>Talvez pareça rotina.</span></h2>
+
+        <div class="identification">
+            <div class="id-card">
+                <h3>Alimentar</h3>
+                <p>Você chega em casa, abre a geladeira e só percebe na terceira colher.</p>
+            </div>
+            <div class="id-card">
+                <h3>Financeiro</h3>
+                <p>Você recebe dinheiro, compra "só dessa vez" e depois passa o mês fazendo malabarismo.</p>
+            </div>
+            <div class="id-card">
+                <h3>Decisório</h3>
+                <p>Você abre o computador para começar uma tarefa e, quando percebe, já está há 40 minutos no Instagram.</p>
+            </div>
+        </div>
+
+        <div class="identification-footer">
+            <strong>Cenas diferentes.<br>A mesma estrutura invisível.</strong>
+        </div>
+    </section>
+
+    <!-- Quebra de Crença -->
+    <section class="section">
+        <div class="belief-break">
+            <h3>O problema não é disciplina.<br>É que você está tentando agir tarde demais.</h3>
+
+            <p>A maioria das soluções tenta te controlar depois que o padrão já começou.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">Dieta</div>
+                <div class="timeline-item">Planilha</div>
+                <div class="timeline-item">Aplicativo</div>
+                <div class="timeline-item">Promessa</div>
+                <div class="timeline-item">Culpa</div>
+                <div class="timeline-item">Recomeço</div>
+            </div>
+
+            <p>Mas existe uma etapa antes da reação.</p>
+
+            <p style="font-size: 1.4rem; color: var(--preto); font-weight: 700; margin: 30px 0;">
+                A <span style="color: var(--laranja-interrupcao);">ATIVAÇÃO</span>
+            </p>
+
+            <p>É o momento em que o corpo reconhece o padrão e começa a executar antes da consciência chegar.</p>
+
+            <div class="signature">
+                Quando você percebe, já foi.<br>Eu trabalho antes disso.
+            </div>
+        </div>
+    </section>
+
+    <!-- Descobertas -->
+    <section class="section">
+        <h2>Dentro do e-book, você vai descobrir:</h2>
+
+        <ul class="discovery-list">
+            <li>O que acontece antes de você "perder o controle"</li>
+            <li>Por que força de vontade falha quando o corpo já ativou o padrão</li>
+            <li>Como funciona a cadeia: gatilho, ativação, reação e consequência</li>
+            <li>Por que seu padrão pode estar no território errado</li>
+            <li>O que observar hoje para começar a enxergar o mecanismo</li>
+            <li>Por que você não consegue mapear isso com precisão sozinha</li>
+        </ul>
+
+        <div class="discovery-alert">
+            <strong>Aviso:</strong> <p>Esse e-book não vai te dar uma dica genérica. Ele vai te mostrar por que as dicas genéricas falharam.</p>
+        </div>
+    </section>
+
+    <!-- Bloco de Tensão -->
+    <section class="section">
+        <div class="tension-block">
+            <h3>Você pode entender o padrão…<br>e ainda assim não saber onde ele começa em você.</h3>
+
+            <p>Porque o que mantém o ciclo vivo não é falta de informação.</p>
+
+            <p style="margin-top: 20px; font-size: 1.1rem; color: var(--preto);">É não saber:</p>
+
+            <ul class="tension-list">
+                <li>Qual é o seu território dominante</li>
+                <li>Qual é o seu gatilho real</li>
+                <li>Quanto tempo dura sua ativação</li>
+                <li>Quais sinais físicos aparecem antes da reação</li>
+                <li>Qual interrupção funciona para o seu caso</li>
+            </ul>
+
+            <div class="closing">
+                O e-book te mostra o mapa.<br>O próximo passo é descobrir o seu ponto exato.
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário -->
+    <section class="form-section">
+        <h3>Baixe seu e-book gratuito agora</h3>
+
+        <form id="captureForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+                <label for="name">Seu nome</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Seu e-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp (opcional)</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999">
+            </div>
+
+            <div class="form-checkbox">
+                <input type="checkbox" id="whatsapp-consent" name="whatsapp_consent">
+                <label for="whatsapp-consent">Posso receber lembretes e conteúdos curtos sobre padrões automáticos pelo WhatsApp</label>
+            </div>
+
+            <button type="submit" class="form-button">
+                QUERO ENTENDER MEUS 3 SEGUNDOS
+            </button>
+        </form>
+    </section>
+
+    <!-- Autoridade -->
+    <section class="section">
+        <div class="authority">
+            <h3>Quem criou o Padrão Interrompido™</h3>
+
+            <p>Marcos Vinicius é hipnoterapeuta e criador do método <strong>Padrão Interrompido™</strong>, uma abordagem aplicada ao mapeamento de comportamentos automáticos antes da reação consciente.</p>
+
+            <p>Seu trabalho não parte da ideia de "ter mais disciplina", mas de identificar o momento invisível onde o padrão começa a se formar.</p>
+
+            <div class="final-phrase">
+                Não é sobre resistir mais.<br>É sobre perceber antes.
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé Ético -->
+    <footer class="ethical-footer">
+        <p>
+            <strong>Aviso Legal:</strong> Este material é educativo e informativo. Não substitui acompanhamento médico, psicológico, nutricional ou financeiro. O Padrão Interrompido™ não promete cura, emagrecimento, enriquecimento ou resultado estético. Se você está enfrentando questões de saúde mental graves, procure um profissional qualificado.
+        </p>
+        <p>
+            © 2026 Marcos Vinicius — Todos os direitos reservados.<br>
+            <a href="https://instagram.com/marcosviniciius">@marcosviniciius</a> •
+            <a href="https://padraointerrompido.com.br">padraointerrompido.com.br</a>
+        </p>
+    </footer>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const whatsappConsent = document.getElementById('whatsapp-consent').checked;
+
+            console.log({
+                name,
+                email,
+                whatsapp,
+                whatsappConsent
+            });
+
+            alert(`✓ Perfeito, ${name}!\n\nSeu e-book está a caminho para ${email}.\n\nVerifique a caixa de entrada (e spam).`);
+
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
