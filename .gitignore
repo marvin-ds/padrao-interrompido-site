@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Environment variables
+.env.local
+.env.*.local
+
+# Netlify local files
+.netlify
+
+# Dependencies
+node_modules
+
+# Logs
+pnpm-debug.log*

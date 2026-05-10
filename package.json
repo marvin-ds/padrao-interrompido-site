@@ -1,0 +1,8 @@
+{
+  "name": "funil-ebook-quiz",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "dependencies": {
+    "resend": "^4.0.0"
+  }
+}
