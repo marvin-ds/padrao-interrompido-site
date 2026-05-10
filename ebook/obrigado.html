@@ -151,6 +151,51 @@
       color: var(--branco-gelo);
     }
 
+    .authority-section {
+      padding: 0 0 72px;
+    }
+
+    .authority {
+      background-color: var(--azul-gelo);
+      border: none;
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .authority h3 {
+      color: var(--preto);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .authority p {
+      color: var(--azul-petroleo);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .authority-photo {
+      border: 3px solid var(--laranja-interrupcao);
+      border-radius: 50%;
+      height: 150px;
+      margin: 0 auto 30px;
+      object-fit: cover;
+      width: 150px;
+    }
+
+    .authority .final-phrase {
+      border-top: 1px solid rgba(27, 77, 92, 0.2);
+      color: var(--preto);
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-top: 30px;
+      padding-top: 30px;
+    }
+
     .ethical-footer {
       background-color: var(--preto);
       border-top: 5px solid var(--laranja-interrupcao);
@@ -190,6 +235,10 @@
 
       .thank-you-card {
         padding: 28px;
+      }
+
+      .authority {
+        padding: 40px 20px;
       }
     }
   </style>
@@ -263,6 +312,24 @@
             Descobrir meu ponto de partida
           </a>
         </article>
+      </div>
+    </section>
+
+    <section class="authority-section">
+      <div class="container">
+        <div class="authority">
+          <img src="./marcos-vinicius.jpg" alt="Marcos Vinicius" class="authority-photo" loading="lazy">
+
+          <h3>Quem criou o Padrão Interrompido™</h3>
+
+          <p>Marcos Vinicius é hipnoterapeuta e criador do método <strong>Padrão Interrompido™</strong>, uma abordagem aplicada ao mapeamento de comportamentos automáticos antes da reação consciente.</p>
+
+          <p>Seu trabalho não parte da ideia de "ter mais disciplina", mas de identificar o momento invisível onde o padrão começa a se formar.</p>
+
+          <div class="final-phrase">
+            Não é sobre resistir mais.<br>É sobre perceber antes.
+          </div>
+        </div>
       </div>
     </section>
   </main>

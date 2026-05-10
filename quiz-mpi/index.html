@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Diagnóstico Padrão Interrompido™ — Descubra Onde Seu Padrão Começa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --preto: #000000;
+            --azul-petroleo: #1B4D5C;
+            --branco-gelo: #F5F5F5;
+            --azul-gelo: #E8F1F3;
+            --laranja-interrupcao: #D47A3A;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Lato', sans-serif;
+            background-color: var(--branco-gelo);
+            color: var(--preto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, var(--preto) 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            color: var(--branco-gelo);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 122, 58, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+        }
+
+        .hero-text .subheadline {
+            font-size: 1.1rem;
+            color: rgba(245, 245, 245, 0.9);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .hero-text .bullets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+            max-width: 600px;
+        }
+
+        .hero-text .bullets li {
+            list-style: none;
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.85);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .hero-text .bullets li::before {
+            content: '✓';
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--laranja-interrupcao);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            border: 2px solid var(--laranja-interrupcao);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 40px 0 20px 0;
+        }
+
+        .cta-primary:hover {
+            background-color: transparent;
+            color: var(--laranja-interrupcao);
+        }
+
+        .microcopy {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-top: 15px;
+        }
+
+        /* Section Base */
+        .section {
+            padding: 80px 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            color: var(--preto);
+        }
+
+        .section h2 span {
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+        }
+
+        .section p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--preto);
+        }
+
+        /* Bloco de Transição */
+        .transition-block {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            position: relative;
+        }
+
+        .transition-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--laranja-interrupcao);
+        }
+
+        .transition-block h3 {
+            font-size: 1.8rem;
+            color: var(--preto);
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .transition-block p {
+            color: var(--azul-petroleo);
+        }
+
+        .question-list {
+            list-style: none;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .question-list li {
+            padding: 15px 0;
+            color: var(--preto);
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(27, 77, 92, 0.1);
+        }
+
+        .question-list li::before {
+            content: '→';
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin-right: 15px;
+        }
+
+        /* Territórios */
+        .territories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .territory-card {
+            background-color: var(--azul-gelo);
+            padding: 30px;
+            border-left: 4px solid var(--laranja-interrupcao);
+        }
+
+        .territory-card h3 {
+            font-size: 1.3rem;
+            color: var(--preto);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .territory-card p {
+            color: var(--azul-petroleo);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .territory-card .insight {
+            color: var(--preto);
+            font-size: 0.95rem;
+            font-style: italic;
+            padding-top: 15px;
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+        }
+
+        /* Risk Block */
+        .risk-block {
+            background: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            margin: 60px 0;
+        }
+
+        .risk-block h3 {
+            font-size: 1.8rem;
+            color: var(--preto);
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .risk-list {
+            list-style: none;
+            display: grid;
+            gap: 20px;
+        }
+
+        .risk-list li {
+            padding: 20px;
+            color: var(--preto);
+            font-size: 1.05rem;
+            background-color: rgba(212, 122, 58, 0.08);
+            border-left: 4px solid var(--laranja-interrupcao);
+            line-height: 1.6;
+        }
+
+        /* What You Get */
+        .benefits-list {
+            display: grid;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .benefits-list li {
+            list-style: none;
+            padding: 15px;
+            background-color: var(--azul-gelo);
+            border-left: 4px solid var(--laranja-interrupcao);
+            color: var(--preto);
+            font-size: 1.05rem;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin-right: 15px;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .pricing-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .price-tag {
+            font-size: 3.5rem;
+            color: var(--laranja-interrupcao);
+            font-weight: 900;
+            margin: 30px 0;
+        }
+
+        .price-tag::before {
+            content: 'R$';
+            font-size: 2rem;
+        }
+
+        .cta-large {
+            display: inline-block;
+            padding: 20px 50px;
+            background-color: var(--laranja-interrupcao);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            border: 2px solid var(--laranja-interrupcao);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 30px 0;
+        }
+
+        .cta-large:hover {
+            background-color: transparent;
+            color: var(--laranja-interrupcao);
+        }
+
+        .price-microcopy {
+            font-size: 0.9rem;
+            color: var(--azul-petroleo);
+            margin-top: 20px;
+        }
+
+        /* Garantia */
+        .guarantee-section {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border-left: 5px solid var(--laranja-interrupcao);
+            margin: 60px 0;
+        }
+
+        .guarantee-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .guarantee-section p {
+            color: var(--azul-petroleo);
+        }
+
+        /* FAQ */
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background-color: var(--azul-gelo);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--laranja-interrupcao);
+        }
+
+        .faq-item h4 {
+            font-size: 1.1rem;
+            color: var(--preto);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .faq-item p {
+            color: var(--azul-petroleo);
+            font-size: 1rem;
+        }
+
+        /* Authority Section */
+        .authority {
+            background-color: var(--azul-gelo);
+            padding: 60px;
+            border: none;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .authority-photo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--laranja-interrupcao);
+        }
+
+        .authority h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--preto);
+        }
+
+        .authority p {
+            color: var(--azul-petroleo);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .authority .final-phrase {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+            font-size: 1.2rem;
+            color: var(--preto);
+            font-style: italic;
+        }
+
+        /* Rodapé Ético */
+        .ethical-footer {
+            padding: 40px;
+            background-color: var(--preto);
+            border-top: 5px solid var(--laranja-interrupcao);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--branco-gelo);
+            line-height: 1.7;
+        }
+
+        .ethical-footer p {
+            margin-bottom: 15px;
+        }
+
+        .ethical-footer a {
+            color: var(--laranja-interrupcao);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .ethical-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .hero-text .bullets {
+                grid-template-columns: 1fr;
+            }
+
+            .territories {
+                grid-template-columns: 1fr;
+            }
+
+            .transition-block,
+            .risk-block,
+            .pricing-section,
+            .guarantee-section,
+            .authority {
+                padding: 40px 20px;
+            }
+
+            .price-tag {
+                font-size: 2.5rem;
+            }
+
+            .cta-large {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Agora descubra onde o seu padrão <span>começa</span>.</h1>
+        <p class="subheadline">O e-book te mostrou o mecanismo. Este quiz diagnóstico te mostra o seu.</p>
+
+        <ul class="bullets">
+          <li>15 perguntas precisas</li>
+          <li>Resultado em 5 minutos</li>
+          <li>Diagnóstico visual</li>
+          <li>Plano de ação imediato</li>
+        </ul>
+
+        <a href="#checkout" class="cta-primary">COMEÇAR MEU DIAGNÓSTICO</a>
+        <p class="microcopy">Acesso imediato • Garantia 7 dias • R$17</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="transition-block">
+    <h3>O padrão é inteligente. Mas você não o vê quando está acontecendo.</h3>
+    <p>No e-book, você entendeu o mecanismo. Aqui, você descobre: <strong>em qual território ele está dominando você</strong> — e exatamente quando você pode interromper.</p>
+    <ul class="question-list">
+      <li>Em qual território seu padrão vive (Alimentar, Financeiro ou Decisório)?</li>
+      <li>Qual é seu gatilho real?</li>
+      <li>Quanto tempo você tem antes de reagir?</li>
+      <li>Como criar espaço para a escolha?</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Qual território domina <span>você</span>?</h2>
+    <div class="territories">
+      <div class="territory-card">
+        <h3>🍽️ ALIMENTAR</h3>
+        <p>Você chega em casa. Vai direto pra cozinha. Abre a geladeira sem pensar.</p>
+        <p class="insight"><em>E só percebe depois da terceira colher.</em></p>
+      </div>
+      <div class="territory-card">
+        <h3>💳 FINANCEIRO</h3>
+        <p>Notificação de pagamento. Você abre a loja. Adiciona no carrinho "só pra olhar".</p>
+        <p class="insight"><em>E só percebe no saldo do mês.</em></p>
+      </div>
+      <div class="territory-card">
+        <h3>⏰ DECISÓRIO</h3>
+        <p>Tarefa importante aparece. Você sente o peso. Abre o Instagram "só um segundo".</p>
+        <p class="insight"><em>E só percebe 2 horas depois, sob pressão total.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="risk-block">
+    <h3>Você pode estar resolvendo no <span>lugar errado</span>.</h3>
+    <ul class="risk-list">
+      <li><strong>Dieta trabalha em Alimentar</strong> — mas você está em Financeiro</li>
+      <li><strong>Planilha controla gastos</strong> — mas não mapeia o gatilho</li>
+      <li><strong>Produtividade "melhora foco"</strong> — mas não instala pausa antes</li>
+      <li><strong>Força de vontade chega tarde:</strong> padrão executa em 3 segundos, ela em 5</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>O que você vai <span>receber</span></h2>
+    <ul class="benefits-list">
+      <li>✓ Quiz de 15 perguntas muito precisas</li>
+      <li>✓ Diagnóstico visual interativo</li>
+      <li>✓ PDF com seu perfil comportamental</li>
+      <li>✓ Plano de 7 dias com técnica específica</li>
+      <li>✓ Seu "tempo de reação" mapeado</li>
+      <li>✓ Acesso à comunidade privada</li>
+      <li>✓ Suporte por 7 dias (garantia)</li>
+    </ul>
+  </section>
+
+  <section class="pricing-section">
+    <h3>Um investimento tão pequeno quanto o impacto é grande.</h3>
+    <div class="price-tag">17</div>
+    <a href="#checkout" class="cta-large">ACESSAR MEU DIAGNÓSTICO</a>
+    <p class="price-microcopy">Pagamento único • Acesso imediato</p>
+  </section>
+
+  <section class="guarantee-section">
+    <h3>✓ Garantia 7 dias</h3>
+    <p>Se em 7 dias você ver que o diagnóstico não mapeou seu padrão corretamente, devolvemos seu dinheiro. Sem perguntas. <strong>Porque isso não vai acontecer.</strong></p>
+  </section>
+
+  <section class="section">
+    <h2>Perguntas <span>Frequentes</span></h2>
+    <div class="faq-section">
+      <div class="faq-item">
+        <h4>Quanto tempo leva?</h4>
+        <p>O quiz em si? 5-7 minutos. O diagnóstico completo (com PDF e plano)? Você acessa em segundos.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Isso vai resolver meu padrão de uma vez?</h4>
+        <p>Não. Isso é o passo 1. Ver o padrão é diferente de conseguir interromper com consistência. Mas você não consegue fazer o passo 2 sem antes fazer o passo 1.</p>
+      </div>
+      <div class="faq-item">
+        <h4>E se eu não conseguir interromper mesmo sabendo?</h4>
+        <p>Por isso o plano inclui 7 dias de suporte. E por isso existem programas mais profundos depois. Mas a primeira coisa que você precisa é saber em qual território está operando.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Pode ser que nenhum dos 3 territórios seja meu?</h4>
+        <p>Improvável. Alimentar, Financeiro e Decisório cobrem quase 100% dos padrões automáticos em mulheres. O que pode acontecer é você ter dois territórios, mas um dominando o outro.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Como funciona a garantia?</h4>
+        <p>Se em 7 dias você achar que o diagnóstico não foi preciso, manda uma mensagem. A gente devolve 100% sem burocracia.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="authority">
+    <img src="./marcos-vinicius.jpg" alt="Marcos Vinícius" class="authority-photo">
+    <h3>Marcos Vinícius</h3>
+    <p>Especialista em padrões automáticos e comportamento humano. Trabalha com mulheres que sabem o que fazer — mas na hora não conseguem.</p>
+    <p>Criador do framework Padrão Interrompido™.</p>
+    <p class="final-phrase">"Você não come por fome. Você executa um padrão. E ele começa antes de você perceber."</p>
+  </section>
+
+  <section class="ethical-footer">
+    <p><strong>Padrão Interrompido™</strong> — Diagnóstico de Padrões Automáticos</p>
+    <p>Este é um produto educacional. Não substitui acompanhamento psicológico, psiquiátrico ou médico.</p>
+    <p style="margin-top: 30px; font-size: 0.8rem;">
+      <a href="./politica-privacidade.html">Política de Privacidade</a> •
+      <a href="./termos-uso.html">Termos de Uso</a>
+    </p>
+  </section>
+</body>
+</html>

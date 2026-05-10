@@ -14,20 +14,568 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS Global -->
-  <link rel="stylesheet" href="../css/global.css">
-  <!-- CSS Específico da Página Home -->
-  <link rel="stylesheet" href="../css/pages.css">
-
   <title>Padrão Interrompido™ - Método de Interrupção de Padrões Automáticos</title>
-</head>
-<body>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --preto: #000000;
+      --azul-petroleo: #1B4D5C;
+      --branco-gelo: #F5F5F5;
+      --azul-gelo: #E8F1F3;
+      --laranja-interrupcao: #D47A3A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Lato', sans-serif;
+      background-color: var(--branco-gelo);
+      color: var(--preto);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .max-width-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: var(--preto);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-decoration: none;
+      color: var(--branco-gelo);
+    }
+
+    .logo span {
+      color: var(--laranja-interrupcao);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: var(--branco-gelo);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--laranja-interrupcao);
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--preto) 0%, #0a1a1f 100%);
+      color: var(--branco-gelo);
+      padding: 120px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 122, 58, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__headline {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .hero__subheadline {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(245, 245, 245, 0.9);
+    }
+
+    .hero__signature {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 40px 0;
+      color: var(--laranja-interrupcao);
+    }
+
+    .hero__support {
+      font-size: 1rem;
+      margin: 40px auto;
+      max-width: 600px;
+      line-height: 1.8;
+      color: rgba(245, 245, 245, 0.85);
+    }
+
+    /* Section */
+    .section {
+      padding: 100px 30px;
+      background: var(--branco-gelo);
+    }
+
+    .section--light {
+      background: var(--azul-gelo);
+    }
+
+    .section--dark {
+      background: var(--preto);
+    }
+
+    .section__title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .section__title span {
+      color: var(--laranja-interrupcao);
+    }
+
+    .section__subtitle {
+      font-size: 1.1rem;
+      color: var(--azul-petroleo);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+    }
+
+    .card {
+      background: var(--azul-gelo);
+      padding: 30px;
+      border-left: 4px solid var(--laranja-interrupcao);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card__number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--laranja-interrupcao);
+      margin-bottom: 15px;
+    }
+
+    .card__title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--preto);
+      margin-bottom: 15px;
+    }
+
+    .card__text {
+      font-size: 1rem;
+      color: var(--azul-petroleo);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .card__text p {
+      margin-bottom: 12px;
+    }
+
+    .card__impact {
+      padding: 15px;
+      background: rgba(212, 122, 58, 0.1);
+      color: var(--preto);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-left: 3px solid var(--laranja-interrupcao);
+    }
+
+    /* Framework */
+    .framework {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 50px 0;
+      padding: 40px;
+      background: var(--azul-gelo);
+      border-radius: 4px;
+    }
+
+    .framework__item {
+      flex: 1;
+      min-width: 150px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .framework__label {
+      font-size: 0.85rem;
+      color: var(--laranja-interrupcao);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .framework__title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--preto);
+    }
+
+    /* CTA */
+    .cta-primary {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--laranja-interrupcao);
+      color: white;
+      border: 2px solid var(--laranja-interrupcao);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      margin: 30px 0;
+    }
+
+    .cta-primary:hover {
+      background: transparent;
+      color: var(--laranja-interrupcao);
+    }
+
+    /* Contrast Block */
+    .contrast-block {
+      background: var(--branco-gelo);
+      padding: 40px;
+      border-left: 5px solid var(--laranja-interrupcao);
+      margin: 40px 0;
+    }
+
+    .contrast-block__label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--preto);
+      margin-bottom: 20px;
+    }
+
+    .contrast-block__content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .contrast-block__list {
+      list-style: none;
+    }
+
+    .contrast-block__list li {
+      padding: 10px 0;
+      color: var(--azul-petroleo);
+      font-size: 1rem;
+    }
+
+    .contrast-block__keyline {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--preto);
+      padding-top: 30px;
+      border-top: 2px solid var(--laranja-interrupcao);
+    }
+
+    /* Manifesto */
+    .manifesto {
+      margin: 50px 0;
+    }
+
+    .manifesto__item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: rgba(212, 122, 58, 0.05);
+      border-left: 3px solid var(--laranja-interrupcao);
+      border-radius: 4px;
+    }
+
+    .manifesto__icon {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--laranja-interrupcao);
+      min-width: 40px;
+    }
+
+    .manifesto__item p {
+      color: var(--branco-gelo);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* Credentials */
+    .credentials__list {
+      list-style: none;
+      background: var(--branco-gelo);
+      padding: 30px;
+      border-left: 4px solid var(--laranja-interrupcao);
+    }
+
+    .credentials__list li {
+      padding: 12px 0;
+      color: var(--azul-petroleo);
+      font-size: 1rem;
+    }
+
+    .credentials__list li::before {
+      content: '✓ ';
+      color: var(--laranja-interrupcao);
+      font-weight: 900;
+      margin-right: 10px;
+    }
+
+    /* Stories Grid */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+    }
+
+    .story {
+      background: var(--branco-gelo);
+      padding: 30px;
+      border-left: 4px solid var(--laranja-interrupcao);
+      border-radius: 4px;
+    }
+
+    .story__quote {
+      color: var(--azul-petroleo);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .story__author {
+      color: var(--preto);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 20px;
+      background: var(--branco-gelo);
+      border-left: 4px solid var(--laranja-interrupcao);
+    }
+
+    .faq-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background: var(--azul-gelo);
+      border: none;
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--preto);
+      transition: all 0.3s ease;
+    }
+
+    .faq-trigger:hover {
+      background: rgba(27, 77, 92, 0.1);
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-trigger.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      display: none;
+      padding: 20px;
+      background: var(--branco-gelo);
+      color: var(--azul-petroleo);
+      line-height: 1.8;
+    }
+
+    .faq-content.active {
+      display: block;
+    }
+
+    .faq-content ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .faq-content li {
+      margin: 8px 0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--preto);
+      color: var(--branco-gelo);
+      padding: 60px 30px 30px;
+      border-top: 3px solid var(--laranja-interrupcao);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+    }
+
+    .footer-section h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--laranja-interrupcao);
+    }
+
+    .footer-section a {
+      color: var(--branco-gelo);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--laranja-interrupcao);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 10px;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(245, 245, 245, 0.8);
+    }
+
+    .footer-note {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 122, 58, 0.3);
+      font-size: 0.85rem;
+      color: rgba(245, 245, 245, 0.6);
+      line-height: 1.6;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .hero__headline {
+        font-size: 2rem;
+      }
+
+      .section__title {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 15px;
+        font-size: 0.95rem;
+      }
+
+      .contrast-block__content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .framework {
+        flex-direction: column;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .hero {
+        padding: 80px 20px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
   <!-- HEADER -->
   <header>
     <nav class="navbar">
@@ -43,14 +591,12 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
+    <div class="container max-width-container">
       <h1 class="hero__headline">O problema não é você.<br>É o momento que você ainda não aprendeu a ver.</h1>
 
       <div class="hero__subheadline">
         <p>Antes de comer sem fome.<br>Antes de gastar no impulso.<br>Antes de fugir da tarefa.<br>Antes de responder no automático.</p>
-
         <p><strong>Existe um intervalo invisível entre o gatilho e a reação.</strong></p>
-
         <p>É nesse ponto — segundos antes — que o Padrão Interrompido™ atua.</p>
       </div>
 
@@ -66,58 +612,34 @@
   </section>
 
   <!-- IDENTIFICAÇÃO -->
-  <section class="section" id="identificacao">
-    <div class="container">
-      <h2 class="section__title text-center">Você não percebe quando começa.<br>Só percebe quando já aconteceu.</h2>
+  <section class="section">
+    <div class="container max-width-container">
+      <h2 class="section__title text-center">Você não percebe quando <span>começa</span>.<br>Só percebe quando já aconteceu.</h2>
 
       <p class="section__subtitle text-center">É por isso que tanta gente confunde padrão automático com falta de disciplina. Mas, na maioria das vezes, o ciclo não começa na ação. Começa segundos antes.</p>
 
       <div class="cards-grid">
-        <!-- CARD 1 -->
         <div class="card">
-          <div class="card__number">01</div>
-          <h3 class="card__title">Alimentação</h3>
-          <div class="card__text">
-            <p>Você chega em casa cansada. Deixa a bolsa no sofá. Vai até a cozinha. Abre a geladeira.</p>
-            <p style="margin-top: var(--spacing-md);">Quando percebe, já está comendo.</p>
-            <p style="margin-top: var(--spacing-md); color: var(--color-teal); font-size: 14px;">"De novo. Eu nem vi quando começou."</p>
-          </div>
+          <h3 class="card__title">🍽️ Alimentação</h3>
+          <p class="card__text">Você chega em casa cansada. Deixa a bolsa no sofá. Vai até a cozinha. Abre a geladeira. Quando percebe, já está comendo.</p>
           <div class="card__impact">O padrão começou antes da geladeira.</div>
         </div>
 
-        <!-- CARD 2 -->
         <div class="card">
-          <div class="card__number">02</div>
-          <h3 class="card__title">Dinheiro</h3>
-          <div class="card__text">
-            <p>O dinheiro cai. Vem o alívio. Você pensa: "Dessa vez vou organizar."</p>
-            <p style="margin-top: var(--spacing-md);">Mas antes do plano, vem a compra pequena. Depois outra. Depois mais uma.</p>
-            <p style="margin-top: var(--spacing-md); color: var(--color-teal); font-size: 14px;">O ciclo já aconteceu.</p>
-          </div>
+          <h3 class="card__title">💳 Dinheiro</h3>
+          <p class="card__text">O dinheiro cai. Vem o alívio. Você pensa: "Dessa vez vou organizar." Mas antes do plano, vem a compra pequena. Depois outra.</p>
           <div class="card__impact">O padrão começou no alívio, não na compra.</div>
         </div>
 
-        <!-- CARD 3 -->
         <div class="card">
-          <div class="card__number">03</div>
-          <h3 class="card__title">Procrastinação</h3>
-          <div class="card__text">
-            <p>Você sabe exatamente o que precisa fazer. A tarefa está ali. O prazo está claro.</p>
-            <p style="margin-top: var(--spacing-md);">Mas algo pesa no peito. Você pega o celular por um segundo.</p>
-            <p style="margin-top: var(--spacing-md); color: var(--color-teal); font-size: 14px;">Passaram duas horas.</p>
-          </div>
+          <h3 class="card__title">⏰ Procrastinação</h3>
+          <p class="card__text">Você sabe exatamente o que precisa fazer. A tarefa está ali. Mas algo pesa no peito. Você pega o celular por um segundo.</p>
           <div class="card__impact">Não foi preguiça. Foi uma reação automática.</div>
         </div>
 
-        <!-- CARD 4 -->
         <div class="card">
-          <div class="card__number">04</div>
-          <h3 class="card__title">Reações Emocionais</h3>
-          <div class="card__text">
-            <p>Você promete que dessa vez vai responder diferente. A mensagem chega. O tom incomoda.</p>
-            <p style="margin-top: var(--spacing-md);">Quando percebe, já respondeu no impulso.</p>
-            <p style="margin-top: var(--spacing-md); color: var(--color-teal); font-size: 14px;">A reação parecia imediata. Mas teve um começo.</p>
-          </div>
+          <h3 class="card__title">😤 Reações Emocionais</h3>
+          <p class="card__text">Você promete que dessa vez vai responder diferente. A mensagem chega. O tom incomoda. Quando percebe, já respondeu.</p>
           <div class="card__impact">O padrão começou na ativação, não na resposta.</div>
         </div>
       </div>
@@ -127,26 +649,9 @@
   <!-- VIRADA DE PERCEPÇÃO -->
   <section class="section section--light">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">O padrão não começa onde você acha que começa.</h2>
+      <h2 class="section__title text-center">O padrão não começa onde você <span>acha</span> que começa.</h2>
 
-      <p class="section__subtitle text-center" style="margin-bottom: var(--spacing-2xl);">A maioria das pessoas tenta mudar no ponto errado.</p>
-
-      <ul style="list-style: none; margin-bottom: var(--spacing-xl);">
-        <li style="margin-bottom: var(--spacing-md); padding-left: var(--spacing-md);">
-          <strong style="color: var(--color-teal);">Tenta controlar</strong> a comida quando já está comendo.
-        </li>
-        <li style="margin-bottom: var(--spacing-md); padding-left: var(--spacing-md);">
-          <strong style="color: var(--color-teal);">Tenta controlar</strong> o gasto depois que já abriu o aplicativo.
-        </li>
-        <li style="margin-bottom: var(--spacing-md); padding-left: var(--spacing-md);">
-          <strong style="color: var(--color-teal);">Tenta vencer</strong> a procrastinação quando já está paralisada.
-        </li>
-        <li style="margin-bottom: var(--spacing-md); padding-left: var(--spacing-md);">
-          <strong style="color: var(--color-teal);">Tenta controlar</strong> a resposta quando o corpo já entrou em defesa.
-        </li>
-      </ul>
-
-      <p style="text-align: center; font-size: 18px; color: var(--color-gray); margin-bottom: var(--spacing-2xl);">Mas o comportamento automático não nasce na consequência. Ele nasce <strong>antes</strong>.</p>
+      <p class="section__subtitle text-center">A maioria das pessoas tenta mudar no ponto errado.</p>
 
       <div class="contrast-block">
         <div class="contrast-block__label">Muitas vezes não é apenas:</div>
@@ -162,7 +667,7 @@
             <li>Um gatilho que passou despercebido</li>
             <li>Uma ativação interna que você não nomeou</li>
             <li>Uma reação automática que assumiu o comando</li>
-            <li>Uma consequência que só aparece quando o ciclo já fechou</li>
+            <li>Uma consequência que só aparece quando o ciclo fechou</li>
           </ul>
         </div>
         <div class="contrast-block__keyline">Não é fraqueza. É mecanismo. E mecanismo pode ser observado, interrompido e treinado.</div>
@@ -172,8 +677,8 @@
 
   <!-- FRAMEWORK -->
   <section class="section" id="metodo">
-    <div class="container">
-      <h2 class="section__title text-center">Todo padrão automático tem uma sequência.</h2>
+    <div class="container max-width-container">
+      <h2 class="section__title text-center">Todo padrão automático tem uma <span>sequência</span>.</h2>
 
       <p class="section__subtitle text-center">O Padrão Interrompido™ organiza essa sequência em quatro etapas:</p>
 
@@ -181,54 +686,51 @@
         <div class="framework__item">
           <div class="framework__label">Etapa 1</div>
           <div class="framework__title">Gatilho</div>
-          <p style="font-size: 14px; color: var(--color-gray); margin-top: var(--spacing-sm);">O ponto que acende o ciclo</p>
+          <p>O ponto que acende o ciclo</p>
         </div>
-        <div style="text-align: center; font-size: 24px; color: var(--color-gray-light); display: flex; align-items: center; justify-content: center;">→</div>
+        <div style="font-size: 24px; color: var(--laranja-interrupcao);">→</div>
         <div class="framework__item">
           <div class="framework__label">Etapa 2</div>
           <div class="framework__title">Ativação</div>
-          <p style="font-size: 14px; color: var(--color-gray); margin-top: var(--spacing-sm);">O corpo entra antes da mente</p>
+          <p>O corpo entra antes da mente</p>
         </div>
-        <div style="text-align: center; font-size: 24px; color: var(--color-gray-light); display: flex; align-items: center; justify-content: center;">→</div>
+        <div style="font-size: 24px; color: var(--laranja-interrupcao);">→</div>
         <div class="framework__item">
           <div class="framework__label">Etapa 3</div>
           <div class="framework__title">Reação</div>
-          <p style="font-size: 14px; color: var(--color-gray); margin-top: var(--spacing-sm);">O automático assume o comando</p>
+          <p>O automático assume o comando</p>
         </div>
-        <div style="text-align: center; font-size: 24px; color: var(--color-gray-light); display: flex; align-items: center; justify-content: center;">→</div>
+        <div style="font-size: 24px; color: var(--laranja-interrupcao);">→</div>
         <div class="framework__item">
           <div class="framework__label">Etapa 4</div>
           <div class="framework__title">Consequência</div>
-          <p style="font-size: 14px; color: var(--color-gray); margin-top: var(--spacing-sm);">Quando a consciência chega tarde</p>
+          <p>Quando a consciência chega tarde</p>
         </div>
       </div>
 
-      <!-- DETALHAMENTO -->
-      <div style="margin-top: var(--spacing-2xl);">
-        <div class="cards-grid">
-          <div class="card">
-            <h3 class="card__title">1. Gatilho</h3>
-            <p class="card__text">O gatilho é o acontecimento inicial. Pode ser externo ou interno: uma notificação, uma frase, uma chegada em casa, uma sensação física ou uma memória.</p>
-            <div class="card__impact">O gatilho é pequeno. O efeito dele, não.</div>
-          </div>
+      <div class="cards-grid">
+        <div class="card">
+          <h3 class="card__title">1. Gatilho</h3>
+          <p class="card__text">O gatilho é o acontecimento inicial. Pode ser externo ou interno: uma notificação, uma frase, uma chegada em casa, uma sensação física ou uma memória.</p>
+          <div class="card__impact">O gatilho é pequeno. O efeito dele, não.</div>
+        </div>
 
-          <div class="card">
-            <h3 class="card__title">2. Ativação</h3>
-            <p class="card__text">É o corpo mudando de estado. Tensão subindo. Alívio procurando saída. Ansiedade tentando resolver algo rápido.</p>
-            <div class="card__impact">Aqui o padrão começa a ganhar força.</div>
-          </div>
+        <div class="card">
+          <h3 class="card__title">2. Ativação</h3>
+          <p class="card__text">É o corpo mudando de estado. Tensão subindo. Alívio procurando saída. Ansiedade tentando resolver algo rápido.</p>
+          <div class="card__impact">Aqui o padrão começa a ganhar força.</div>
+        </div>
 
-          <div class="card">
-            <h3 class="card__title">3. Reação</h3>
-            <p class="card__text">O comportamento visível. Comer. Comprar. Fugir. Adiar. Responder. Parece uma escolha, mas muitas vezes é apenas o padrão completando o caminho.</p>
-            <div class="card__impact">Você acha que escolheu. Mas, muitas vezes, só chegou atrasada.</div>
-          </div>
+        <div class="card">
+          <h3 class="card__title">3. Reação</h3>
+          <p class="card__text">O comportamento visível. Comer. Comprar. Fugir. Adiar. Responder. Parece uma escolha, mas muitas vezes é apenas o padrão completando o caminho.</p>
+          <div class="card__impact">Você acha que escolheu. Mas chegou atrasada.</div>
+        </div>
 
-          <div class="card">
-            <h3 class="card__title">4. Consequência</h3>
-            <p class="card__text">O momento em que você percebe o que aconteceu. Culpa. Frustração. Arrependimento. A promessa de que amanhã será diferente.</p>
-            <div class="card__impact">Quando você percebe aqui, já foi.</div>
-          </div>
+        <div class="card">
+          <h3 class="card__title">4. Consequência</h3>
+          <p class="card__text">O momento em que você percebe o que aconteceu. Culpa. Frustração. Arrependimento. A promessa de que amanhã será diferente.</p>
+          <div class="card__impact">Quando você percebe aqui, já foi.</div>
         </div>
       </div>
     </div>
@@ -237,28 +739,28 @@
   <!-- ONDE ATUA -->
   <section class="section section--light">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">Nós não trabalhamos no fim do ciclo.<br>Trabalhamos antes da reação.</h2>
+      <h2 class="section__title text-center">Nós não trabalhamos no fim do <span>ciclo</span>.<br>Trabalhamos antes da reação.</h2>
 
-      <p class="section__subtitle text-center" style="margin-bottom: var(--spacing-xl);">O Padrão Interrompido™ não parte da ideia de que você precisa se esforçar infinitamente para ser outra pessoa. Ele parte de uma pergunta mais precisa:</p>
+      <p class="section__subtitle text-center">O Padrão Interrompido™ não parte da ideia de que você precisa se esforçar infinitamente para ser outra pessoa. Ele parte de uma pergunta mais precisa:</p>
 
-      <div style="background: var(--color-white); padding: var(--spacing-xl); border-left: 4px solid var(--color-teal); border-radius: 4px; margin-bottom: var(--spacing-xl); text-align: center;">
-        <p style="font-size: 18px; font-weight: 600; color: var(--color-black);">Em que momento o padrão toma o controle antes de você perceber?</p>
+      <div style="background: var(--branco-gelo); padding: 30px; border-left: 4px solid var(--laranja-interrupcao); text-align: center; margin-bottom: 40px;">
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--preto);">Em que momento o padrão toma o controle antes de você perceber?</p>
       </div>
 
-      <p style="text-align: center; margin-bottom: var(--spacing-xl); font-size: 16px; line-height: 1.8;">A partir dessa pergunta, o método investiga a sequência e busca ampliar o <strong>intervalo entre ativação e reação</strong>.</p>
+      <p style="text-align: center; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.8; color: var(--azul-petroleo);">A partir dessa pergunta, o método investiga a sequência e busca ampliar o <strong>intervalo entre ativação e reação</strong>.</p>
 
-      <p style="text-align: center; font-size: 18px; font-weight: 600; color: var(--color-teal);">É nesse intervalo que nasce a possibilidade de escolha.</p>
+      <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--laranja-interrupcao);">É nesse intervalo que nasce a possibilidade de escolha.</p>
     </div>
   </section>
 
   <!-- 4 MOVIMENTOS -->
   <section class="section">
-    <div class="container">
-      <h2 class="section__title text-center">Como o Padrão Interrompido™ funciona</h2>
+    <div class="container max-width-container">
+      <h2 class="section__title text-center">Como o Padrão Interrompido™ <span>funciona</span></h2>
 
       <p class="section__subtitle text-center">O método não tenta brigar com o comportamento final. Ele volta alguns segundos antes.</p>
 
-      <div class="cards-grid" style="margin-top: var(--spacing-2xl);">
+      <div class="cards-grid">
         <div class="card">
           <div class="card__number">1</div>
           <h3 class="card__title">Mapear</h3>
@@ -288,89 +790,48 @@
         </div>
       </div>
 
-      <p style="text-align: center; font-size: 18px; font-weight: 600; color: var(--color-teal); margin-top: var(--spacing-2xl);">Você não precisa vencer o padrão na força. Precisa chegar antes dele.</p>
+      <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--laranja-interrupcao); margin-top: 40px;">Você não precisa vencer o padrão na força. Precisa chegar antes dele.</p>
     </div>
   </section>
 
   <!-- PARA QUEM É -->
   <section class="section section--light">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">Para pessoas que sabem o que precisam fazer, mas travam na hora.</h2>
+      <h2 class="section__title text-center">Para pessoas que sabem o que precisam <span>fazer</span>, mas travam na hora.</h2>
 
-      <p class="section__subtitle text-center" style="margin-bottom: var(--spacing-xl);">O Padrão Interrompido™ foi criado para pessoas que não precisam de mais uma explicação genérica sobre disciplina.</p>
+      <p class="section__subtitle text-center">O Padrão Interrompido™ foi criado para pessoas que não precisam de mais uma explicação genérica sobre disciplina.</p>
 
-      <div style="background: var(--color-white); padding: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
-        <p style="margin-bottom: var(--spacing-md); font-size: 16px;"><strong>Elas já sabem o que deveriam fazer.</strong></p>
-        <ul style="list-style: none; padding-left: var(--spacing-md);">
-          <li style="margin-bottom: var(--spacing-sm);">✓ Sabem que deveriam comer melhor</li>
-          <li style="margin-bottom: var(--spacing-sm);">✓ Gastar com mais consciência</li>
-          <li style="margin-bottom: var(--spacing-sm);">✓ Começar a tarefa antes</li>
-          <li style="margin-bottom: var(--spacing-sm);">✓ Responder com mais calma</li>
-          <li>✓ Parar de repetir certos ciclos</li>
+      <div style="background: var(--branco-gelo); padding: 30px; border-left: 4px solid var(--laranja-interrupcao); margin-bottom: 30px;">
+        <p style="margin-bottom: 15px; font-size: 1.05rem; font-weight: 600; color: var(--preto);">Elas já sabem o que deveriam fazer:</p>
+        <ul style="list-style: none; padding-left: 20px;">
+          <li style="margin-bottom: 8px; color: var(--azul-petroleo);">✓ Sabem que deveriam comer melhor</li>
+          <li style="margin-bottom: 8px; color: var(--azul-petroleo);">✓ Gastar com mais consciência</li>
+          <li style="margin-bottom: 8px; color: var(--azul-petroleo);">✓ Começar a tarefa antes</li>
+          <li style="margin-bottom: 8px; color: var(--azul-petroleo);">✓ Responder com mais calma</li>
+          <li style="color: var(--azul-petroleo);">✓ Parar de repetir certos ciclos</li>
         </ul>
-        <p style="margin-top: var(--spacing-md); font-size: 16px;"><strong>Mas, na hora, algo acontece.</strong></p>
+        <p style="margin-top: 15px; font-size: 1.05rem; font-weight: 600; color: var(--preto);">Mas, na hora, algo acontece.</p>
       </div>
 
-      <p style="text-align: center; margin-bottom: var(--spacing-xl); font-size: 16px; color: var(--color-gray);">Especialmente para quem vive frases como:</p>
+      <p style="text-align: center; font-size: 1.1rem; color: var(--azul-petroleo); margin-bottom: 30px;">Especialmente para quem vive frases como:</p>
 
-      <div style="background: #E8F1F3; padding: var(--spacing-lg); border-radius: 4px; margin-bottom: var(--spacing-xl);">
+      <div style="background: var(--azul-gelo); padding: 30px; border-left: 4px solid var(--laranja-interrupcao);">
         <ul style="list-style: none;">
-          <li style="margin-bottom: var(--spacing-sm); color: var(--color-gray-dark);">"Eu sei o que fazer, mas na hora não consigo."</li>
-          <li style="margin-bottom: var(--spacing-sm); color: var(--color-gray-dark);">"Eu prometo que vou mudar, mas repito."</li>
-          <li style="margin-bottom: var(--spacing-sm); color: var(--color-gray-dark);">"Eu só percebo depois."</li>
-          <li style="margin-bottom: var(--spacing-sm); color: var(--color-gray-dark);">"Parece que tem uma parte de mim que assume."</li>
+          <li style="margin-bottom: 12px; color: var(--azul-petroleo); font-size: 1rem;">"Eu sei o que fazer, mas na hora não consigo."</li>
+          <li style="margin-bottom: 12px; color: var(--azul-petroleo); font-size: 1rem;">"Eu prometo que vou mudar, mas repito."</li>
+          <li style="margin-bottom: 12px; color: var(--azul-petroleo); font-size: 1rem;">"Eu só percebo depois."</li>
+          <li style="color: var(--azul-petroleo); font-size: 1rem;">"Parece que tem uma parte de mim que assume."</li>
         </ul>
       </div>
 
-      <p style="text-align: center; font-size: 18px; font-weight: 600; color: var(--color-teal);">O Padrão Interrompido™ não fala com quem não sabe. Fala com quem sabe — mas perde o acesso a si no momento decisivo.</p>
-    </div>
-  </section>
-
-  <!-- TERRITÓRIOS -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title text-center">Onde os padrões aparecem</h2>
-
-      <p class="section__subtitle text-center">O método pode ser aplicado a diferentes comportamentos automáticos do cotidiano.</p>
-
-      <div class="cards-grid" style="margin-top: var(--spacing-xl);">
-        <div class="card">
-          <h3 class="card__title">Alimentação</h3>
-          <p class="card__text">Quando a comida vira resposta para cansaço, ansiedade, vazio ou sobrecarga.</p>
-          <div class="card__impact">Não começa na geladeira. Começa antes.</div>
-        </div>
-
-        <div class="card">
-          <h3 class="card__title">Dinheiro</h3>
-          <p class="card__text">Quando a compra vira alívio, recompensa, compensação ou fuga.</p>
-          <div class="card__impact">Não começa no pagamento. Começa antes.</div>
-        </div>
-
-        <div class="card">
-          <h3 class="card__title">Procrastinação</h3>
-          <p class="card__text">Quando a tarefa ativa medo, peso, cobrança ou sensação de incapacidade.</p>
-          <div class="card__impact">Não começa no Instagram. Começa antes.</div>
-        </div>
-
-        <div class="card">
-          <h3 class="card__title">Reações Emocionais</h3>
-          <p class="card__text">Quando a resposta automática aparece antes da presença.</p>
-          <div class="card__impact">Não começa na frase que você disse. Começa antes.</div>
-        </div>
-
-        <div class="card">
-          <h3 class="card__title">Autossabotagem</h3>
-          <p class="card__text">Quando você se aproxima de algo importante e, sem perceber, cria uma saída.</p>
-          <div class="card__impact">Não começa na desistência. Começa antes.</div>
-        </div>
-      </div>
+      <p style="text-align: center; font-size: 1.2rem; font-weight: 600; color: var(--laranja-interrupcao); margin-top: 40px;">O Padrão Interrompido™ não fala com quem não sabe.<br>Fala com quem sabe — mas perde o acesso a si no momento decisivo.</p>
     </div>
   </section>
 
   <!-- MANIFESTO -->
   <section class="section section--dark" id="manifesto">
     <div class="container max-width-container">
-      <h2 class="section__title text-center" style="color: var(--color-white);">Manifesto</h2>
+      <h2 class="section__title text-center" style="color: var(--branco-gelo);">Nosso <span>Manifesto</span></h2>
 
       <div class="manifesto">
         <div class="manifesto__item">
@@ -388,24 +849,24 @@
           <p>A promessa feita depois da culpa costuma durar pouco, porque ela chega tarde.</p>
         </div>
 
-        <div class="manifesto__item" style="border-color: var(--color-teal); background: transparent;">
-          <div class="manifesto__icon">→</div>
+        <div class="manifesto__item" style="background: transparent;">
+          <div class="manifesto__icon" style="color: var(--laranja-interrupcao);">→</div>
           <p>O ponto de mudança está <strong>antes</strong>.</p>
         </div>
 
-        <div class="manifesto__item" style="border-color: var(--color-teal); background: transparent;">
-          <div class="manifesto__icon">→</div>
+        <div class="manifesto__item" style="background: transparent;">
+          <div class="manifesto__icon" style="color: var(--laranja-interrupcao);">→</div>
           <p>Existe um momento em que o padrão ainda não virou ação. Um espaço pequeno. Quase invisível. Mas real.</p>
         </div>
 
-        <div class="manifesto__item" style="border-color: var(--color-teal); background: transparent;">
-          <div class="manifesto__icon">→</div>
+        <div class="manifesto__item" style="background: transparent;">
+          <div class="manifesto__icon" style="color: var(--laranja-interrupcao);">→</div>
           <p><strong>É ali que o Padrão Interrompido™ trabalha.</strong></p>
         </div>
       </div>
 
-      <div style="text-align: center; margin-top: var(--spacing-2xl); padding: var(--spacing-lg); border: 2px solid var(--color-teal); border-radius: 4px;">
-        <p style="font-size: 18px; font-weight: 600;">Quando você percebe depois, sobra culpa.<br>Quando você percebe antes, nasce escolha.</p>
+      <div style="text-align: center; margin-top: 40px; padding: 30px; border: 2px solid var(--laranja-interrupcao);">
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--branco-gelo);">Quando você percebe depois, sobra culpa.<br>Quando você percebe antes, nasce escolha.</p>
       </div>
     </div>
   </section>
@@ -413,194 +874,113 @@
   <!-- SOBRE -->
   <section class="section" id="sobre">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">Por trás do Padrão Interrompido™</h2>
+      <h2 class="section__title text-center">Por trás do Padrão <span>Interrompido™</span></h2>
 
-      <div style="background: var(--color-gray-light); padding: var(--spacing-xl); border-radius: 8px; margin-bottom: var(--spacing-xl);">
-        <p style="font-size: 16px; line-height: 1.8; margin-bottom: var(--spacing-md); color: var(--color-gray-dark);">O Padrão Interrompido™ é conduzido por <strong>Marcos Vinicius</strong>, operador e estudioso de padrões comportamentais, com experiência em processos de mudança, hipnoterapia aplicada e leitura de respostas automáticas.</p>
+      <div style="background: var(--azul-gelo); padding: 40px; border-left: 4px solid var(--laranja-interrupcao); margin-bottom: 40px;">
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; color: var(--azul-petroleo);">O Padrão Interrompido™ é conduzido por <strong>Marcos Vinicius</strong>, operador e estudioso de padrões comportamentais, com experiência em processos de mudança, hipnoterapia aplicada e leitura de respostas automáticas.</p>
 
-        <p style="font-size: 16px; line-height: 1.8; color: var(--color-gray-dark);">O método nasce da observação de um ponto comum em diferentes comportamentos repetitivos: <strong>a pessoa quase sempre sabe o que precisa fazer, mas perde o acesso à escolha no momento em que o padrão é ativado.</strong></p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--azul-petroleo);">O método nasce da observação de um ponto comum em diferentes comportamentos repetitivos: <strong>a pessoa quase sempre sabe o que precisa fazer, mas perde o acesso à escolha no momento em que o padrão é ativado.</strong></p>
       </div>
 
-      <h3 style="font-size: 20px; font-weight: 600; margin-bottom: var(--spacing-md);">Credenciais</h3>
+      <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; color: var(--preto);">Credenciais</h3>
 
-      <div class="credentials">
-        <ul class="credentials__list">
-          <li>8 anos de experiência com padrões comportamentais</li>
-          <li>Formação em hipnoterapia aplicada</li>
-          <li>Estudos em neuropsicologia comportamental</li>
-          <li>Mais de 500 atendimentos e processos acompanhados</li>
-          <li>Aplicação em padrões alimentares, financeiros, decisórios e emocionais</li>
-        </ul>
+      <div class="credentials__list">
+        <li>8 anos de experiência com padrões comportamentais</li>
+        <li>Formação em hipnoterapia aplicada</li>
+        <li>Estudos em neuropsicologia comportamental</li>
+        <li>Mais de 500 atendimentos e processos acompanhados</li>
+        <li>Aplicação em padrões alimentares, financeiros, decisórios e emocionais</li>
       </div>
 
-      <p style="margin-top: var(--spacing-xl); font-size: 14px; color: var(--color-gray); font-style: italic;">Essas informações são apresentadas com sobriedade, sem exagero e sem tom de "guru". A autoridade aqui vem da precisão.</p>
-    </div>
-  </section>
-
-  <!-- HISTÓRIAS -->
-  <section class="section section--light">
-    <div class="container">
-      <h2 class="section__title text-center">O que muda quando a pessoa começa a ver antes</h2>
-
-      <p class="section__subtitle text-center">Histórias de reconhecimento e transformação de perspectiva.</p>
-
-      <div class="stories-grid">
-        <div class="story">
-          <p class="story__quote">"Eu achava que o problema era a comida. Depois percebi que o padrão começava antes: no cansaço de chegar em casa e querer desligar de tudo. Pela primeira vez, consegui perceber o impulso antes de obedecer."</p>
-          <p class="story__author">M.S., 42 anos</p>
-        </div>
-
-        <div class="story">
-          <p class="story__quote">"Eu não comprava porque precisava. Eu comprava porque queria sentir alívio. Quando vi isso antes de clicar, pareceu que eu tinha acordado de um transe."</p>
-          <p class="story__author">R.O., 38 anos</p>
-        </div>
-
-        <div class="story">
-          <p class="story__quote">"Não era preguiça. Era fuga. Eu via a tarefa, sentia um peso e escapava antes mesmo de perceber. Aprender a ver esse momento mudou a forma como eu me observava."</p>
-          <p class="story__author">A.C., 36 anos</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- O QUE NÃO É -->
-  <section class="section">
-    <div class="container max-width-container">
-      <h2 class="section__title text-center">O que o Padrão Interrompido™ não é</h2>
-
-      <p class="section__subtitle text-center">Clareza sobre o que esperamos e o que não prometemos.</p>
-
-      <div style="background: #FFF5F5; padding: var(--spacing-lg); border-radius: 4px; margin-bottom: var(--spacing-xl);">
-        <p style="text-align: center; font-size: 16px; font-weight: 600; color: var(--color-teal); margin-bottom: var(--spacing-md);">Não é motivação. Não é promessa mágica. Não é força de vontade fantasiada de método.</p>
-      </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
-        <div>
-          <h4 style="font-weight: 600; margin-bottom: var(--spacing-md); color: var(--color-teal);">Não é:</h4>
-          <ul style="list-style: none;">
-            <li style="margin-bottom: var(--spacing-sm);">• Terapia clínica</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Tratamento médico</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Diagnóstico</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Promessa de cura</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Fórmula mágica</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Motivação de internet</li>
-            <li>• Positividade forçada</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 style="font-weight: 600; margin-bottom: var(--spacing-md); color: var(--color-teal);">É:</h4>
-          <ul style="list-style: none;">
-            <li style="margin-bottom: var(--spacing-sm);">• Leitura de padrões</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Identificação de gatilhos</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Percepção da ativação interna</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Criação de pausa</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Treino de nova resposta</li>
-            <li style="margin-bottom: var(--spacing-sm);">• Recuperação gradual de escolha</li>
-          </ul>
-        </div>
-      </div>
-
-      <p style="text-align: center; font-size: 18px; font-weight: 600; color: var(--color-teal);">A diferença entre promessa e método é precisão.</p>
-
-      <div style="background: var(--color-gray-light); padding: var(--spacing-lg); border-radius: 4px; margin-top: var(--spacing-xl);">
-        <p style="font-size: 14px; color: var(--color-gray); line-height: 1.8;"><strong>Importante:</strong> O Padrão Interrompido™ não substitui acompanhamento médico, psicológico ou psiquiátrico quando há sofrimento intenso, diagnóstico clínico ou necessidade de tratamento especializado.</p>
-      </div>
+      <p style="margin-top: 40px; font-size: 0.9rem; color: var(--azul-petroleo); font-style: italic;">Essas informações são apresentadas com sobriedade, sem exagero e sem tom de "guru". A autoridade aqui vem da precisão.</p>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="section section--light" id="faq">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">Perguntas Frequentes</h2>
+      <h2 class="section__title text-center">Perguntas <span>Frequentes</span></h2>
 
-      <div style="margin-top: var(--spacing-xl);">
-        <!-- FAQ 1 -->
+      <div style="margin-top: 50px;">
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>O que é o Padrão Interrompido™?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
             <p>É um método de observação e interrupção de padrões automáticos. Ele parte da ideia de que muitos comportamentos repetitivos seguem uma sequência:</p>
-            <p style="margin-top: var(--spacing-md); font-weight: 600;">Gatilho → Ativação → Reação → Consequência</p>
-            <p style="margin-top: var(--spacing-md);">O trabalho consiste em identificar essa sequência e ampliar o intervalo entre ativação e reação, onde a mudança ainda é possível.</p>
+            <p style="margin-top: 15px; font-weight: 600; color: var(--preto);">Gatilho → Ativação → Reação → Consequência</p>
+            <p style="margin-top: 15px;">O trabalho consiste em identificar essa sequência e ampliar o intervalo entre ativação e reação, onde a mudança ainda é possível.</p>
           </div>
         </div>
 
-        <!-- FAQ 2 -->
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>Por que "quando você percebe, já foi"?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
             <p>Porque muitas pessoas só tomam consciência do padrão depois que ele já aconteceu:</p>
-            <ul style="list-style: none; margin-top: var(--spacing-md);">
-              <li>• Depois que comeram</li>
-              <li>• Depois que compraram</li>
-              <li>• Depois que fugiram da tarefa</li>
+            <ul style="list-style: none; margin-top: 15px; padding-left: 20px;">
+              <li style="margin-bottom: 8px;">• Depois que comeram</li>
+              <li style="margin-bottom: 8px;">• Depois que compraram</li>
+              <li style="margin-bottom: 8px;">• Depois que fugiram da tarefa</li>
               <li>• Depois que reagiram no impulso</li>
             </ul>
-            <p style="margin-top: var(--spacing-md);">O Padrão Interrompido™ trabalha <strong>antes desse ponto</strong>, no intervalo onde você ainda pode criar uma pausa.</p>
+            <p style="margin-top: 15px;">O Padrão Interrompido™ trabalha <strong>antes desse ponto</strong>, no intervalo onde você ainda pode criar uma pausa.</p>
           </div>
         </div>
 
-        <!-- FAQ 3 -->
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>Isso é sobre força de vontade?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
             <p>Não.</p>
-            <p style="margin-top: var(--spacing-md);">Força de vontade tenta controlar a reação quando ela já está forte. O Padrão Interrompido™ busca perceber o ciclo antes da reação assumir o controle.</p>
-            <p style="margin-top: var(--spacing-md);">A lógica não é <strong>resistir mais</strong>. É <strong>chegar antes</strong>.</p>
+            <p style="margin-top: 15px;">Força de vontade tenta controlar a reação quando ela já está forte. O Padrão Interrompido™ busca perceber o ciclo antes da reação assumir o controle.</p>
+            <p style="margin-top: 15px;">A lógica não é <strong>resistir mais</strong>. É <strong>chegar antes</strong>.</p>
           </div>
         </div>
 
-        <!-- FAQ 4 -->
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>O que significa ativação?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
-            <p>Ativação é o estado interno que surge depois do gatilho e antes da reação.</p>
-            <p style="margin-top: var(--spacing-md);">Pode ser:</p>
-            <ul style="list-style: none; margin-top: var(--spacing-md);">
-              <li>• Ansiedade ou tensão</li>
-              <li>• Alívio ou urgência</li>
-              <li>• Vazio ou irritação</li>
+            <p>Ativação é o estado interno que surge depois do gatilho e antes da reação. Pode ser:</p>
+            <ul style="list-style: none; margin-top: 15px; padding-left: 20px;">
+              <li style="margin-bottom: 8px;">• Ansiedade ou tensão</li>
+              <li style="margin-bottom: 8px;">• Alívio ou urgência</li>
+              <li style="margin-bottom: 8px;">• Vazio ou irritação</li>
               <li>• Qualquer alteração interna que empurre você para o automático</li>
             </ul>
-            <p style="margin-top: var(--spacing-md);">É uma das etapas mais importantes do método, porque é ali que você pode intervir.</p>
+            <p style="margin-top: 15px;">É uma das etapas mais importantes do método, porque é ali que você pode intervir.</p>
           </div>
         </div>
 
-        <!-- FAQ 5 -->
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>O método serve para qualquer pessoa?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
             <p>Ele pode ajudar pessoas que desejam compreender padrões automáticos comportamentais do cotidiano.</p>
-            <p style="margin-top: var(--spacing-md);">Mas <strong>não substitui</strong> psicoterapia, avaliação médica, tratamento psiquiátrico ou acompanhamento especializado.</p>
-            <p style="margin-top: var(--spacing-md);">Quando existe <strong>sofrimento intenso, transtorno diagnosticado, risco à integridade ou uso de medicação</strong>, o acompanhamento profissional adequado é indispensável.</p>
+            <p style="margin-top: 15px;">Mas <strong>não substitui</strong> psicoterapia, avaliação médica, tratamento psiquiátrico ou acompanhamento especializado.</p>
+            <p style="margin-top: 15px;">Quando existe <strong>sofrimento intenso, transtorno diagnosticado, risco à integridade ou uso de medicação</strong>, o acompanhamento profissional adequado é indispensável.</p>
           </div>
         </div>
 
-        <!-- FAQ 6 -->
         <div class="faq-item">
-          <button class="faq-trigger" onclick="toggleFaq(this)">
+          <button class="faq-trigger" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
             <span>O objetivo é nunca mais repetir um padrão?</span>
             <span class="faq-icon">▼</span>
           </button>
           <div class="faq-content">
             <p>Não.</p>
-            <p style="margin-top: var(--spacing-md);">O objetivo é <strong>desenvolver percepção e ampliar o espaço de escolha</strong>.</p>
-            <p style="margin-top: var(--spacing-md);">Padrões podem reaparecer, especialmente em momentos de cansaço, estresse ou sobrecarga. A diferença é que, com treino, a pessoa começa a reconhecer o ciclo mais cedo — e pode agir no intervalo.</p>
+            <p style="margin-top: 15px;">O objetivo é <strong>desenvolver percepção e ampliar o espaço de escolha</strong>.</p>
+            <p style="margin-top: 15px;">Padrões podem reaparecer, especialmente em momentos de cansaço, estresse ou sobrecarga. A diferença é que, com treino, a pessoa começa a reconhecer o ciclo mais cedo — e pode agir no intervalo.</p>
           </div>
         </div>
       </div>
@@ -608,20 +988,17 @@
   </section>
 
   <!-- CTA FINAL -->
-  <section class="section" style="background: linear-gradient(135deg, var(--color-black) 0%, #0a2a35 100%); color: var(--color-white); text-align: center;">
+  <section class="section section--dark" style="text-align: center;">
     <div class="container max-width-container">
-      <h2 class="section__title" style="color: var(--color-white);">O padrão começa antes.<br>A mudança também.</h2>
+      <h2 class="section__title" style="color: var(--branco-gelo);">O padrão começa <span>antes</span>.<br>A mudança também.</h2>
 
-      <p style="font-size: 18px; line-height: 1.8; margin-bottom: var(--spacing-xl); color: #d0d0d0;">Se você só percebe depois, sobra culpa.</p>
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; color: rgba(245, 245, 245, 0.85);">Se você só percebe depois, sobra culpa.</p>
 
-      <p style="font-size: 18px; line-height: 1.8; margin-bottom: var(--spacing-2xl); color: #d0d0d0;">Mas quando aprende a reconhecer o gatilho, nomear a ativação e criar uma pausa antes da reação, algo muda.</p>
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; color: rgba(245, 245, 245, 0.85);">Mas quando aprende a reconhecer o gatilho, nomear a ativação e criar uma pausa antes da reação, algo muda.</p>
 
-      <p style="font-size: 18px; font-weight: 600; margin-bottom: var(--spacing-2xl); color: var(--color-white);">Você deixa de olhar apenas para a consequência.<br>E começa a enxergar o início.</p>
+      <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 40px; color: var(--branco-gelo);">Você deixa de olhar apenas para a consequência.<br>E começa a enxergar o início.</p>
 
-      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
-        <button class="cta-primary" onclick="alert('Em breve: Explorar o método')">Explorar o Método</button>
-        <button style="padding: var(--spacing-md) var(--spacing-xl); background: transparent; color: var(--color-white); border: 2px solid var(--color-white); border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onclick="alert('Em breve: Acompanhar conteúdos')">Acompanhar Conteúdos</button>
-      </div>
+      <button class="cta-primary">Explorar o Método</button>
     </div>
   </section>
 
@@ -661,14 +1038,14 @@
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <!-- Global JS -->
-  <script src="../js/global.js"></script>
-  <!-- Analytics -->
-  <script src="../js/analytics.js"></script>
-
-  <!-- Google Analytics 4 (descomente e adicione seu ID) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
-
+  <script>
+    // FAQ Toggle
+    document.querySelectorAll('.faq-trigger').forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+        this.nextElementSibling.classList.toggle('active');
+      });
+    });
+  </script>
 </body>
 </html>
