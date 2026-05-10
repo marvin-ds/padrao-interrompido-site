@@ -34,6 +34,18 @@ node_modules
 
 ## Variáveis usadas no projeto
 
+## Stack mínima atual
+
+Na fase inicial, a stack oficial é:
+
+- Zoho Mail apenas para e-mail corporativo do dia a dia.
+- Resend para e-mails transacionais.
+- Brevo para automação, campanhas e CRM simples inicial.
+- Eduzz para checkout e eventos comerciais.
+- Netlify para hospedagem e Functions.
+
+Zoho CRM e Zoho Marketing Automation foram considerados anteriormente, mas estão pausados nesta fase por custo e complexidade.
+
 ### Resend
 
 | Variável         | Descrição                          |
@@ -41,7 +53,22 @@ node_modules
 | `RESEND_API_KEY` | Chave de API do Resend.            |
 | `RESEND_FROM`    | Remetente usado no envio do ebook. |
 
-### Zoho CRM
+### Brevo
+
+| Variável                     | Descrição                                                       |
+| ---------------------------- | --------------------------------------------------------------- |
+| `BREVO_API_KEY`              | Chave de API do Brevo para criar/atualizar contatos.            |
+| `BREVO_LIST_ID_EBOOK`        | ID da lista de leads que baixaram o ebook.                      |
+| `BREVO_LIST_ID_QUIZ_INTERESSE` | ID da lista de leads com interesse no quiz.                   |
+| `BREVO_LIST_ID_CLIENTES_QUIZ` | ID da lista de clientes que compraram o quiz.                  |
+| `BREVO_SENDER_EMAIL`         | E-mail remetente usado em campanhas e automações no Brevo.      |
+| `BREVO_SENDER_NAME`          | Nome do remetente usado em campanhas e automações no Brevo.     |
+
+### Zoho CRM — pausado nesta fase inicial
+
+> Nota: Esta abordagem foi considerada anteriormente, mas foi pausada na fase inicial por custo e complexidade. A stack atual usa Brevo como CRM simples e automação.
+>
+> As variáveis de Zoho CRM foram mantidas apenas como referência histórica/técnica, mas não fazem parte da implementação mínima atual.
 
 | Variável             | Descrição                                     |
 | -------------------- | --------------------------------------------- |
@@ -81,7 +108,7 @@ node_modules
 
 * Nunca colocar API Keys no HTML, CSS ou JavaScript público.
 * Nunca commitadar `.env` no GitHub.
-* Nunca expor `ZOHO_CLIENT_SECRET`, `ZOHO_REFRESH_TOKEN` ou `RESEND_API_KEY` no front-end.
+* Nunca expor `BREVO_API_KEY`, `ZOHO_CLIENT_SECRET`, `ZOHO_REFRESH_TOKEN` ou `RESEND_API_KEY` no front-end.
 * Usar variáveis sensíveis apenas em Netlify Functions.
 * Usar `.env.example` apenas como referência.
 * Rotacionar chaves caso sejam expostas acidentalmente.

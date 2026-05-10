@@ -2,13 +2,257 @@
 
 ## 1. Visão Geral
 
-Este documento orienta a implementação técnica e estratégica do funil que começa na captura do ebook gratuito, passa pela nutrição do lead, apresenta o quiz pago de R$17 e conecta os pontos comerciais com Zoho CRM, Zoho Marketing Automation, Resend, Eduzz e agentes de WhatsApp.
+Este documento orienta a implementação técnica e estratégica do funil que começa na captura do ebook gratuito, passa pela nutrição do lead, apresenta o quiz pago de R$17 e conecta os pontos comerciais com Brevo, Resend, Eduzz e agentes de WhatsApp.
 
-O objetivo do funil é transformar interesse inicial em relacionamento organizado, entrega confiável e oferta contextual. A página `/ebook` captura nome, e-mail, WhatsApp e consentimento. A Netlify Function recebe os dados, valida as informações, salva ou atualiza o lead no Zoho CRM, dispara o envio transacional do ebook pelo Resend e retorna o redirecionamento para `/ebook/obrigado.html`.
+O objetivo do funil é transformar interesse inicial em relacionamento organizado, entrega confiável e oferta contextual. A página `/ebook` captura nome, e-mail, WhatsApp e consentimento. Na stack mínima atual, a Netlify Function deve receber os dados, validar as informações, criar ou atualizar o contato no Brevo, disparar o envio transacional do ebook pelo Resend e retornar o redirecionamento para `/ebook/obrigado.html`.
 
 A página de obrigado confirma a entrega, oferece o recebimento opcional pelo WhatsApp com o Agente Atendente e apresenta o quiz pago de R$17 como próximo passo natural. Leads que vieram pelo ebook devem ser direcionados para `/quiz-mpi`, enquanto tráfego frio de anúncios deve continuar indo para `/quiz`.
 
-O princípio central é simples: o Zoho deve ser o cérebro do relacionamento, o Resend deve entregar o ebook, a Eduzz deve processar a compra e os agentes de WhatsApp devem atuar com contexto, sem transformar o primeiro contato em pressão de venda.
+O princípio central da fase inicial é simples: o Brevo organiza relacionamento e nutrição, o Resend entrega mensagens transacionais, a Eduzz processa a compra e os agentes de WhatsApp devem atuar com contexto, sem transformar o primeiro contato em pressão de venda.
+
+## Decisão Atual de Stack — Fase Inicial
+
+Para a fase inicial do projeto, a stack mínima definida é:
+
+- **Zoho Mail**: usado apenas como provedor de e-mail corporativo do dia a dia.
+- **Resend**: usado apenas para e-mails transacionais, como envio de ebook, PDFs personalizados e mensagens técnicas.
+- **Brevo**: usado para automação de e-mail marketing, campanhas, segmentação e CRM simples inicial.
+- **Eduzz**: usado para checkout e processamento de compra do quiz.
+- **Netlify**: usado para hospedagem do site e Netlify Functions.
+- **GitHub**: usado para versionamento do projeto.
+
+A decisão evita contratar, neste início, múltiplas ferramentas pagas do ecossistema Zoho, como Zoho CRM e Zoho Marketing Automation.
+
+### Funil oficial atual
+
+```text
+Página de captura
+ ↓
+Brevo recebe o lead
+ ↓
+Resend envia o ebook/PDF
+ ↓
+Brevo nutre por e-mail
+ ↓
+Lead vai para /quiz-mpi
+ ↓
+Eduzz processa compra
+ ↓
+Brevo atualiza status do lead
+```
+
+### Funil expandido
+
+```text
+/ebook
+ ↓
+Lead preenche formulário
+ ↓
+Netlify Function recebe os dados
+ ↓
+Brevo cria/atualiza contato
+ ↓
+Resend envia ebook/PDF
+ ↓
+/ebook/obrigado.html
+ ↓
+Lead pode clicar para WhatsApp opcional ou para /quiz-mpi
+ ↓
+Brevo nutre quem ainda não comprou
+ ↓
+/quiz-mpi
+ ↓
+Checkout Eduzz
+ ↓
+Status de compra deve voltar para Brevo quando a integração estiver definida
+```
+
+### Papel de cada ferramenta
+
+#### Zoho Mail
+
+Usado apenas para e-mails corporativos do dia a dia, como:
+
+* [contato@dominio.com](mailto:contato@dominio.com)
+* [suporte@dominio.com](mailto:suporte@dominio.com)
+* [atendimento@dominio.com](mailto:atendimento@dominio.com)
+* [financeiro@dominio.com](mailto:financeiro@dominio.com)
+
+Não será usado como CRM.
+Não será usado como automação de campanhas.
+Não será usado como disparador principal de e-mails de marketing.
+
+#### Resend
+
+Usado apenas para e-mails transacionais, como:
+
+* entrega do ebook;
+* envio de PDF personalizado;
+* resultado do quiz;
+* confirmações técnicas;
+* mensagens geradas pelo sistema.
+
+Não será usado como ferramenta de campanhas ou nutrição.
+
+#### Brevo
+
+Usado como ferramenta principal da fase inicial para:
+
+* receber leads capturados;
+* organizar contatos;
+* segmentar leads;
+* criar listas;
+* criar atributos personalizados;
+* disparar campanhas;
+* criar automações de nutrição;
+* funcionar como CRM simples inicial.
+
+Nesta fase, o Brevo substitui a necessidade imediata de Zoho CRM e Zoho Marketing Automation.
+
+#### Eduzz
+
+Usado para:
+
+* checkout do quiz;
+* pagamento;
+* status de compra;
+* eventos comerciais;
+* recuperação futura de vendas.
+
+#### Netlify
+
+Usado para:
+
+* hospedar as páginas HTML;
+* executar Netlify Functions;
+* receber dados da página de captura;
+* enviar dados para Brevo;
+* acionar Resend para envio transacional.
+
+### Mudança em relação à arquitetura anterior
+
+A arquitetura anterior considerava:
+
+```text
+Página de captura
+ ↓
+Zoho CRM
+ ↓
+Zoho Marketing Automation
+ ↓
+Resend
+ ↓
+Eduzz
+```
+
+Essa arquitetura está pausada nesta fase inicial.
+
+A arquitetura atual passa a ser:
+
+```text
+Página de captura
+ ↓
+Brevo
+ ↓
+Resend
+ ↓
+Brevo nutrição
+ ↓
+Eduzz
+```
+
+Motivo da mudança:
+
+* reduzir custo inicial;
+* evitar contratar múltiplas ferramentas separadas;
+* simplificar implementação;
+* validar o funil antes de investir em CRM mais robusto;
+* manter Resend para o que ele já faz bem: transacional;
+* manter Zoho Mail apenas para e-mail corporativo.
+
+### Regras atuais de implementação
+
+A partir desta decisão:
+
+1. Novas integrações de leads devem priorizar Brevo, não Zoho CRM.
+2. A Netlify Function de captura deve futuramente criar/atualizar contato no Brevo.
+3. Resend continua enviando o ebook/PDF.
+4. Brevo deve cuidar das automações de nutrição.
+5. Zoho Mail não deve ser usado em automações de marketing.
+6. Zoho CRM não deve ser implementado agora, salvo decisão futura.
+7. Zoho Marketing Automation não deve ser implementado agora, salvo decisão futura.
+8. Qualquer documentação antiga sobre Zoho CRM deve ser marcada como abordagem anterior/pausada.
+
+### CRM nesta fase
+
+Nesta fase, CRM completo não é obrigatório.
+
+O necessário agora é uma base simples e organizada de leads dentro do Brevo, com dados como:
+
+* nome;
+* e-mail;
+* WhatsApp;
+* origem;
+* campanha;
+* página de captura;
+* baixou ebook;
+* clicou no quiz;
+* comprou quiz;
+* status do lead;
+* data de entrada;
+* última ação conhecida.
+
+O Brevo deve ser tratado como CRM simples inicial.
+
+Um CRM mais robusto poderá ser considerado depois, quando houver:
+
+* maior volume de leads;
+* equipe comercial;
+* pipeline manual;
+* necessidade de histórico comercial avançado;
+* múltiplos produtos;
+* necessidade de relatórios mais sofisticados.
+
+### Campos/atributos sugeridos no Brevo
+
+```text
+NOME
+EMAIL
+WHATSAPP
+ORIGEM
+CAMPANHA
+PAGINA_CAPTURA
+STATUS_LEAD
+BAIXOU_EBOOK
+CLICOU_QUIZ
+COMPROU_QUIZ
+PRODUTO_INTERESSE
+DATA_ENTRADA
+ULTIMA_ACAO
+```
+
+Listas sugeridas:
+
+```text
+Leads - Ebook
+Leads - Quiz Interesse
+Clientes - Quiz
+Nutrição - Ebook
+Recuperação - Quiz
+```
+
+Status sugeridos:
+
+```text
+novo_lead
+ebook_enviado
+em_nutricao
+clicou_quiz
+checkout_iniciado
+comprou_quiz
+recuperacao
+cliente
+```
 
 ## 2. Arquitetura do Projeto
 
@@ -26,7 +270,7 @@ O projeto é um site HTML estático hospedado no Netlify e sincronizado com GitH
 
 `/js` guarda scripts front-end, incluindo o script da captura do ebook e comportamentos da página de obrigado.
 
-`/netlify/functions` guarda serverless functions do Netlify. A Function `captura-ebook.js` deve centralizar integrações sensíveis com Zoho e Resend.
+`/netlify/functions` guarda serverless functions do Netlify. Na stack mínima atual, a Function `captura-ebook.js` deve centralizar integrações sensíveis com Brevo e Resend.
 
 `/css` guarda estilos do site. Ajustes visuais devem seguir a identidade já existente do projeto.
 
@@ -69,7 +313,7 @@ Captura: nome, e-mail e WhatsApp
         ↓
 Netlify Function
         ↓
-Zoho CRM
+Brevo
         ↓
 Resend envia ebook
         ↓
@@ -245,6 +489,8 @@ O retorno em caso de erro deve ser amigável, sem expor detalhes internos da int
 
 ## 8. Zoho CRM
 
+> Nota: Esta abordagem foi considerada anteriormente, mas foi pausada na fase inicial por custo e complexidade. A stack atual usa Brevo como CRM simples e automação.
+
 O Zoho CRM deve ser tratado como a base principal dos leads. Tudo que for relevante para relacionamento, segmentação e acompanhamento deve ser salvo nele: origem, consentimento, produto de interesse, etapa do funil, comportamento e compra.
 
 Campos sugeridos:
@@ -282,6 +528,8 @@ Os API Names reais do Zoho devem ser conferidos antes da implementação. O nome
 A criação ou atualização do lead deve preferir upsert por e-mail. Isso evita duplicidade em cadastros repetidos e permite enriquecer um lead já existente com novas tags, origem ou etapa do funil.
 
 ## 9. Zoho Marketing Automation
+
+> Nota: Esta abordagem foi considerada anteriormente, mas foi pausada na fase inicial por custo e complexidade. A stack atual usa Brevo como CRM simples e automação.
 
 A nutrição deve partir do Zoho CRM. O Marketing Automation deve receber leads segmentados por campos e tags, não por listas manuais soltas.
 
@@ -741,7 +989,7 @@ O consentimento deve ser salvo como campo no Zoho CRM, com data e origem quando 
 
 ## 22. Resumo Executivo
 
-O ebook captura. O Zoho organiza. O Resend entrega. A página de obrigado abre conversa. O WhatsApp acolhe. O quiz de R$17 monetiza o interesse. A Eduzz processa a venda. Os agentes acompanham quem demonstrou intenção.
+O ebook captura. O Brevo organiza e nutre. O Resend entrega. A página de obrigado abre conversa. O WhatsApp acolhe. O quiz de R$17 monetiza o interesse. A Eduzz processa a venda. Os agentes acompanham quem demonstrou intenção.
 
 ## Página de Obrigado do Ebook — Decisão Pendente
 
