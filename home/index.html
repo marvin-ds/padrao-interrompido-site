@@ -536,6 +536,70 @@
       line-height: 1.6;
     }
 
+    .authority-standard {
+      background-color: var(--azul-gelo);
+      border-left: 4px solid var(--laranja-interrupcao);
+      margin: 0 auto;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .authority-standard__photo {
+      border: 3px solid var(--laranja-interrupcao);
+      border-radius: 50%;
+      height: 150px;
+      margin: 0 auto 30px;
+      object-fit: cover;
+      width: 150px;
+    }
+
+    .authority-standard h3 {
+      color: var(--preto);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .authority-standard p {
+      color: var(--azul-petroleo);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .authority-standard__phrase {
+      border-top: 1px solid rgba(27, 77, 92, 0.2);
+      color: var(--preto);
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-top: 30px;
+      padding-top: 30px;
+    }
+
+    .ethical-footer {
+      background-color: var(--preto);
+      border-top: 5px solid var(--laranja-interrupcao);
+      color: var(--branco-gelo);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .ethical-footer p {
+      margin-bottom: 15px;
+    }
+
+    .ethical-footer a {
+      color: var(--laranja-interrupcao);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .ethical-footer a:hover {
+      text-decoration: underline;
+    }
+
     /* Responsivo */
     @media (max-width: 768px) {
       .hero__headline {
@@ -871,28 +935,22 @@
     </div>
   </section>
 
-  <!-- SOBRE -->
+  <!-- AUTORIDADE -->
   <section class="section" id="sobre">
     <div class="container max-width-container">
-      <h2 class="section__title text-center">Por trás do Padrão <span>Interrompido™</span></h2>
+      <div class="authority-standard">
+        <img src="/ebook/marcos-vinicius.jpg" alt="Marcos Vinicius" class="authority-standard__photo" loading="lazy">
 
-      <div style="background: var(--azul-gelo); padding: 40px; border-left: 4px solid var(--laranja-interrupcao); margin-bottom: 40px;">
-        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; color: var(--azul-petroleo);">O Padrão Interrompido™ é conduzido por <strong>Marcos Vinicius</strong>, operador e estudioso de padrões comportamentais, com experiência em processos de mudança, hipnoterapia aplicada e leitura de respostas automáticas.</p>
+        <h3>Quem criou o Padrão Interrompido™</h3>
 
-        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--azul-petroleo);">O método nasce da observação de um ponto comum em diferentes comportamentos repetitivos: <strong>a pessoa quase sempre sabe o que precisa fazer, mas perde o acesso à escolha no momento em que o padrão é ativado.</strong></p>
+        <p>Marcos Vinicius é hipnoterapeuta e criador do método <strong>Padrão Interrompido™</strong>, uma abordagem aplicada ao mapeamento de comportamentos automáticos antes da reação consciente.</p>
+
+        <p>Seu trabalho não parte da ideia de "ter mais disciplina", mas de identificar o momento invisível onde o padrão começa a se formar.</p>
+
+        <div class="authority-standard__phrase">
+          Não é sobre resistir mais.<br>É sobre perceber antes.
+        </div>
       </div>
-
-      <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; color: var(--preto);">Credenciais</h3>
-
-      <div class="credentials__list">
-        <li>8 anos de experiência com padrões comportamentais</li>
-        <li>Formação em hipnoterapia aplicada</li>
-        <li>Estudos em neuropsicologia comportamental</li>
-        <li>Mais de 500 atendimentos e processos acompanhados</li>
-        <li>Aplicação em padrões alimentares, financeiros, decisórios e emocionais</li>
-      </div>
-
-      <p style="margin-top: 40px; font-size: 0.9rem; color: var(--azul-petroleo); font-style: italic;">Essas informações são apresentadas com sobriedade, sem exagero e sem tom de "guru". A autoridade aqui vem da precisão.</p>
     </div>
   </section>
 
@@ -1003,39 +1061,22 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>Padrão Interrompido™</h4>
-        <div class="footer-tagline">
-          <p>Quando você percebe, já foi.</p>
-          <p>Nós trabalhamos antes disso.</p>
-        </div>
-      </div>
-
-      <div class="footer-section">
-        <h4>Explorar</h4>
-        <ul>
-          <li><a href="#metodo">Método</a></li>
-          <li><a href="#manifesto">Manifesto</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Contato</h4>
-        <ul>
-          <li><a href="mailto:marcos.cislene@gmail.com">marcos.cislene@gmail.com</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-note">
-      <p><strong>Nota importante:</strong> O Padrão Interrompido™ trabalha com observação e interrupção de padrões comportamentais. Não substitui acompanhamento médico, psicológico ou psiquiátrico. Quando há sofrimento intenso ou diagnóstico clínico, busque um profissional qualificado.</p>
-    </div>
+  <footer class="ethical-footer">
+    <p>
+      <strong>Aviso Legal:</strong> Este material é educativo e informativo. Não substitui acompanhamento médico, psicológico, nutricional ou financeiro. O Padrão Interrompido™ não promete cura, emagrecimento, enriquecimento ou resultado estético. Se você está enfrentando questões de saúde mental graves, procure um profissional qualificado.
+    </p>
+    <p>
+      © 2026 Marcos Vinicius — Todos os direitos reservados.<br>
+      <a href="https://instagram.com/marcosvinicius.mpi">@marcosvinicius.mpi</a> •
+      <a href="https://padraointerrompido.com.br">padraointerrompido.com.br</a>
+    </p>
+    <p>
+      Seus dados são tratados conforme a LGPD e usados apenas para comunicação, entrega de materiais e relacionamento com consentimento. Você pode solicitar atualização ou exclusão pelo e-mail <a href="mailto:contato@padraointerrompido.com.br">contato@padraointerrompido.com.br</a>.
+    </p>
+    <p>
+      <a href="https://padraointerrompido.com.br/politica-de-privacidade/">Política de Privacidade</a> •
+      <a href="https://padraointerrompido.com.br/termos-de-uso/">Termos de Uso</a>
+    </p>
   </footer>
 
   <script>

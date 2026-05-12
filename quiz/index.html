@@ -390,6 +390,71 @@
             font-style: italic;
         }
 
+        .authority {
+            background-color: var(--azul-gelo);
+            color: var(--preto);
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .authority-photo {
+            border: 3px solid var(--laranja-interrupcao);
+            border-radius: 50%;
+            height: 150px;
+            margin: 0 auto 30px;
+            object-fit: cover;
+            width: 150px;
+        }
+
+        .authority h3 {
+            color: var(--preto);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .authority p {
+            color: var(--azul-petroleo);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .authority .final-phrase {
+            border-top: 1px solid rgba(27, 77, 92, 0.2);
+            color: var(--preto);
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-top: 30px;
+            padding-top: 30px;
+        }
+
+        .ethical-footer {
+            background-color: var(--preto);
+            border-top: 5px solid var(--laranja-interrupcao);
+            color: var(--branco-gelo);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .ethical-footer p {
+            margin-bottom: 15px;
+        }
+
+        .ethical-footer a {
+            color: var(--laranja-interrupcao);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .ethical-footer a:hover {
+            text-decoration: underline;
+        }
+
         /* RESPONSIVO */
         @media (max-width: 768px) {
             .hero {
@@ -448,7 +513,7 @@
                 <li>Receba um plano inicial de 7 dias</li>
             </ul>
 
-            <button class="cta-button" onclick="scrollTo('.oferta-box')">FAZER MEU MAPEAMENTO AGORA — R$17</button>
+            <a class="cta-button" href="https://chk.eduzz.com/E05NO54G9X?utm_source=meta&utm_medium=quiz_frio&utm_campaign=quiz_17">FAZER MEU MAPEAMENTO AGORA — R$17</a>
 
             <div class="microcopy">15 perguntas • Resultado imediato • Pagamento único • Garantia de 7 dias de satisfação</div>
         </div>
@@ -683,7 +748,7 @@
 
             <p class="oferta-valor">Menos que uma compra por impulso.<br>Menos que um delivery de culpa.<br>Menos que mais uma tentativa no escuro.</p>
 
-            <button class="cta-button">FAZER MEU MAPEAMENTO AGORA</button>
+            <a class="cta-button" href="https://chk.eduzz.com/E05NO54G9X?utm_source=meta&utm_medium=quiz_frio&utm_campaign=quiz_17">FAZER MEU MAPEAMENTO AGORA</a>
 
             <div class="microcopy" style="margin-top: 20px;">Pagamento único • Acesso imediato • Resultado em poucos minutos</div>
         </div>
@@ -821,11 +886,45 @@
 
             <p style="margin-top: 30px; font-weight: 700; font-size: 17px;">O mapeamento te mostra o começo.</p>
 
-            <button class="cta-button" style="margin-top: 40px;">FAZER MEU MAPEAMENTO AGORA — R$17</button>
+            <a class="cta-button" style="margin-top: 40px;" href="https://chk.eduzz.com/E05NO54G9X?utm_source=meta&utm_medium=quiz_frio&utm_campaign=quiz_17">FAZER MEU MAPEAMENTO AGORA — R$17</a>
 
             <p class="frase-final">Quando você percebe, já foi.<br>O mapeamento começa antes disso.</p>
         </div>
     </section>
+
+    <section class="bloco dark">
+        <div class="authority">
+            <img src="/ebook/marcos-vinicius.jpg" alt="Marcos Vinicius" class="authority-photo" loading="lazy">
+
+            <h3>Quem criou o Padrão Interrompido™</h3>
+
+            <p>Marcos Vinicius é hipnoterapeuta e criador do método <strong>Padrão Interrompido™</strong>, uma abordagem aplicada ao mapeamento de comportamentos automáticos antes da reação consciente.</p>
+
+            <p>Seu trabalho não parte da ideia de "ter mais disciplina", mas de identificar o momento invisível onde o padrão começa a se formar.</p>
+
+            <div class="final-phrase">
+                Não é sobre resistir mais.<br>É sobre perceber antes.
+            </div>
+        </div>
+    </section>
+
+    <footer class="ethical-footer">
+        <p>
+            <strong>Aviso Legal:</strong> Este material é educativo e informativo. Não substitui acompanhamento médico, psicológico, nutricional ou financeiro. O Padrão Interrompido™ não promete cura, emagrecimento, enriquecimento ou resultado estético. Se você está enfrentando questões de saúde mental graves, procure um profissional qualificado.
+        </p>
+        <p>
+            © 2026 Marcos Vinicius — Todos os direitos reservados.<br>
+            <a href="https://instagram.com/marcosvinicius.mpi">@marcosvinicius.mpi</a> •
+            <a href="https://padraointerrompido.com.br">padraointerrompido.com.br</a>
+        </p>
+        <p>
+            Seus dados são tratados conforme a LGPD e usados apenas para comunicação, entrega de materiais e relacionamento com consentimento. Você pode solicitar atualização ou exclusão pelo e-mail <a href="mailto:contato@padraointerrompido.com.br">contato@padraointerrompido.com.br</a>.
+        </p>
+        <p>
+            <a href="https://padraointerrompido.com.br/politica-de-privacidade/">Política de Privacidade</a> •
+            <a href="https://padraointerrompido.com.br/termos-de-uso/">Termos de Uso</a>
+        </p>
+    </footer>
 
     <script>
         // FAQ Toggle
