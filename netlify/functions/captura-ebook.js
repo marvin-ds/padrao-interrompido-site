@@ -20,6 +20,15 @@ function normalizePhone(value = "") {
   return String(value).replace(/\D/g, "");
 }
 
+function normalizePublicUrl(value = "", fallbackUrl = "https://padraointerrompido.com.br/") {
+  const rawValue = sanitizeString(value || fallbackUrl);
+  const url = new URL(rawValue, "https://padraointerrompido.com.br");
+
+  url.pathname = url.pathname.replace(/\/ebook\/ebook\//g, "/ebook/");
+
+  return url.toString();
+}
+
 function normalizeBrevoPhone(phone = "") {
   const digits = normalizePhone(phone);
 
@@ -130,7 +139,11 @@ async function upsertContactBrevo(lead) {
 }
 
 async function sendEbookEmail(lead) {
-  const quizUrl = process.env.QUIZ_EBOOK_URL;
+  const ebookUrl = normalizePublicUrl(process.env.EBOOK_URL);
+  const quizUrl = normalizePublicUrl(
+    process.env.QUIZ_EBOOK_URL,
+    "https://padraointerrompido.com.br/quiz-mpi/"
+  );
 
   const html = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
@@ -139,7 +152,7 @@ async function sendEbookEmail(lead) {
       <p>Seu ebook gratuito está aqui:</p>
 
       <p>
-        <a href="${process.env.EBOOK_URL}" target="_blank" rel="noopener noreferrer">
+        <a href="${ebookUrl}" target="_blank" rel="noopener noreferrer">
           Clique aqui para baixar o ebook
         </a>
       </p>
@@ -163,15 +176,11 @@ async function sendEbookEmail(lead) {
         do ebook em um caminho mais claro, pessoal e aplicável.
       </p>
 
-      ${
-        quizUrl
-          ? `<p>
-              <a href="${quizUrl}" target="_blank" rel="noopener noreferrer">
-                Descobrir meu ponto de partida
-              </a>
-            </p>`
-          : ""
-      }
+      <p>
+        <a href="${quizUrl}" target="_blank" rel="noopener noreferrer">
+          Descobrir meu ponto de partida
+        </a>
+      </p>
 
       <p>
         Com carinho,<br>
@@ -183,7 +192,7 @@ async function sendEbookEmail(lead) {
   const text = `Oi, ${lead.nome}!
 
 Seu ebook gratuito está aqui:
-${process.env.EBOOK_URL}
+${ebookUrl}
 
 Leia com calma. A ideia não é só consumir mais um conteúdo, mas perceber onde o seu padrão começa a se repetir sem você notar.
 
@@ -191,14 +200,10 @@ E antes de tentar aplicar tudo de uma vez, existe um próximo passo que pode te 
 
 o Quiz de Mapeamento.
 
-Ele foi criado para revelar o seu ponto de partida e transformar o conteúdo do ebook em um caminho mais claro, pessoal e aplicável.${
-  quizUrl
-    ? `
+Ele foi criado para revelar o seu ponto de partida e transformar o conteúdo do ebook em um caminho mais claro, pessoal e aplicável.
 
 Descobrir meu ponto de partida:
-${quizUrl}`
-    : ""
-}
+${quizUrl}
 
 Com carinho,
 Equipe Padrão Interrompido`;
