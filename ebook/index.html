@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TCW949NK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-QJ7PW4HBRQ');
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '541342531532855');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Padrão Interrompido™ - Descubra Seus 3 Segundos</title>
@@ -455,6 +494,14 @@
             color: var(--preto);
         }
 
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
         .form-button {
             width: 100%;
             padding: 16px;
@@ -590,6 +637,13 @@
     </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCW949NK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -737,9 +791,20 @@
                 </label>
             </div>
 
-            <input type="hidden" name="origem" value="Página Ebook">
-            <input type="hidden" name="campanha" value="ebook_gratuito">
-            <input type="hidden" name="pagina" value="/ebook">
+            <input type="hidden" name="utm_source" id="utm_source">
+            <input type="hidden" name="utm_medium" id="utm_medium">
+            <input type="hidden" name="utm_campaign" id="utm_campaign">
+            <input type="hidden" name="utm_content" id="utm_content">
+            <input type="hidden" name="utm_term" id="utm_term">
+            <input type="hidden" name="origem" id="origem" value="ebook">
+            <input type="hidden" name="campanha" id="campanha" value="ebook_gratuito">
+            <input type="hidden" name="pagina" id="pagina" value="/ebook">
+            <input type="hidden" name="form_started_at" id="form_started_at">
+
+            <div class="hp-field" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
 
             <button type="submit" class="form-button">
                 QUERO ENTENDER MEUS 3 SEGUNDOS
@@ -788,6 +853,11 @@
     <script>
         const formEbook = document.getElementById("formEbook");
         const mensagemFormEbook = document.getElementById("mensagemFormEbook");
+        const formStartedAt = document.getElementById("form_started_at");
+
+        if (formStartedAt) {
+            formStartedAt.value = String(Date.now());
+        }
 
         if (formEbook) {
             formEbook.addEventListener("submit", async function (event) {
@@ -823,7 +893,22 @@
                         throw new Error(dados.message || "Erro ao enviar cadastro.");
                     }
 
-                    window.location.href = dados.redirect || "/ebook/obrigado.html";
+                    if (window.trackFunnelEvent) {
+                        window.trackFunnelEvent(
+                            "generate_lead",
+                            {
+                                lead_source: "ebook",
+                                product: "ebook_padrao_interrompido",
+                                funnel_step: "ebook_capture",
+                                page: "/ebook"
+                            },
+                            "Lead"
+                        );
+                    }
+
+                    window.setTimeout(function () {
+                        window.location.href = dados.redirect || "/ebook/obrigado.html";
+                    }, 250);
                 } catch (erro) {
                     console.error("Erro no envio do formulário do ebook:", erro);
 
@@ -840,5 +925,6 @@
             });
         }
     </script>
+  <script src="/js/tracking.js"></script>
 </body>
 </html>

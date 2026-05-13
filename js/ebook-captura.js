@@ -2,7 +2,7 @@
   const whatsappButton = document.getElementById("whatsapp-ebook");
 
   if (whatsappButton) {
-    const numeroAtendente = "5519999999999";
+    const numeroAtendente = "5513997615872";
     const mensagem = encodeURIComponent(
       "Oi, acabei de me cadastrar para receber o ebook gratuito. Pode me enviar por aqui também?"
     );

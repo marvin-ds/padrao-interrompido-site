@@ -8,16 +8,96 @@ function jsonResponse(statusCode, payload) {
   };
 }
 
+const MAX_BODY_BYTES = 10 * 1024;
+const MIN_FORM_SECONDS = 3;
+const FIELD_LIMITS = {
+  nome: 120,
+  email: 254,
+  whatsapp: 20,
+  utm_source: 150,
+  utm_medium: 150,
+  utm_campaign: 150,
+  utm_content: 150,
+  utm_term: 150,
+  origem: 80,
+  campanha: 150,
+  pagina: 200,
+  status_funil: 80
+};
+
 function sanitizeString(value = "") {
-  return String(value).trim();
+  return String(value).replace(/<[^>]*>/g, "").trim();
+}
+
+function sanitizeLimitedString(value = "", maxLength = 150) {
+  return sanitizeString(value).slice(0, maxLength);
 }
 
 function normalizeEmail(value = "") {
-  return sanitizeString(value).toLowerCase();
+  return sanitizeLimitedString(value, FIELD_LIMITS.email).toLowerCase();
 }
 
 function normalizePhone(value = "") {
+  return String(value).replace(/\D/g, "").slice(0, FIELD_LIMITS.whatsapp);
+}
+
+function getPhoneDigits(value = "") {
   return String(value).replace(/\D/g, "");
+}
+
+function getHeader(headers = {}, name = "") {
+  const normalizedName = name.toLowerCase();
+  const entry = Object.entries(headers).find(([key]) => key.toLowerCase() === normalizedName);
+
+  return entry ? String(entry[1]) : "";
+}
+
+function isBodyTooLarge(body = "") {
+  return Buffer.byteLength(String(body || ""), "utf8") > MAX_BODY_BYTES;
+}
+
+function parseJsonBody(body = "") {
+  try {
+    return {
+      ok: true,
+      data: JSON.parse(body || "{}")
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      data: {}
+    };
+  }
+}
+
+function isRequiredFieldTooLong(value = "", maxLength = 120) {
+  return sanitizeString(value).length > maxLength;
+}
+
+function isSuspiciousBotSubmission(body = {}) {
+  if (sanitizeString(body.website)) {
+    return true;
+  }
+
+  if (!body.form_started_at) {
+    return false;
+  }
+
+  const startedAt = Number(body.form_started_at);
+
+  if (!Number.isFinite(startedAt) || startedAt <= 0) {
+    return false;
+  }
+
+  return Date.now() - startedAt < MIN_FORM_SECONDS * 1000;
+}
+
+function genericAcceptedResponse() {
+  return jsonResponse(200, {
+    success: true,
+    message: "Lead salvo e ebook enviado.",
+    redirect: "/ebook/obrigado.html"
+  });
 }
 
 function normalizePublicUrl(value = "", fallbackUrl = "https://padraointerrompido.com.br/") {
@@ -25,6 +105,18 @@ function normalizePublicUrl(value = "", fallbackUrl = "https://padraointerrompid
   const url = new URL(rawValue, "https://padraointerrompido.com.br");
 
   url.pathname = url.pathname.replace(/\/ebook\/ebook\//g, "/ebook/");
+
+  return url.toString();
+}
+
+function withDefaultParams(urlValue, defaults = {}) {
+  const url = new URL(urlValue, "https://padraointerrompido.com.br");
+
+  Object.entries(defaults).forEach(([key, value]) => {
+    if (value && !url.searchParams.has(key)) {
+      url.searchParams.set(key, value);
+    }
+  });
 
   return url.toString();
 }
@@ -65,6 +157,7 @@ function getOptionalNumberEnv(key) {
 
 function validateEnv() {
   const required = [
+    "BREVO_API_KEY",
     "RESEND_API_KEY",
     "RESEND_FROM",
     "EBOOK_URL"
@@ -79,18 +172,58 @@ function validateEnv() {
 }
 
 async function upsertContactBrevo(lead) {
-  if (!process.env.BREVO_API_KEY) {
-    console.warn("BREVO_API_KEY ausente. Lead não enviado ao Brevo nesta execução.");
-    return null;
-  }
-
   const { firstName, lastName } = splitName(lead.nome);
   const brevoPhone = normalizeBrevoPhone(lead.whatsapp);
   const listIds = [
     getOptionalNumberEnv("BREVO_LIST_ID_EBOOK")
   ].filter(Boolean);
 
-  const payload = {
+  async function sendBrevoContact(payload, attemptName) {
+    const response = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      console.error("Falha ao criar/atualizar contato no Brevo:", {
+        attempt: attemptName,
+        status: response.status,
+        code: data.code,
+        message: data.message
+      });
+
+      return {
+        ok: false,
+        status: response.status,
+        data
+      };
+    }
+
+    return {
+      ok: true,
+      data
+    };
+  }
+
+  function withListIds(payload) {
+    if (listIds.length === 0) {
+      return payload;
+    }
+
+    return {
+      ...payload,
+      listIds
+    };
+  }
+
+  const fullPayload = withListIds({
     email: lead.email,
     attributes: {
       FIRSTNAME: firstName,
@@ -100,49 +233,84 @@ async function upsertContactBrevo(lead) {
       ORIGEM: lead.origem,
       CAMPANHA: lead.campanha,
       PAGINA_CAPTURA: lead.pagina,
+      PAGINA: lead.pagina,
+      UTM_SOURCE: lead.utm_source,
+      UTM_MEDIUM: lead.utm_medium,
+      UTM_CAMPAIGN: lead.utm_campaign,
+      UTM_CONTENT: lead.utm_content,
+      UTM_TERM: lead.utm_term,
       STATUS_LEAD: "ebook_enviado",
+      STATUS_FUNIL: lead.status_funil || "baixou_ebook",
       BAIXOU_EBOOK: true,
       PRODUTO_INTERESSE: "Ebook gratuito"
     },
     emailBlacklisted: false,
     smsBlacklisted: false,
     updateEnabled: true
-  };
-
-  if (listIds.length > 0) {
-    payload.listIds = listIds;
-  }
-
-  const response = await fetch("https://api.brevo.com/v3/contacts", {
-    method: "POST",
-    headers: {
-      "api-key": process.env.BREVO_API_KEY,
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(payload)
   });
 
-  const data = await response.json().catch(() => ({}));
+  const minimalPayload = withListIds({
+    email: lead.email,
+    attributes: {
+      FIRSTNAME: firstName,
+      LASTNAME: lastName
+    },
+    emailBlacklisted: false,
+    smsBlacklisted: false,
+    updateEnabled: true
+  });
 
-  if (!response.ok) {
-    console.error("Falha ao criar/atualizar contato no Brevo:", {
-      status: response.status,
-      code: data.code,
-      message: data.message
-    });
+  const minimalWithoutListPayload = {
+    ...minimalPayload
+  };
+  delete minimalWithoutListPayload.listIds;
 
-    return null;
+  const fullAttempt = await sendBrevoContact(fullPayload, "full_payload");
+  if (fullAttempt.ok) {
+    return fullAttempt.data;
   }
 
-  return data;
+  const minimalAttempt = await sendBrevoContact(minimalPayload, "minimal_payload");
+  if (minimalAttempt.ok) {
+    console.warn(
+      "Contato registrado no Brevo com payload mínimo. Confira se os atributos customizados existem no Brevo."
+    );
+
+    return minimalAttempt.data;
+  }
+
+  if (listIds.length > 0) {
+    const minimalWithoutListAttempt = await sendBrevoContact(
+      minimalWithoutListPayload,
+      "minimal_payload_without_list"
+    );
+
+    if (minimalWithoutListAttempt.ok) {
+      console.warn(
+        "Contato registrado no Brevo sem lista. Confira se BREVO_LIST_ID_EBOOK corresponde a uma lista existente."
+      );
+
+      return minimalWithoutListAttempt.data;
+    }
+  }
+
+  throw new Error("Falha ao registrar lead no Brevo.");
 }
 
 async function sendEbookEmail(lead) {
   const ebookUrl = normalizePublicUrl(process.env.EBOOK_URL);
-  const quizUrl = normalizePublicUrl(
-    process.env.QUIZ_EBOOK_URL,
-    "https://padraointerrompido.com.br/quiz-mpi/"
+  const quizUrl = withDefaultParams(
+    normalizePublicUrl(
+      process.env.QUIZ_EBOOK_URL,
+      "https://padraointerrompido.com.br/quiz-mpi/"
+    ),
+    {
+      utm_source: "resend",
+      utm_medium: "email",
+      utm_campaign: "entrega_ebook",
+      utm_content: "cta_quiz",
+      origem: "ebook"
+    }
   );
 
   const html = `
@@ -258,18 +426,68 @@ exports.handler = async function (event) {
     });
   }
 
+  const contentType = getHeader(event.headers, "content-type");
+
+  if (!contentType.includes("application/json")) {
+    return jsonResponse(400, {
+      success: false,
+      message: "Requisição inválida."
+    });
+  }
+
+  if (isBodyTooLarge(event.body)) {
+    return jsonResponse(413, {
+      success: false,
+      message: "Requisição muito grande."
+    });
+  }
+
+  const parsedBody = parseJsonBody(event.body);
+
+  if (!parsedBody.ok) {
+    return jsonResponse(400, {
+      success: false,
+      message: "Requisição inválida."
+    });
+  }
+
   try {
     validateEnv();
 
-    const body = JSON.parse(event.body || "{}");
+    const body = parsedBody.data;
 
-    const nome = sanitizeString(body.nome);
+    if (isSuspiciousBotSubmission(body)) {
+      console.warn("Submissão suspeita bloqueada por honeypot ou tempo mínimo.");
+      return genericAcceptedResponse();
+    }
+
+    if (
+      isRequiredFieldTooLong(body.nome, FIELD_LIMITS.nome) ||
+      isRequiredFieldTooLong(body.email, FIELD_LIMITS.email) ||
+      getPhoneDigits(body.whatsapp).length > FIELD_LIMITS.whatsapp
+    ) {
+      return jsonResponse(400, {
+        success: false,
+        message: "Preencha nome, e-mail, WhatsApp e aceite o consentimento."
+      });
+    }
+
+    const nome = sanitizeLimitedString(body.nome, FIELD_LIMITS.nome);
     const email = normalizeEmail(body.email);
     const whatsapp = normalizePhone(body.whatsapp);
     const consentimento = body.consentimento;
-    const origem = sanitizeString(body.origem || "Página Ebook");
-    const campanha = sanitizeString(body.campanha || "ebook_gratuito");
-    const pagina = sanitizeString(body.pagina || "/ebook");
+    const origem = sanitizeLimitedString(body.origem || "ebook", FIELD_LIMITS.origem);
+    const campanha = sanitizeLimitedString(body.campanha || "ebook_gratuito", FIELD_LIMITS.campanha);
+    const pagina = sanitizeLimitedString(body.pagina || "/ebook", FIELD_LIMITS.pagina);
+    const utm_source = sanitizeLimitedString(body.utm_source, FIELD_LIMITS.utm_source);
+    const utm_medium = sanitizeLimitedString(body.utm_medium, FIELD_LIMITS.utm_medium);
+    const utm_campaign = sanitizeLimitedString(body.utm_campaign, FIELD_LIMITS.utm_campaign);
+    const utm_content = sanitizeLimitedString(body.utm_content, FIELD_LIMITS.utm_content);
+    const utm_term = sanitizeLimitedString(body.utm_term, FIELD_LIMITS.utm_term);
+    const status_funil = sanitizeLimitedString(
+      body.status_funil || "baixou_ebook",
+      FIELD_LIMITS.status_funil
+    );
 
     if (!nome || !email || !whatsapp || !consentimento) {
       return jsonResponse(400, {
@@ -298,7 +516,13 @@ exports.handler = async function (event) {
       whatsapp,
       origem,
       campanha,
-      pagina
+      pagina,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_content,
+      utm_term,
+      status_funil
     };
 
     await upsertContactBrevo(lead);

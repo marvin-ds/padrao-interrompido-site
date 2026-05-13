@@ -90,6 +90,8 @@ Zoho CRM e Zoho Marketing Automation foram considerados anteriormente, mas estã
 | -------------------- | --------------------------------------- |
 | `WHATSAPP_ATENDENTE` | Número do agente atendente no WhatsApp. |
 
+Número oficial atual: `5513997615872`.
+
 ### Quiz
 
 | Variável         | Descrição                                                    |

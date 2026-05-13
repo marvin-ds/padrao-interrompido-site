@@ -1,3 +1,120 @@
+# Segurança Operacional — Correções Fase 1
+
+Data: 2026-05-12
+
+Esta seção resume as correções de baixo risco aplicadas após a auditoria registrada em `/docs/AUDITORIA_SEGURANCA_LGPD.md`.
+
+## Headers de Segurança
+
+O projeto usa o arquivo `/_headers` na raiz para configurar headers servidos pela Netlify em todas as rotas.
+
+Headers configurados:
+
+- `Strict-Transport-Security`
+- `X-Content-Type-Options`
+- `Referrer-Policy`
+- `Permissions-Policy`
+- `X-Frame-Options`
+- `Content-Security-Policy`
+
+A CSP atual é inicial e moderada. Ela foi desenhada para preservar scripts internos, Google Tag Manager, Google Analytics 4, Meta Pixel, links e frames necessários da Eduzz e fontes do Google Fonts quando usadas.
+
+Teste obrigatório após deploy:
+
+- Google Tag Assistant;
+- Meta Pixel Helper;
+- GTM Preview;
+- GA4 DebugView;
+- clique para checkout Eduzz;
+- envio real do formulário do ebook.
+
+## Honeypot
+
+O formulário de `/ebook/index.html` possui um campo invisível chamado `website`.
+
+Usuários reais não devem preencher esse campo. Bots simples tendem a preencher todos os inputs. Quando `website` chega preenchido na Function, a submissão é tratada como suspeita:
+
+- não envia para Brevo;
+- não envia e-mail pelo Resend;
+- retorna uma resposta genérica controlada para não revelar a regra ao bot.
+
+## Timestamp Anti-Bot
+
+O formulário também possui o campo hidden `form_started_at`, preenchido no carregamento com `Date.now()`.
+
+A Function compara esse timestamp com o horário de recebimento. Submissões feitas em menos de 3 segundos são tratadas como suspeitas.
+
+Se o timestamp estiver ausente por alguma falha do navegador, a submissão não é bloqueada imediatamente nesta fase. Isso evita quebrar usuários reais enquanto o comportamento é monitorado.
+
+## Limites Server-Side
+
+A Function `captura-ebook.js` aplica os seguintes limites:
+
+| Campo | Limite |
+| --- | --- |
+| Body HTTP | 10 KB |
+| `nome` | 120 caracteres |
+| `email` | 254 caracteres |
+| `whatsapp` | 20 dígitos |
+| `utm_source` | 150 caracteres |
+| `utm_medium` | 150 caracteres |
+| `utm_campaign` | 150 caracteres |
+| `utm_content` | 150 caracteres |
+| `utm_term` | 150 caracteres |
+| `origem` | 80 caracteres |
+| `campanha` | 150 caracteres |
+| `pagina` | 200 caracteres |
+| `status_funil` | 80 caracteres |
+
+Campos obrigatórios inválidos são rejeitados. Campos opcionais longos são truncados de forma segura.
+
+## Tratamento de JSON Inválido
+
+Payloads com JSON inválido retornam status `400`, sem cair no erro genérico `500`.
+
+Payloads acima de 10 KB retornam status `413`.
+
+Métodos diferentes de `POST` retornam status `405`.
+
+## Logs
+
+Os logs da Function não devem registrar:
+
+- tokens;
+- API keys;
+- payload completo;
+- nome completo;
+- telefone completo;
+- e-mail completo.
+
+Em caso de erro, registrar apenas o necessário para diagnóstico técnico, sem expor dados pessoais.
+
+## Testes Manuais Recomendados
+
+1. Abrir `/ebook`.
+2. Preencher o formulário normalmente.
+3. Confirmar que o lead chega no Brevo.
+4. Confirmar que o e-mail chega pelo Resend.
+5. Confirmar redirecionamento para `/ebook/obrigado.html`.
+6. Testar submissão muito rápida.
+7. Testar honeypot preenchido manualmente via DevTools.
+8. Testar JSON inválido diretamente na Function.
+9. Testar payload acima de 10 KB.
+10. Testar Tag Assistant.
+11. Testar Meta Pixel Helper.
+12. Testar links para Eduzz.
+
+## Ainda Não Implementado
+
+- Banner de cookies.
+- Google Consent Mode v2.
+- Webhook Eduzz.
+- Rate limit real com Redis/Upstash ou storage externo.
+- CAPTCHA.
+- Meta Conversions API.
+- GA4 Measurement Protocol.
+- Server-side tracking.
+
 # 🔐 Segurança & Compliance — Checklist
 
 ## LGPD (Lei Geral de Proteção de Dados)
