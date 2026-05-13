@@ -25,6 +25,18 @@ const FIELD_LIMITS = {
   status_funil: 80
 };
 
+function getEnvValue(key, fallbackValue = "") {
+  const value = process.env[key];
+
+  if (value === undefined || value === null) {
+    return fallbackValue;
+  }
+
+  return String(value)
+    .trim()
+    .replace(/^['"]|['"]$/g, "") || fallbackValue;
+}
+
 function sanitizeString(value = "") {
   return String(value).replace(/<[^>]*>/g, "").trim();
 }
@@ -151,7 +163,7 @@ function splitName(fullName = "") {
 }
 
 function getOptionalNumberEnv(key) {
-  const value = Number(process.env[key]);
+  const value = Number(getEnvValue(key));
   return Number.isInteger(value) && value > 0 ? value : null;
 }
 
@@ -163,7 +175,7 @@ function validateEnv() {
     "EBOOK_URL"
   ];
 
-  const missing = required.filter((key) => !process.env[key]);
+  const missing = required.filter((key) => !getEnvValue(key));
 
   if (missing.length > 0) {
     console.error("Variáveis de ambiente obrigatórias ausentes:", missing.join(", "));
@@ -182,7 +194,7 @@ async function upsertContactBrevo(lead) {
     const response = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
-        "api-key": process.env.BREVO_API_KEY,
+        "api-key": getEnvValue("BREVO_API_KEY"),
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
@@ -287,18 +299,22 @@ async function upsertContactBrevo(lead) {
   };
   delete bareEmailWithoutListPayload.listIds;
 
+  const minimalAttempt = await sendBrevoContact(minimalPayload, "minimal_payload");
+  if (minimalAttempt.ok) {
+    const fullAttempt = await sendBrevoContact(fullPayload, "full_payload_after_minimal");
+
+    if (!fullAttempt.ok) {
+      console.warn(
+        "Contato registrado no Brevo, mas atributos completos não foram confirmados. Confira atributos customizados."
+      );
+    }
+
+    return minimalAttempt.data;
+  }
+
   const fullAttempt = await sendBrevoContact(fullPayload, "full_payload");
   if (fullAttempt.ok) {
     return fullAttempt.data;
-  }
-
-  const minimalAttempt = await sendBrevoContact(minimalPayload, "minimal_payload");
-  if (minimalAttempt.ok) {
-    console.warn(
-      "Contato registrado no Brevo com payload mínimo. Confira se os atributos customizados existem no Brevo."
-    );
-
-    return minimalAttempt.data;
   }
 
   if (listIds.length > 0) {
@@ -368,10 +384,10 @@ async function upsertContactBrevo(lead) {
 }
 
 async function sendEbookEmail(lead) {
-  const ebookUrl = normalizePublicUrl(process.env.EBOOK_URL);
+  const ebookUrl = normalizePublicUrl(getEnvValue("EBOOK_URL"));
   const quizUrl = withDefaultParams(
     normalizePublicUrl(
-      process.env.QUIZ_EBOOK_URL,
+      getEnvValue("QUIZ_EBOOK_URL"),
       "https://padraointerrompido.com.br/quiz-mpi/"
     ),
     {
@@ -447,7 +463,7 @@ Com carinho,
 Equipe Padrão Interrompido`;
 
   const payload = {
-    from: process.env.RESEND_FROM,
+    from: getEnvValue("RESEND_FROM"),
     to: [lead.email],
     subject: "Aqui está o seu ebook gratuito",
     html,
@@ -467,7 +483,7 @@ Equipe Padrão Interrompido`;
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      Authorization: `Bearer ${getEnvValue("RESEND_API_KEY")}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
