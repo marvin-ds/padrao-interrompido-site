@@ -265,6 +265,18 @@ async function upsertContactBrevo(lead) {
   };
   delete minimalWithoutListPayload.listIds;
 
+  const emailOnlyPayload = withListIds({
+    email: lead.email,
+    emailBlacklisted: false,
+    smsBlacklisted: false,
+    updateEnabled: true
+  });
+
+  const emailOnlyWithoutListPayload = {
+    ...emailOnlyPayload
+  };
+  delete emailOnlyWithoutListPayload.listIds;
+
   const fullAttempt = await sendBrevoContact(fullPayload, "full_payload");
   if (fullAttempt.ok) {
     return fullAttempt.data;
@@ -291,6 +303,30 @@ async function upsertContactBrevo(lead) {
       );
 
       return minimalWithoutListAttempt.data;
+    }
+  }
+
+  const emailOnlyAttempt = await sendBrevoContact(emailOnlyPayload, "email_only_payload");
+  if (emailOnlyAttempt.ok) {
+    console.warn(
+      "Contato registrado no Brevo apenas com e-mail. Confira atributos customizados e lista do ebook."
+    );
+
+    return emailOnlyAttempt.data;
+  }
+
+  if (listIds.length > 0) {
+    const emailOnlyWithoutListAttempt = await sendBrevoContact(
+      emailOnlyWithoutListPayload,
+      "email_only_payload_without_list"
+    );
+
+    if (emailOnlyWithoutListAttempt.ok) {
+      console.warn(
+        "Contato registrado no Brevo apenas com e-mail e sem lista. Confira BREVO_LIST_ID_EBOOK."
+      );
+
+      return emailOnlyWithoutListAttempt.data;
     }
   }
 
@@ -419,6 +455,8 @@ Equipe Padrão Interrompido`;
 }
 
 exports.handler = async function (event) {
+  let currentStep = "method_check";
+
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, {
       success: false,
@@ -426,6 +464,7 @@ exports.handler = async function (event) {
     });
   }
 
+  currentStep = "content_type_check";
   const contentType = getHeader(event.headers, "content-type");
 
   if (!contentType.includes("application/json")) {
@@ -435,6 +474,7 @@ exports.handler = async function (event) {
     });
   }
 
+  currentStep = "body_size_check";
   if (isBodyTooLarge(event.body)) {
     return jsonResponse(413, {
       success: false,
@@ -442,6 +482,7 @@ exports.handler = async function (event) {
     });
   }
 
+  currentStep = "json_parse";
   const parsedBody = parseJsonBody(event.body);
 
   if (!parsedBody.ok) {
@@ -452,10 +493,13 @@ exports.handler = async function (event) {
   }
 
   try {
+    currentStep = "validate_env";
     validateEnv();
 
+    currentStep = "sanitize_payload";
     const body = parsedBody.data;
 
+    currentStep = "anti_bot_check";
     if (isSuspiciousBotSubmission(body)) {
       console.warn("Submissão suspeita bloqueada por honeypot ou tempo mínimo.");
       return genericAcceptedResponse();
@@ -525,9 +569,13 @@ exports.handler = async function (event) {
       status_funil
     };
 
+    currentStep = "brevo_upsert";
     await upsertContactBrevo(lead);
+
+    currentStep = "resend_email";
     await sendEbookEmail(lead);
 
+    currentStep = "success_response";
     return jsonResponse(200, {
       success: true,
       message: "Lead salvo e ebook enviado.",
@@ -535,6 +583,7 @@ exports.handler = async function (event) {
     });
   } catch (error) {
     console.error("Erro na captura do ebook:", {
+      step: currentStep,
       message: error.message
     });
 

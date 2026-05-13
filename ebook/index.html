@@ -894,16 +894,20 @@
                     }
 
                     if (window.trackFunnelEvent) {
-                        window.trackFunnelEvent(
-                            "generate_lead",
-                            {
-                                lead_source: "ebook",
-                                product: "ebook_padrao_interrompido",
-                                funnel_step: "ebook_capture",
-                                page: "/ebook"
-                            },
-                            "Lead"
-                        );
+                        try {
+                            window.trackFunnelEvent(
+                                "generate_lead",
+                                {
+                                    lead_source: "ebook",
+                                    product: "ebook_padrao_interrompido",
+                                    funnel_step: "ebook_capture",
+                                    page: "/ebook"
+                                },
+                                "Lead"
+                            );
+                        } catch (trackingError) {
+                            console.warn("Falha ao disparar tracking do lead:", trackingError);
+                        }
                     }
 
                     window.setTimeout(function () {
