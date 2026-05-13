@@ -277,6 +277,16 @@ async function upsertContactBrevo(lead) {
   };
   delete emailOnlyWithoutListPayload.listIds;
 
+  const bareEmailPayload = withListIds({
+    email: lead.email,
+    updateEnabled: true
+  });
+
+  const bareEmailWithoutListPayload = {
+    ...bareEmailPayload
+  };
+  delete bareEmailWithoutListPayload.listIds;
+
   const fullAttempt = await sendBrevoContact(fullPayload, "full_payload");
   if (fullAttempt.ok) {
     return fullAttempt.data;
@@ -327,6 +337,30 @@ async function upsertContactBrevo(lead) {
       );
 
       return emailOnlyWithoutListAttempt.data;
+    }
+  }
+
+  const bareEmailAttempt = await sendBrevoContact(bareEmailPayload, "bare_email_payload");
+  if (bareEmailAttempt.ok) {
+    console.warn(
+      "Contato registrado no Brevo com payload essencial. Confira atributos, lista e flags do contato."
+    );
+
+    return bareEmailAttempt.data;
+  }
+
+  if (listIds.length > 0) {
+    const bareEmailWithoutListAttempt = await sendBrevoContact(
+      bareEmailWithoutListPayload,
+      "bare_email_payload_without_list"
+    );
+
+    if (bareEmailWithoutListAttempt.ok) {
+      console.warn(
+        "Contato registrado no Brevo com payload essencial e sem lista. Confira BREVO_LIST_ID_EBOOK."
+      );
+
+      return bareEmailWithoutListAttempt.data;
     }
   }
 
@@ -569,17 +603,38 @@ exports.handler = async function (event) {
       status_funil
     };
 
+    let brevoSaved = false;
+    let brevoErrorMessage = "";
+
     currentStep = "brevo_upsert";
-    await upsertContactBrevo(lead);
+    try {
+      await upsertContactBrevo(lead);
+      brevoSaved = true;
+    } catch (brevoError) {
+      brevoErrorMessage = brevoError.message;
+      console.error("Falha no Brevo sem bloquear envio do ebook:", {
+        step: currentStep,
+        message: brevoError.message
+      });
+    }
 
     currentStep = "resend_email";
     await sendEbookEmail(lead);
 
     currentStep = "success_response";
+    if (!brevoSaved) {
+      console.warn("Ebook enviado, mas lead não foi confirmado no Brevo:", {
+        message: brevoErrorMessage
+      });
+    }
+
     return jsonResponse(200, {
       success: true,
-      message: "Lead salvo e ebook enviado.",
-      redirect: "/ebook/obrigado.html"
+      message: brevoSaved
+        ? "Lead salvo e ebook enviado."
+        : "Ebook enviado. Cadastro pendente de sincronização.",
+      redirect: "/ebook/obrigado.html",
+      brevoSynced: brevoSaved
     });
   } catch (error) {
     console.error("Erro na captura do ebook:", {
@@ -589,7 +644,8 @@ exports.handler = async function (event) {
 
     return jsonResponse(500, {
       success: false,
-      message: "Erro interno ao processar cadastro."
+      message: "Erro interno ao processar cadastro.",
+      code: currentStep
     });
   }
 };

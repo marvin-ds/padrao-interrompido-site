@@ -890,6 +890,7 @@
                     const dados = await resposta.json();
 
                     if (!resposta.ok) {
+                        console.error("Resposta de erro da captura do ebook:", dados);
                         throw new Error(dados.message || "Erro ao enviar cadastro.");
                     }
 
