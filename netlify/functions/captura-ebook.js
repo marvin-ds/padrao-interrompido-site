@@ -189,6 +189,14 @@ async function upsertContactBrevo(lead) {
   const listIds = [
     getOptionalNumberEnv("BREVO_LIST_ID_EBOOK")
   ].filter(Boolean);
+  let lastBrevoFailure = null;
+
+  function buildBrevoError(message, details) {
+    const error = new Error(message);
+    error.brevo = details || lastBrevoFailure;
+
+    return error;
+  }
 
   async function sendBrevoContact(payload, attemptName) {
     const response = await fetch("https://api.brevo.com/v3/contacts", {
@@ -204,11 +212,18 @@ async function upsertContactBrevo(lead) {
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      console.error("Falha ao criar/atualizar contato no Brevo:", {
+      lastBrevoFailure = {
         attempt: attemptName,
         status: response.status,
-        code: data.code,
-        message: data.message
+        code: sanitizeLimitedString(data.code, 80),
+        message: sanitizeLimitedString(data.message, 220)
+      };
+
+      console.error("Falha ao criar/atualizar contato no Brevo:", {
+        attempt: lastBrevoFailure.attempt,
+        status: lastBrevoFailure.status,
+        code: lastBrevoFailure.code,
+        message: lastBrevoFailure.message
       });
 
       return {
@@ -221,6 +236,79 @@ async function upsertContactBrevo(lead) {
     return {
       ok: true,
       data
+    };
+  }
+
+  async function addBrevoContactToLists() {
+    if (listIds.length === 0) {
+      return {
+        ok: true,
+        skipped: true,
+        listIds: []
+      };
+    }
+
+    const results = [];
+
+    for (const listId of listIds) {
+      const response = await fetch(`https://api.brevo.com/v3/contacts/lists/${listId}/contacts/add`, {
+        method: "POST",
+        headers: {
+          "api-key": getEnvValue("BREVO_API_KEY"),
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          emails: [lead.email]
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+      const message = sanitizeLimitedString(data.message, 220);
+      const alreadyInList = /already|ja esta|já está|already in list/i.test(message);
+
+      if (!response.ok && !alreadyInList) {
+        lastBrevoFailure = {
+          attempt: "add_contact_to_list",
+          status: response.status,
+          code: sanitizeLimitedString(data.code, 80),
+          message,
+          listId
+        };
+
+        console.error("Falha ao adicionar contato à lista do Brevo:", {
+          status: lastBrevoFailure.status,
+          code: lastBrevoFailure.code,
+          message: lastBrevoFailure.message,
+          listId
+        });
+
+        throw buildBrevoError("Falha ao adicionar lead à lista do Brevo.", lastBrevoFailure);
+      }
+
+      results.push({
+        listId,
+        status: response.status,
+        alreadyInList
+      });
+    }
+
+    return {
+      ok: true,
+      skipped: false,
+      listIds,
+      results
+    };
+  }
+
+  async function confirmBrevoSuccess(attemptName, data) {
+    const listSync = await addBrevoContactToLists();
+
+    return {
+      data,
+      attempt: attemptName,
+      listSynced: !listSync.skipped,
+      listIds: listSync.listIds
     };
   }
 
@@ -309,12 +397,12 @@ async function upsertContactBrevo(lead) {
       );
     }
 
-    return minimalAttempt.data;
+    return confirmBrevoSuccess("minimal_payload", minimalAttempt.data);
   }
 
   const fullAttempt = await sendBrevoContact(fullPayload, "full_payload");
   if (fullAttempt.ok) {
-    return fullAttempt.data;
+    return confirmBrevoSuccess("full_payload", fullAttempt.data);
   }
 
   if (listIds.length > 0) {
@@ -328,7 +416,7 @@ async function upsertContactBrevo(lead) {
         "Contato registrado no Brevo sem lista. Confira se BREVO_LIST_ID_EBOOK corresponde a uma lista existente."
       );
 
-      return minimalWithoutListAttempt.data;
+      return confirmBrevoSuccess("minimal_payload_without_list", minimalWithoutListAttempt.data);
     }
   }
 
@@ -338,7 +426,7 @@ async function upsertContactBrevo(lead) {
       "Contato registrado no Brevo apenas com e-mail. Confira atributos customizados e lista do ebook."
     );
 
-    return emailOnlyAttempt.data;
+    return confirmBrevoSuccess("email_only_payload", emailOnlyAttempt.data);
   }
 
   if (listIds.length > 0) {
@@ -352,7 +440,7 @@ async function upsertContactBrevo(lead) {
         "Contato registrado no Brevo apenas com e-mail e sem lista. Confira BREVO_LIST_ID_EBOOK."
       );
 
-      return emailOnlyWithoutListAttempt.data;
+      return confirmBrevoSuccess("email_only_payload_without_list", emailOnlyWithoutListAttempt.data);
     }
   }
 
@@ -362,7 +450,7 @@ async function upsertContactBrevo(lead) {
       "Contato registrado no Brevo com payload essencial. Confira atributos, lista e flags do contato."
     );
 
-    return bareEmailAttempt.data;
+    return confirmBrevoSuccess("bare_email_payload", bareEmailAttempt.data);
   }
 
   if (listIds.length > 0) {
@@ -376,11 +464,11 @@ async function upsertContactBrevo(lead) {
         "Contato registrado no Brevo com payload essencial e sem lista. Confira BREVO_LIST_ID_EBOOK."
       );
 
-      return bareEmailWithoutListAttempt.data;
+      return confirmBrevoSuccess("bare_email_payload_without_list", bareEmailWithoutListAttempt.data);
     }
   }
 
-  throw new Error("Falha ao registrar lead no Brevo.");
+  throw buildBrevoError("Falha ao registrar lead no Brevo.");
 }
 
 async function sendEbookEmail(lead) {
@@ -621,16 +709,20 @@ exports.handler = async function (event) {
 
     let brevoSaved = false;
     let brevoErrorMessage = "";
+    let brevoErrorDetail = null;
+    let brevoSyncInfo = null;
 
     currentStep = "brevo_upsert";
     try {
-      await upsertContactBrevo(lead);
+      brevoSyncInfo = await upsertContactBrevo(lead);
       brevoSaved = true;
     } catch (brevoError) {
       brevoErrorMessage = brevoError.message;
+      brevoErrorDetail = brevoError.brevo || null;
       console.error("Falha no Brevo sem bloquear envio do ebook:", {
         step: currentStep,
-        message: brevoError.message
+        message: brevoError.message,
+        brevo: brevoErrorDetail
       });
     }
 
@@ -650,7 +742,16 @@ exports.handler = async function (event) {
         ? "Lead salvo e ebook enviado."
         : "Ebook enviado. Cadastro pendente de sincronização.",
       redirect: "/ebook/obrigado.html",
-      brevoSynced: brevoSaved
+      brevoSynced: brevoSaved,
+      brevoStatus: brevoSaved ? "synced" : "failed",
+      brevoSync: brevoSaved
+        ? {
+            attempt: brevoSyncInfo ? brevoSyncInfo.attempt : "unknown",
+            listSynced: brevoSyncInfo ? brevoSyncInfo.listSynced : false,
+            listIds: brevoSyncInfo ? brevoSyncInfo.listIds : []
+          }
+        : undefined,
+      brevoError: brevoSaved ? undefined : brevoErrorDetail
     });
   } catch (error) {
     console.error("Erro na captura do ebook:", {
