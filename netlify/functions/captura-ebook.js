@@ -326,10 +326,10 @@ async function upsertContactBrevo(lead) {
   const fullPayload = withListIds({
     email: lead.email,
     attributes: {
-      FIRSTNAME: firstName,
-      LASTNAME: lastName,
+      NOME: firstName,
+      SOBRENOME: lastName,
       SMS: brevoPhone,
-      WHATSAPP: brevoPhone,
+      TELEFONE: brevoPhone,
       ORIGEM: lead.origem,
       CAMPANHA: lead.campanha,
       PAGINA_CAPTURA: lead.pagina,
@@ -341,6 +341,7 @@ async function upsertContactBrevo(lead) {
       UTM_TERM: lead.utm_term,
       STATUS_LEAD: "ebook_enviado",
       STATUS_FUNIL: lead.status_funil || "baixou_ebook",
+      CONSENTIMENTO: lead.consentimento ? true : false,
       BAIXOU_EBOOK: true,
       PRODUTO_INTERESSE: "Ebook gratuito"
     },
@@ -352,8 +353,8 @@ async function upsertContactBrevo(lead) {
   const minimalPayload = withListIds({
     email: lead.email,
     attributes: {
-      FIRSTNAME: firstName,
-      LASTNAME: lastName
+      NOME: firstName,
+      SOBRENOME: lastName
     },
     emailBlacklisted: false,
     smsBlacklisted: false,
@@ -696,6 +697,7 @@ exports.handler = async function (event) {
       nome,
       email,
       whatsapp,
+      consentimento,
       origem,
       campanha,
       pagina,
