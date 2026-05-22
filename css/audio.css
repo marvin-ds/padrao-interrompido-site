@@ -1,0 +1,376 @@
+/* ============================================
+   KIT ÁUDIO GUIADO - TÉCNICA DE PAUSA APLICADA
+   ============================================ */
+
+:root {
+  --audio-ink: #101517;
+  --audio-deep: #122f37;
+  --audio-teal: #1B4D5C;
+  --audio-cyan: #B9D9DD;
+  --audio-orange: #D47A3A;
+  --audio-paper: #F4F7F6;
+  --audio-line: rgba(16, 21, 23, 0.12);
+}
+
+.audio-page {
+  background: var(--audio-paper);
+  color: var(--audio-ink);
+}
+
+.audio-hero {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(16, 21, 23, 0.96), rgba(18, 47, 55, 0.9)),
+    radial-gradient(circle at 85% 28%, rgba(185, 217, 221, 0.18), transparent 34%);
+  color: var(--color-white);
+  display: flex;
+  min-height: 92vh;
+  overflow: hidden;
+  padding: 96px 24px 72px;
+  position: relative;
+}
+
+.audio-hero::after {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  content: "";
+  height: min(44vw, 520px);
+  position: absolute;
+  right: -120px;
+  top: 16%;
+  width: min(44vw, 520px);
+}
+
+.audio-hero__content {
+  max-width: 880px;
+  position: relative;
+  z-index: 1;
+}
+
+.audio-eyebrow {
+  color: #f0b27f;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.audio-hero h1,
+.audio-section h2,
+.audio-offer h2 {
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.audio-hero h1 {
+  font-size: clamp(2.3rem, 5.8vw, 5.45rem);
+  margin-bottom: 24px;
+  max-width: 1020px;
+}
+
+.audio-hero__subtitle {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  max-width: 780px;
+}
+
+.audio-hero__microcopy,
+.audio-price-note {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.audio-cta-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.audio-cta {
+  background: var(--audio-orange);
+  border: 2px solid var(--audio-orange);
+  border-radius: 6px;
+  color: var(--color-white);
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-width: 250px;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.audio-cta:hover {
+  background: transparent;
+  color: var(--audio-orange);
+  transform: translateY(-2px);
+}
+
+.audio-section {
+  padding: 82px 24px;
+}
+
+.audio-section--light {
+  background: var(--color-white);
+}
+
+.audio-section--dark {
+  background: var(--audio-ink);
+  color: var(--color-white);
+}
+
+.audio-section__inner {
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.audio-section__narrow {
+  margin: 0 auto;
+  max-width: 840px;
+}
+
+.audio-section h2,
+.audio-offer h2 {
+  color: inherit;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  margin-bottom: 24px;
+}
+
+.audio-section p {
+  color: rgba(16, 21, 23, 0.78);
+  font-size: 1.06rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.audio-section--dark p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.audio-list {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 30px 0;
+  padding: 0;
+}
+
+.audio-list li {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--audio-line);
+  border-radius: 8px;
+  color: var(--audio-ink);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  padding: 16px 18px;
+}
+
+.audio-section--dark .audio-list li {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--color-white);
+}
+
+.audio-highlight {
+  border-left: 5px solid var(--audio-orange);
+  color: var(--audio-ink);
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.45;
+  margin-top: 28px;
+  padding: 18px 0 18px 22px;
+}
+
+.audio-section--dark .audio-highlight {
+  color: var(--color-white);
+}
+
+.audio-stack {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 32px 0;
+}
+
+.audio-stack span {
+  background: var(--audio-cyan);
+  border: 1px solid rgba(27, 77, 92, 0.18);
+  border-radius: 999px;
+  color: var(--audio-deep);
+  font-weight: 800;
+  padding: 12px 16px;
+}
+
+.audio-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 34px;
+}
+
+.audio-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.audio-card {
+  background: var(--color-white);
+  border: 1px solid var(--audio-line);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.audio-card h3 {
+  color: var(--audio-teal);
+  font-size: 1.28rem;
+  margin-bottom: 14px;
+}
+
+.audio-card p {
+  margin-bottom: 0;
+}
+
+.audio-compare {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 34px;
+}
+
+.audio-panel {
+  background: var(--color-white);
+  border: 1px solid var(--audio-line);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.audio-panel h3 {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+.audio-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.audio-panel li {
+  border-bottom: 1px solid var(--audio-line);
+  padding: 12px 0;
+}
+
+.audio-panel li:last-child {
+  border-bottom: 0;
+}
+
+.audio-offer {
+  background: linear-gradient(135deg, var(--audio-deep), var(--audio-ink));
+  color: var(--color-white);
+  padding: 86px 24px;
+}
+
+.audio-offer__box {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 40px;
+}
+
+.audio-product {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.15rem;
+}
+
+.audio-price {
+  color: var(--color-white);
+  font-size: clamp(3rem, 7vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 24px 0 18px;
+}
+
+.audio-faq {
+  display: grid;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.audio-faq details {
+  background: var(--color-white);
+  border: 1px solid var(--audio-line);
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.audio-faq summary {
+  color: var(--audio-ink);
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.audio-faq details p {
+  margin: 14px 0 0;
+}
+
+.audio-final {
+  background: var(--audio-ink);
+  color: var(--color-white);
+  padding: 86px 24px;
+  text-align: center;
+}
+
+.audio-final p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto 22px;
+  max-width: 760px;
+}
+
+.audio-final .audio-price-note {
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .audio-hero {
+    min-height: auto;
+    padding-top: 76px;
+  }
+
+  .audio-grid,
+  .audio-grid--two,
+  .audio-compare {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .audio-section,
+  .audio-offer,
+  .audio-final {
+    padding: 58px 18px;
+  }
+
+  .audio-hero {
+    padding: 64px 18px 58px;
+  }
+
+  .audio-cta {
+    width: 100%;
+  }
+
+  .audio-offer__box,
+  .audio-card,
+  .audio-panel {
+    padding: 22px;
+  }
+}

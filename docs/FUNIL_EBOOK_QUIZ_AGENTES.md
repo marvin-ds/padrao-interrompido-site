@@ -129,6 +129,8 @@ Usado para:
 * enviar dados para Brevo;
 * acionar Resend para envio transacional.
 
+> Nota operacional: a Netlify deve ser usada com disciplina de deploy. Testes devem acontecer em branch/deploy preview sempre que possível. Produção deve ser publicada apenas quando as alterações estiverem agrupadas, revisadas e prontas para usuários reais.
+
 ### Mudança em relação à arquitetura anterior
 
 A arquitetura anterior considerava:
@@ -1088,3 +1090,102 @@ Nota estratégica:
 ```text
 Recomendação atual: validar o funil com uma solução pronta ou semi-pronta antes de investir no desenvolvimento de agentes próprios. Depois que o fluxo vencedor estiver claro, avaliar se vale construir uma solução própria.
 ```
+
+## Regra Operacional — Deploys na Netlify e Controle de Créditos
+
+O projeto está hospedado na Netlify e utiliza um plano pago inicial. Mesmo com upgrade, devemos evitar desperdício de créditos e manter disciplina no processo de publicação.
+
+### Regra principal
+
+Não subir produção a cada pequeno teste.
+
+Deploy de produção deve ser usado apenas quando uma alteração já foi revisada, testada e aprovada.
+
+### Frequência recomendada
+
+Subir produção no máximo algumas vezes por semana, agrupando alterações sempre que possível.
+
+Exemplos de alterações que podem ser agrupadas antes de produção:
+
+- pequenos ajustes de copy;
+- correções visuais;
+- ajustes de espaçamento;
+- troca de links;
+- alterações em documentação;
+- melhorias menores de formulário;
+- ajustes de tracking e UTMs.
+
+### Testes antes de produção
+
+Antes de publicar em produção, testar usando:
+
+- branch;
+- deploy preview;
+- preview gerado pelo Netlify;
+- ambiente local, quando aplicável.
+
+Deploy previews e branch deploys devem ser priorizados para testes, porque não devem consumir os mesmos créditos de deploy de produção.
+
+### Fluxo recomendado de publicação
+
+```text
+Criar alteração
+ ↓
+Testar localmente, se possível
+ ↓
+Subir para branch ou abrir preview
+ ↓
+Validar visual, formulário, links e integrações
+ ↓
+Agrupar ajustes pendentes
+ ↓
+Fazer deploy de produção apenas quando estiver pronto
+```
+
+### Quando fazer deploy de produção
+
+Fazer deploy de produção quando:
+
+* a página estiver visualmente validada;
+* o formulário estiver testado;
+* os links principais estiverem corretos;
+* as integrações essenciais estiverem funcionando;
+* a alteração impactar diretamente usuários reais;
+* houver um conjunto de ajustes prontos, e não apenas um microajuste isolado.
+
+### Quando não fazer deploy de produção
+
+Evitar deploy de produção para:
+
+* testar uma frase isolada;
+* testar cor, espaçamento ou detalhe visual pequeno;
+* verificar se um arquivo subiu;
+* testar código ainda incerto;
+* fazer experimentos rápidos;
+* validar algo que pode ser testado em preview.
+
+### Checklist antes do deploy de produção
+
+Antes de publicar em produção, conferir:
+
+* [ ] A página abre corretamente no preview.
+* [ ] O formulário do ebook envia os dados corretamente.
+* [ ] A Function não retorna erro.
+* [ ] O lead entra no Brevo.
+* [ ] O e-mail do Resend é enviado.
+* [ ] O link do ebook funciona.
+* [ ] O CTA para `/quiz-mpi` funciona.
+* [ ] Os links possuem UTMs corretas.
+* [ ] Não há credenciais expostas.
+* [ ] Não há arquivos `.env` versionados.
+* [ ] Não há textos proibidos, como “diagnóstico”, quando a comunicação pede “mapeamento”.
+
+### Regra para documentação
+
+Alterações apenas em documentação não precisam gerar deploy de produção imediato, a menos que o deploy esteja agrupado com outras mudanças relevantes.
+
+### Resumo da regra
+
+Use preview para testar.
+Use produção para publicar.
+Não use produção como ambiente de teste.

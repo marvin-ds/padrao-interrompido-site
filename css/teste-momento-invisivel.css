@@ -1,0 +1,531 @@
+/* ============================================
+   TESTE DO MOMENTO INVISÍVEL™
+   ============================================ */
+
+:root {
+  --dark: #0A0A0A;
+  --dark-soft: #1A1A1A;
+  --accent: #E8860F;
+  --accent-bright: #F0A000;
+  --white: #FFFFFF;
+  --gray: #CCCCCC;
+  --line: rgba(232, 134, 15, 0.42);
+}
+
+.momento-page {
+  background: var(--dark);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+}
+
+.momento-page * {
+  letter-spacing: 0;
+}
+
+.momento-page a {
+  color: inherit;
+}
+
+.momento-shell {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.momento-topbar {
+  align-items: center;
+  background: rgba(10, 10, 10, 0.88);
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  padding: 18px 20px;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 20;
+}
+
+.momento-logo {
+  align-items: center;
+  display: inline-flex;
+  height: 36px;
+  text-decoration: none;
+}
+
+.momento-logo__image {
+  display: block;
+  filter: invert(1);
+  height: 34px;
+  opacity: 0.78;
+  transition: opacity 180ms ease, transform 180ms ease;
+  width: 34px;
+}
+
+.momento-logo:hover .momento-logo__image {
+  opacity: 0.95;
+  transform: scale(1.03);
+}
+
+.momento-hero {
+  min-height: calc(100vh - 80px);
+  overflow: hidden;
+  padding: 46px 0 72px;
+  position: relative;
+}
+
+.momento-hero::before {
+  background:
+    radial-gradient(circle at 74% 18%, rgba(232, 134, 15, 0.18), transparent 32%),
+    radial-gradient(circle at 15% 82%, rgba(232, 134, 15, 0.09), transparent 26%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.momento-hero__grid {
+  align-items: center;
+  display: grid;
+  gap: 52px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  min-height: 76vh;
+  position: relative;
+  z-index: 1;
+}
+
+.momento-kicker,
+.momento-section__kicker {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.momento-hero h1,
+.momento-section h2,
+.momento-cta-band h2 {
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  line-height: 1.04;
+}
+
+.momento-hero h1 {
+  animation: momentoSlideUp 0.72s ease both;
+  font-size: clamp(3rem, 7vw, 5.6rem);
+  max-width: 900px;
+}
+
+.momento-accent {
+  color: var(--accent);
+}
+
+.momento-subheadline {
+  animation: momentoSlideUp 0.72s ease 0.12s both;
+  color: var(--gray);
+  font-size: clamp(1.03rem, 2vw, 1.24rem);
+  line-height: 1.75;
+  margin: 26px 0 0;
+  max-width: 760px;
+}
+
+.momento-scenes {
+  animation: momentoFade 0.8s ease 0.22s both;
+  border-left: 2px solid var(--line);
+  display: grid;
+  gap: 10px;
+  margin: 34px 0;
+  padding-left: 20px;
+}
+
+.momento-scenes p {
+  color: var(--white);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.35;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: momentoSlideUp 0.5s ease both;
+}
+
+.momento-scenes p:nth-child(1) { animation-delay: 0.26s; }
+.momento-scenes p:nth-child(2) { animation-delay: 0.34s; }
+.momento-scenes p:nth-child(3) { animation-delay: 0.42s; }
+.momento-scenes p:nth-child(4) { animation-delay: 0.50s; }
+.momento-scenes p:nth-child(5) { animation-delay: 0.58s; }
+.momento-scenes p:nth-child(6) { animation-delay: 0.66s; }
+
+.momento-cta-wrap {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.momento-button {
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 0 0 rgba(232, 134, 15, 0);
+  color: var(--white);
+  display: inline-flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  justify-content: center;
+  min-width: 245px;
+  padding: 16px 28px;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.momento-button:hover,
+.momento-button:focus-visible {
+  background: var(--accent-bright);
+  box-shadow: 0 14px 40px rgba(232, 134, 15, 0.24);
+  outline: none;
+  transform: scale(1.03);
+}
+
+.momento-microcopy {
+  color: rgba(204, 204, 204, 0.86);
+  font-size: 0.86rem;
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.momento-visual {
+  animation: momentoFade 0.9s ease 0.24s both;
+  border: 1px solid rgba(232, 134, 15, 0.36);
+  border-radius: 10px;
+  min-height: 430px;
+  overflow: hidden;
+  position: relative;
+}
+
+.momento-visual::before,
+.momento-visual::after {
+  border: 1px solid rgba(232, 134, 15, 0.34);
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+}
+
+.momento-visual::before {
+  height: 280px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+}
+
+.momento-visual::after {
+  height: 160px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+}
+
+.momento-visual__text {
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  left: 50%;
+  line-height: 1.1;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(78%, 300px);
+}
+
+.momento-divider {
+  background: var(--line);
+  height: 1px;
+  width: 100%;
+}
+
+.momento-section {
+  padding: 76px 0;
+}
+
+.momento-section h2,
+.momento-cta-band h2 {
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  margin-bottom: 28px;
+  max-width: 880px;
+}
+
+.momento-section p,
+.momento-section li {
+  color: var(--gray);
+  font-size: 1.04rem;
+  line-height: 1.78;
+}
+
+.momento-recognition {
+  display: grid;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.momento-pair {
+  border: 1px solid rgba(232, 134, 15, 0.18);
+  border-radius: 8px;
+  padding: 18px;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.momento-pair:hover {
+  background: rgba(232, 134, 15, 0.08);
+  border-color: rgba(232, 134, 15, 0.48);
+}
+
+.momento-pair p {
+  margin: 0;
+}
+
+.momento-pair p + p {
+  margin-top: 6px;
+}
+
+.momento-reveal {
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-top: 32px;
+}
+
+.momento-list {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 30px 0;
+  padding: 0;
+}
+
+.momento-list li {
+  border-bottom: 1px solid rgba(232, 134, 15, 0.18);
+  padding: 0 0 14px;
+}
+
+.momento-note {
+  border-left: 3px solid var(--accent);
+  color: var(--white);
+  font-weight: 700;
+  margin-top: 28px;
+  padding-left: 18px;
+}
+
+.momento-steps {
+  counter-reset: steps;
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 34px 0;
+  padding: 0;
+}
+
+.momento-steps li {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(232, 134, 15, 0.22);
+  border-radius: 8px;
+  min-height: 78px;
+  padding: 20px 20px 20px 72px;
+  position: relative;
+}
+
+.momento-steps li::before {
+  align-items: center;
+  background: var(--accent);
+  border-radius: 50%;
+  color: var(--white);
+  content: counter(steps);
+  counter-increment: steps;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  height: 36px;
+  justify-content: center;
+  left: 20px;
+  position: absolute;
+  top: 20px;
+  width: 36px;
+}
+
+.momento-cta-band {
+  background: linear-gradient(135deg, rgba(232, 134, 15, 0.12), rgba(255, 255, 255, 0.03));
+  padding: 82px 0;
+  text-align: center;
+}
+
+.momento-cta-band h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.momento-cta-band .momento-cta-wrap {
+  align-items: center;
+}
+
+.momento-faq {
+  display: grid;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.momento-faq details {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(232, 134, 15, 0.22);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.momento-faq summary {
+  color: var(--white);
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  padding: 20px;
+}
+
+.momento-faq details p {
+  margin: 0;
+  padding: 0 20px 20px;
+}
+
+.momento-footer {
+  border-top: 1px solid var(--line);
+  color: rgba(204, 204, 204, 0.78);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  padding: 34px 20px;
+}
+
+.momento-footer__inner {
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+.momento-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.momento-footer a:hover {
+  text-decoration: underline;
+}
+
+.momento-animate {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.momento-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes momentoSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes momentoFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .momento-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .momento-visual {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .momento-topbar {
+    padding: 14px 16px;
+  }
+
+  .momento-logo {
+    height: 34px;
+  }
+
+  .momento-logo__image {
+    height: 32px;
+    opacity: 0.72;
+    width: 32px;
+  }
+
+  .momento-shell {
+    padding: 0 18px;
+  }
+
+  .momento-hero {
+    min-height: auto;
+    padding: 42px 0 58px;
+  }
+
+  .momento-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .momento-section,
+  .momento-cta-band {
+    padding: 58px 0;
+  }
+
+  .momento-button {
+    width: 100%;
+  }
+
+  .momento-visual {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .momento-topbar {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .momento-logo {
+    height: 46px;
+  }
+
+  .momento-logo__image {
+    height: 44px;
+    width: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
