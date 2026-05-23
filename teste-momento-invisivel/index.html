@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TCW949NK');
-  </script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ"></script>
+  <!-- Tracking bootstrap: queues events early and loads third-party scripts after first paint. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = window.gtag || gtag;
+
     gtag('js', new Date());
-
     gtag('config', 'G-QJ7PW4HBRQ');
-  </script>
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '541342531532855');
-  fbq('track', 'PageView');
+    !function(f,n){
+      if(f.fbq)return;
+      n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+    }(window);
+
+    fbq('init', '541342531532855');
+    fbq('track', 'PageView');
+
+    (function () {
+      let marketingLoaded = false;
+
+      function loadScript(src, id) {
+        if (document.getElementById(id)) return;
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.id = id;
+        script.src = src;
+        document.head.appendChild(script);
+      }
+
+      function loadMarketingTags() {
+        if (marketingLoaded) return;
+        marketingLoaded = true;
+
+        window.dataLayer.push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+
+        loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-TCW949NK', 'gtm-tcw949nk');
+        loadScript('https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ', 'gtag-gqj7pw4hbrq');
+        loadScript('https://connect.facebook.net/en_US/fbevents.js', 'meta-pixel-541342531532855');
+      }
+
+      window.addEventListener('load', function () {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadMarketingTags, { timeout: 1800 });
+        } else {
+          window.setTimeout(loadMarketingTags, 800);
+        }
+      }, { once: true });
+    }());
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
   </noscript>
-  <!-- End Meta Pixel Code -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,9 +77,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap"
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  >
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+  </noscript>
 
-  <link rel="stylesheet" href="../css/teste-momento-invisivel.css">
+  <link rel="stylesheet" href="../css/teste-momento-invisivel.css?v=20260523-3">
 
   <title>Teste do Momento Invisível™</title>
 </head>
@@ -74,6 +111,7 @@
         alt="Momento Invisível"
         class="momento-logo__image"
       >
+      <span class="momento-logo__label">Momento Invisível™</span>
     </a>
   </header>
 
@@ -82,24 +120,35 @@
       <div class="momento-shell momento-hero__grid">
         <div>
           <p class="momento-kicker">Teste gratuito • Padrão Interrompido™</p>
-          <h1>
-            Descubra onde seu <span class="momento-accent">padrão</span> começa antes de virar <span class="momento-accent">"eu fiz de novo"</span>.
+          <h1 class="momento-heading">
+            <span class="momento-heading__line">Descubra onde</span>
+            <span class="momento-heading__line">seu <span class="momento-accent">padrão</span></span>
+            <span class="momento-heading__line">começa antes</span>
+            <span class="momento-heading__line">de virar</span>
+            <span class="momento-heading__line"><span class="momento-accent">"eu fiz de novo"</span>.</span>
           </h1>
           <p class="momento-subheadline">
-            Um teste educativo para mapear o seu <span class="momento-accent">Momento Invisível™</span>: o instante antes da reação automática, quando uma frase, uma pressa pequena ou um sinal quase invisível pode aparecer.
+            Um teste educativo para mapear o seu <span class="momento-accent">Momento Invisível™</span>: aquele instante quase imperceptível antes da reação automática.
           </p>
 
           <div class="momento-scenes" aria-label="Cenas antes do padrão">
-            <p><span class="momento-accent">Antes</span> do clique.</p>
-            <p><span class="momento-accent">Antes</span> da geladeira abrir.</p>
-            <p><span class="momento-accent">Antes</span> do "só cinco minutos".</p>
-            <p><span class="momento-accent">Antes</span> da mensagem enviada.</p>
-            <p><span class="momento-accent">Antes</span> do "tudo bem" que depois pesa.</p>
-            <p><span class="momento-accent">Antes</span> do "amanhã eu volto".</p>
+            <p><span class="momento-accent">Antes</span> de comprar algo que nem era tão necessário.</p>
+            <p><span class="momento-accent">Antes</span> de abrir a geladeira sem fome clara.</p>
+            <p><span class="momento-accent">Antes</span> de pegar o celular e transformar "só cinco minutos" em uma hora perdida.</p>
+            <p><span class="momento-accent">Antes</span> de mandar aquela mensagem no calor do momento.</p>
+            <p><span class="momento-accent">Antes</span> de dizer "tudo bem" quando, por dentro, não estava tudo bem.</p>
+            <p><span class="momento-accent">Antes</span> de prometer que amanhã você volta para sua rotina, seu cuidado, seu projeto ou para você.</p>
           </div>
 
+          <p class="momento-decision">
+            <span>Talvez você não precise</span>
+            <span>entender sua vida inteira.</span>
+            <span>Talvez você só precise</span>
+            <span>descobrir onde isso começa.</span>
+          </p>
+
           <div class="momento-cta-wrap">
-            <a class="momento-button momento-quiz-link" href="https://quiz-padrao-interrompido.vercel.app/">Fazer o Teste gratuito</a>
+            <a class="momento-button momento-quiz-link" href="https://teste.padraointerrompido.com.br">Fazer o Teste gratuito</a>
             <p class="momento-microcopy">Leva poucos minutos. Responda como você age na vida real, não como gostaria de agir.</p>
           </div>
         </div>
@@ -122,27 +171,36 @@
         <div class="momento-recognition">
           <article class="momento-pair">
             <p>Você acha que começou na compra.</p>
-            <p>Mas talvez tenha começado <span class="momento-accent">antes do clique</span>.</p>
+            <p>Mas talvez tenha começado antes do clique no carrinho, quando uma oferta pareceu <span class="momento-accent">urgente, merecida ou "boa demais para deixar passar"</span>.</p>
           </article>
           <article class="momento-pair">
             <p>Você acha que começou na comida.</p>
-            <p>Mas talvez tenha começado <span class="momento-accent">antes da geladeira abrir</span>.</p>
+            <p>Mas talvez tenha começado antes da geladeira abrir, quando <span class="momento-accent">o cansaço, o tédio ou a vontade de alívio</span> chegaram antes da fome.</p>
           </article>
           <article class="momento-pair">
             <p>Você acha que começou na procrastinação.</p>
-            <p>Mas talvez tenha começado <span class="momento-accent">antes do "só cinco minutos"</span>.</p>
+            <p>Mas talvez tenha começado antes do "só cinco minutos", quando você pegou o celular para uma olhada rápida e <span class="momento-accent">a tarefa importante começou a ficar para depois</span>.</p>
           </article>
           <article class="momento-pair">
             <p>Você acha que começou na mensagem.</p>
-            <p>Mas talvez tenha começado <span class="momento-accent">antes do dedo tocar em enviar</span>.</p>
+            <p>Mas talvez tenha começado antes de responder aquela pessoa no calor do momento, quando <span class="momento-accent">o peito apertou, a pressa veio e o dedo foi mais rápido que a pausa</span>.</p>
           </article>
           <article class="momento-pair">
-            <p>Você acha que começou no abandono.</p>
-            <p>Mas talvez tenha começado <span class="momento-accent">antes do "amanhã eu volto"</span>.</p>
+            <p>Você acha que começou no "tudo bem".</p>
+            <p>Mas talvez tenha começado antes de você concordar, aceitar, engolir ou dizer que estava tudo bem só para não criar <span class="momento-accent">peso, conflito ou desconforto</span>.</p>
+          </article>
+          <article class="momento-pair">
+            <p>Você acha que começou no abandono de si.</p>
+            <p>Mas talvez tenha começado antes do "amanhã eu volto", quando você fechou o caderno, deixou o treino, pulou o cuidado, adiou seu projeto ou <span class="momento-accent">se colocou mais uma vez para depois</span>.</p>
           </article>
         </div>
 
-        <p class="momento-reveal">Esse antes é o <span class="momento-accent">Momento Invisível™</span>.</p>
+        <div class="momento-reveal">
+          <p>Esse antes é o <span class="momento-accent">Momento Invisível™</span>.</p>
+          <p>O instante pequeno em que uma frase, um sinal, uma pressa ou uma permissão aparece antes da reação automática.</p>
+          <p>Não é o arrependimento.</p>
+          <p>É o começo que quase ninguém vê.</p>
+        </div>
       </div>
     </section>
 
@@ -151,16 +209,23 @@
     <section class="momento-section momento-animate">
       <div class="momento-shell">
         <p class="momento-section__kicker">O que o Teste revela</p>
-        <h2>O que você vai descobrir no Teste</h2>
-        <p>O Teste do Momento Invisível™ mapeia:</p>
+        <h2>O que você vai descobrir no Teste gratuito</h2>
+        <p>O Teste do Momento Invisível™ ajuda você a mapear:</p>
         <ul class="momento-list">
-          <li>onde seu padrão aparece com mais força;</li>
-          <li>qual mecanismo pode iniciar a sequência;</li>
-          <li>qual frase automática pode abrir a porta;</li>
-          <li>qual sinal pode aparecer antes da reação;</li>
-          <li>qual próximo passo faz mais sentido agora.</li>
+          <li>onde seu padrão aparece com mais força agora;</li>
+          <li>qual tipo de cena costuma abrir essa sequência;</li>
+          <li>que frase pode estar chegando antes do automático;</li>
+          <li>que sinal pode aparecer antes da reação;</li>
+          <li>qual pista observar na próxima vez;</li>
+          <li>por onde começar sem tentar resolver tudo de uma vez.</li>
         </ul>
-        <p class="momento-note">Este teste não é diagnóstico. É uma ferramenta educativa de autopercepção.</p>
+
+        <div class="momento-reveal">
+          <p>Este não é um teste para te rotular.</p>
+          <p>É um espelho rápido para você perceber algo que talvez já estivesse acontecendo no seu dia, mas ainda não tinha ficado claro.</p>
+          <p>A ideia não é sair daqui com uma sentença sobre quem você é. É sair com uma pista.</p>
+          <p>E uma pista já muda o lugar de onde você olha.</p>
+        </div>
       </div>
     </section>
 
@@ -168,23 +233,92 @@
 
     <section class="momento-section momento-animate">
       <div class="momento-shell">
-        <p class="momento-section__kicker">Transparência</p>
+        <p class="momento-section__kicker">Como funciona</p>
         <h2>Como funciona</h2>
-        <ol class="momento-steps">
-          <li>Você responde <span class="momento-accent">18 perguntas</span> rápidas.</li>
-          <li>Recebe uma leitura parcial gratuita.</li>
-          <li>Se quiser aprofundar, pode desbloquear o resultado completo por R$17.</li>
-          <li>O resultado completo mostra seu perfil, frase provável, sinal, Momento Invisível™ e próximo passo recomendado.</li>
-        </ol>
-        <p class="momento-note">Você não precisa comprar nada para ver seu resultado parcial. O desbloqueio completo é opcional.</p>
+        <div class="momento-copy-block">
+          <p>Você responde <span class="momento-accent">18 perguntas rápidas</span> sobre cenas reais da sua vida.</p>
+          <p>Nada de resposta perfeita.</p>
+          <p>Nada de tentar parecer mais controlada, mais disciplinada ou mais resolvida do que você realmente está.</p>
+          <p>O Teste funciona melhor quando você responde pensando no que acontece de verdade:</p>
+        </div>
+
+        <ul class="momento-list">
+          <li>na compra que parecia pequena, mas depois ficou pesando;</li>
+          <li>na comida que parecia alívio, mesmo sem fome clara;</li>
+          <li>no "só cinco minutos" que virou uma manhã, uma noite ou uma tarefa importante adiada;</li>
+          <li>na mensagem enviada rápido demais para alguém, antes de você respirar e entender o que estava sentindo;</li>
+          <li>no "tudo bem" que você disse para evitar conflito, mas que depois ficou voltando na cabeça;</li>
+          <li>no "amanhã eu volto" que você disse sobre seu treino, sua rotina, seu autocuidado, seu projeto ou uma parte sua que sempre fica para depois.</li>
+        </ul>
+
+        <p class="momento-insight">Ao final, você recebe uma leitura gratuita inicial com o território onde seu padrão parece aparecer com mais força e uma pista para começar a observar o seu antes.</p>
+        <p class="momento-note">Você também recebe um resumo em PDF para baixar, guardar e reler com calma.</p>
+      </div>
+    </section>
+
+    <div class="momento-divider"></div>
+
+    <section class="momento-section momento-animate">
+      <div class="momento-shell">
+        <p class="momento-section__kicker">Benefícios do gratuito</p>
+        <h2>O que você leva ao final do Teste gratuito</h2>
+        <p>Ao fazer o Teste, você recebe:</p>
+        <ul class="momento-list">
+          <li>uma leitura inicial do seu território dominante;</li>
+          <li>uma explicação simples sobre como esse padrão pode aparecer;</li>
+          <li>cenas reais para você se reconhecer;</li>
+          <li>uma pista do seu Momento Invisível™;</li>
+          <li>um ponto de observação para os próximos dias;</li>
+          <li>um resumo em PDF para baixar e guardar.</li>
+        </ul>
+
+        <div class="momento-reveal">
+          <p>Porque talvez o mais importante agora não seja mudar tudo.</p>
+          <p>Talvez seja perceber melhor o começo.</p>
+        </div>
+
+        <div class="momento-scenes momento-scenes--compact" aria-label="Cenas para observar depois do teste">
+          <p>A compra antes do clique.</p>
+          <p>A comida antes da primeira mordida.</p>
+          <p>A procrastinação antes da fuga.</p>
+          <p>A mensagem antes do envio.</p>
+          <p>O "tudo bem" antes do peso.</p>
+          <p>O "amanhã eu volto" antes de você se deixar para depois.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="momento-divider"></div>
+
+    <section class="momento-section momento-animate">
+      <div class="momento-shell">
+        <p class="momento-section__kicker">Proteção</p>
+        <div class="momento-objection">
+          <h2>Não é sobre se culpar. É sobre reconhecer o antes.</h2>
+          <p>O Teste não existe para dizer quem você é.</p>
+          <p>Ele existe para mostrar uma pista: onde uma sequência pode começar antes de virar arrependimento.</p>
+          <p>Você não precisa sair daqui se cobrando.</p>
+          <p>Você precisa sair daqui pensando:</p>
+          <p><span class="momento-accent">"Agora eu sei onde começar a olhar."</span></p>
+          <p>Porque, muitas vezes, quando você percebe... já foi.</p>
+          <p>Mas talvez exista um segundo antes disso.</p>
+          <p>E é esse segundo que o Teste ajuda você a encontrar.</p>
+        </div>
       </div>
     </section>
 
     <section class="momento-cta-band momento-animate">
       <div class="momento-shell">
         <h2>Comece pelo ponto que aparece antes do automático.</h2>
+        <div class="momento-copy-block momento-copy-block--center">
+          <p>Talvez não seja sobre entender tudo hoje.</p>
+          <p>Talvez seja sobre enxergar uma cena com mais clareza.</p>
+          <p>Aquela compra. Aquela comida. Aquela tarefa.</p>
+          <p>Aquela mensagem. Aquele "tudo bem". Aquele "amanhã eu volto".</p>
+          <p>Uma cena já é suficiente para começar.</p>
+        </div>
         <div class="momento-cta-wrap">
-          <a class="momento-button momento-quiz-link" href="https://quiz-padrao-interrompido.vercel.app/">Começar meu Teste gratuito</a>
+          <a class="momento-button momento-quiz-link" href="https://teste.padraointerrompido.com.br">Começar meu Teste gratuito</a>
           <p class="momento-microcopy">Descubra o que pode acontecer antes do "eu fiz de novo".</p>
         </div>
       </div>
@@ -199,23 +333,35 @@
         <div class="momento-faq">
           <details>
             <summary>O Teste é gratuito?</summary>
-            <p>Sim. Você responde gratuitamente e recebe uma leitura parcial.</p>
+            <p>Sim. Você responde gratuitamente e recebe uma leitura inicial do seu resultado.</p>
           </details>
           <details>
-            <summary>O resultado completo é pago?</summary>
-            <p>Sim. O desbloqueio completo custa R$17.</p>
+            <summary>O que eu recebo ao final do Teste?</summary>
+            <p>Você recebe uma leitura gratuita com o território onde seu padrão parece aparecer com mais força, uma pista do seu Momento Invisível™ e um resumo em PDF para baixar e guardar.</p>
           </details>
           <details>
-            <summary>O que vem no resultado completo?</summary>
-            <p>Seu território, perfil de mecanismo, frase automática provável, sinal provável, Momento Invisível™, mapa inicial de observação e próximo passo recomendado.</p>
+            <summary>Preciso responder de um jeito "certo"?</summary>
+            <p>Não. O Teste funciona melhor quando você responde com sinceridade, pensando nas cenas reais do seu dia, não na versão ideal de você.</p>
           </details>
           <details>
-            <summary>Isso é diagnóstico?</summary>
+            <summary>O que significa "território dominante"?</summary>
+            <p>É a área onde o seu padrão parece aparecer com mais força agora. Pode ser no consumo, na alimentação, na procrastinação, nas relações ou no abandono de si.</p>
+          </details>
+          <details>
+            <summary>O que é o Momento Invisível™?</summary>
+            <p>É o instante antes da reação automática. Aquele segundo pequeno em que uma frase, um sinal, uma pressa ou uma permissão pode aparecer antes do "eu fiz de novo".</p>
+          </details>
+          <details>
+            <summary>Isso é uma avaliação clínica?</summary>
             <p>Não. É uma ferramenta educativa de autopercepção.</p>
           </details>
           <details>
-            <summary>Tem garantia?</summary>
-            <p>Sim. O desbloqueio possui garantia de 7 dias.</p>
+            <summary>Para que serve o PDF gratuito?</summary>
+            <p>Para você guardar sua leitura inicial, reler com calma e começar a observar as pistas do seu padrão na vida real.</p>
+          </details>
+          <details>
+            <summary>O que eu devo fazer depois do Teste?</summary>
+            <p>Comece observando uma cena. Uma frase. Um sinal. Um momento em que você pensaria: "eu fiz de novo". Você não precisa sair com todas as respostas. Precisa sair com uma pista.</p>
           </details>
         </div>
       </div>
@@ -225,12 +371,19 @@
   <footer class="momento-footer">
     <div class="momento-footer__inner">
       <p>
-        O Teste do Momento Invisível™ tem finalidade educativa e de autopercepção. Ele não substitui acompanhamento psicológico, médico, nutricional, financeiro, jurídico ou terapêutico.
+        <strong>Aviso Legal:</strong> O Teste do Momento Invisível™ tem finalidade educativa e de autopercepção. Não substitui acompanhamento psicológico, médico, nutricional, financeiro, jurídico ou terapêutico. O Padrão Interrompido™ não promete resultado médico, psicológico, financeiro ou estético. Se você está enfrentando questões de saúde mental graves, busque um profissional qualificado.
       </p>
       <p>
-        © 2026 Marcos Vinicius — Padrão Interrompido™ •
-        <a href="../politica-de-privacidade/">Política de Privacidade</a> •
-        <a href="../termos-de-uso/">Termos de Uso</a>
+        © 2026 Marcos Vinicius — Todos os direitos reservados.<br>
+        <a href="https://instagram.com/marcosvinicius.mpi">@marcosvinicius.mpi</a> •
+        <a href="https://padraointerrompido.com.br">padraointerrompido.com.br</a>
+      </p>
+      <p>
+        Seus dados são tratados conforme a LGPD e usados apenas para comunicação, entrega de materiais, rastreamento de origem e relacionamento com consentimento. Você pode solicitar atualização ou exclusão pelo e-mail <a href="mailto:contato@padraointerrompido.com.br">contato@padraointerrompido.com.br</a>.
+      </p>
+      <p>
+        <a href="https://padraointerrompido.com.br/politica-de-privacidade/">Política de Privacidade</a> •
+        <a href="https://padraointerrompido.com.br/termos-de-uso/">Termos de Uso</a>
       </p>
     </div>
   </footer>
@@ -251,7 +404,7 @@
           source: "teste_momento_invisivel",
           product: "quiz_mapeamento",
           funnel_step: "quiz_entry_click",
-          destination: "quiz_padrao_interrompido_vercel",
+          destination: "teste_padraointerrompido",
           page: "/teste-momento-invisivel"
         };
 

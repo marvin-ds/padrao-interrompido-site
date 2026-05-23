@@ -12,14 +12,27 @@
   --line: rgba(232, 134, 15, 0.42);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--dark);
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+}
+
 .momento-page {
   background: var(--dark);
   color: var(--white);
   font-family: "Inter", sans-serif;
-}
-
-.momento-page * {
-  letter-spacing: 0;
+  margin: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  text-align: left;
 }
 
 .momento-page a {
@@ -27,6 +40,7 @@
 }
 
 .momento-shell {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 20px;
@@ -39,7 +53,7 @@
   display: flex;
   justify-content: space-between;
   left: 0;
-  padding: 18px 20px;
+  padding: 18px 24px;
   position: sticky;
   right: 0;
   top: 0;
@@ -48,18 +62,29 @@
 
 .momento-logo {
   align-items: center;
+  color: var(--gray);
   display: inline-flex;
-  height: 36px;
+  gap: 10px;
+  min-height: 52px;
   text-decoration: none;
 }
 
 .momento-logo__image {
   display: block;
   filter: invert(1);
-  height: 34px;
-  opacity: 0.78;
+  height: 50px;
+  opacity: 0.86;
   transition: opacity 180ms ease, transform 180ms ease;
-  width: 34px;
+  width: 50px;
+}
+
+.momento-logo__label {
+  color: rgba(255, 255, 255, 0.74);
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 92px;
 }
 
 .momento-logo:hover .momento-logo__image {
@@ -92,6 +117,11 @@
   min-height: 76vh;
   position: relative;
   z-index: 1;
+  width: 100%;
+}
+
+.momento-hero__grid > * {
+  min-width: 0;
 }
 
 .momento-kicker,
@@ -114,17 +144,22 @@
 }
 
 .momento-hero h1 {
-  animation: momentoSlideUp 0.72s ease both;
   font-size: clamp(3rem, 7vw, 5.6rem);
   max-width: 900px;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.momento-heading__line {
+  display: inline;
 }
 
 .momento-accent {
   color: var(--accent);
+  font-weight: 800;
 }
 
 .momento-subheadline {
-  animation: momentoSlideUp 0.72s ease 0.12s both;
   color: var(--gray);
   font-size: clamp(1.03rem, 2vw, 1.24rem);
   line-height: 1.75;
@@ -133,7 +168,6 @@
 }
 
 .momento-scenes {
-  animation: momentoFade 0.8s ease 0.22s both;
   border-left: 2px solid var(--line);
   display: grid;
   gap: 10px;
@@ -146,23 +180,36 @@
   font-size: clamp(1rem, 2vw, 1.15rem);
   line-height: 1.35;
   margin: 0;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: momentoSlideUp 0.5s ease both;
 }
 
-.momento-scenes p:nth-child(1) { animation-delay: 0.26s; }
-.momento-scenes p:nth-child(2) { animation-delay: 0.34s; }
-.momento-scenes p:nth-child(3) { animation-delay: 0.42s; }
-.momento-scenes p:nth-child(4) { animation-delay: 0.50s; }
-.momento-scenes p:nth-child(5) { animation-delay: 0.58s; }
-.momento-scenes p:nth-child(6) { animation-delay: 0.66s; }
+.momento-scenes--compact {
+  margin-bottom: 0;
+  max-width: 760px;
+}
+
+.momento-scenes--compact p {
+  color: var(--gray);
+}
 
 .momento-cta-wrap {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.momento-decision {
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.28rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.24;
+  margin: 0 0 28px;
+  max-width: 720px;
+}
+
+.momento-decision span {
+  display: block;
 }
 
 .momento-button {
@@ -254,6 +301,7 @@
 
 .momento-section {
   padding: 76px 0;
+  text-align: left;
 }
 
 .momento-section h2,
@@ -280,6 +328,7 @@
   border: 1px solid rgba(232, 134, 15, 0.18);
   border-radius: 8px;
   padding: 18px;
+  text-align: left;
   transition: background 0.22s ease, border-color 0.22s ease;
 }
 
@@ -297,11 +346,24 @@
 }
 
 .momento-reveal {
+  border-left: 3px solid var(--accent);
+  display: grid;
+  gap: 12px;
+  margin-top: 34px;
+  max-width: 760px;
+  padding-left: 22px;
+}
+
+.momento-reveal p {
+  margin: 0;
+}
+
+.momento-reveal p:first-child {
   color: var(--white);
   font-family: "Poppins", sans-serif;
   font-size: clamp(1.35rem, 3vw, 2rem);
   font-weight: 800;
-  margin-top: 32px;
+  line-height: 1.25;
 }
 
 .momento-list {
@@ -321,8 +383,62 @@
   border-left: 3px solid var(--accent);
   color: var(--white);
   font-weight: 700;
+  max-width: 820px;
   margin-top: 28px;
   padding-left: 18px;
+}
+
+.momento-insight,
+.momento-objection {
+  background: rgba(232, 134, 15, 0.1);
+  border: 1px solid rgba(232, 134, 15, 0.34);
+  border-radius: 8px;
+}
+
+.momento-insight {
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 28px 0 0;
+  max-width: 720px;
+  padding: 22px;
+}
+
+.momento-objection {
+  max-width: 880px;
+  padding: 28px;
+}
+
+.momento-objection h2 {
+  margin-bottom: 18px;
+}
+
+.momento-objection p {
+  margin: 0 0 14px;
+  max-width: 760px;
+}
+
+.momento-objection p:last-child {
+  margin-bottom: 0;
+}
+
+.momento-copy-block {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 820px;
+}
+
+.momento-copy-block p {
+  margin: 0;
+}
+
+.momento-copy-block--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .momento-steps {
@@ -374,6 +490,7 @@
 
 .momento-cta-band .momento-cta-wrap {
   align-items: center;
+  text-align: center;
 }
 
 .momento-faq {
@@ -403,11 +520,13 @@
 }
 
 .momento-footer {
-  border-top: 1px solid var(--line);
-  color: rgba(204, 204, 204, 0.78);
-  font-size: 0.82rem;
+  background-color: var(--dark);
+  border-top: 5px solid var(--accent);
+  color: rgba(204, 204, 204, 0.86);
+  font-size: 0.85rem;
   line-height: 1.7;
-  padding: 34px 20px;
+  padding: 40px 20px;
+  text-align: center;
 }
 
 .momento-footer__inner {
@@ -415,19 +534,31 @@
   max-width: 980px;
 }
 
+.momento-footer p {
+  margin: 0 0 15px;
+}
+
+.momento-footer p:last-child {
+  margin-bottom: 0;
+}
+
 .momento-footer a {
   color: var(--accent);
-  text-decoration: none;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .momento-footer a:hover {
-  text-decoration: underline;
+  color: var(--accent-bright);
 }
 
 .momento-animate {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
 }
 
 .momento-animate.is-visible {
@@ -452,6 +583,11 @@
 }
 
 @media (max-width: 900px) {
+  .momento-shell {
+    max-width: min(720px, calc(100vw - 96px));
+    width: min(720px, calc(100vw - 96px));
+  }
+
   .momento-hero__grid {
     grid-template-columns: 1fr;
   }
@@ -463,21 +599,34 @@
 
 @media (max-width: 768px) {
   .momento-topbar {
-    padding: 14px 16px;
+    padding: 16px 18px;
   }
 
   .momento-logo {
-    height: 34px;
+    gap: 8px;
+    min-height: 46px;
   }
 
   .momento-logo__image {
-    height: 32px;
-    opacity: 0.72;
-    width: 32px;
+    height: 46px;
+    opacity: 0.82;
+    width: 46px;
+  }
+
+  .momento-logo__label {
+    font-size: 12px;
+    max-width: 78px;
   }
 
   .momento-shell {
-    padding: 0 18px;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 0 22px;
+    width: 100%;
+  }
+
+  .momento-hero__grid {
+    min-height: auto;
   }
 
   .momento-hero {
@@ -486,7 +635,43 @@
   }
 
   .momento-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
+    font-size: clamp(2.1rem, 9vw, 2.6rem);
+    line-height: 1.08;
+    max-width: 100%;
+    text-wrap: wrap;
+    width: 100%;
+  }
+
+  .momento-heading__line {
+    display: block;
+  }
+
+  .momento-subheadline {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .momento-decision {
+    font-size: clamp(1rem, 4.8vw, 1.22rem);
+    line-height: 1.32;
+    margin-bottom: 24px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .momento-reveal,
+  .momento-insight,
+  .momento-objection {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .momento-reveal {
+    padding-right: 0;
+  }
+
+  .momento-steps li {
+    padding: 18px 16px 18px 62px;
   }
 
   .momento-section,
@@ -495,11 +680,58 @@
   }
 
   .momento-button {
+    min-width: 0;
+    max-width: 100%;
     width: 100%;
   }
 
   .momento-visual {
     display: none;
+  }
+
+  .momento-footer {
+    font-size: 0.8rem;
+    padding: 34px 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .momento-shell {
+    max-width: min(280px, calc(100vw - 64px));
+    padding-left: 0;
+    padding-right: 0;
+    width: min(280px, calc(100vw - 64px));
+  }
+
+  .momento-hero h1,
+  .momento-subheadline,
+  .momento-scenes,
+  .momento-decision,
+  .momento-cta-wrap,
+  .momento-button {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .momento-subheadline,
+  .momento-scenes,
+  .momento-decision,
+  .momento-microcopy {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .momento-hero h1 {
+    font-size: clamp(1.9rem, 8vw, 2.18rem);
+  }
+
+  .momento-decision {
+    font-size: clamp(1rem, 4.5vw, 1.14rem);
+  }
+
+  .momento-button {
+    max-width: 100%;
+    width: 280px;
   }
 }
 
@@ -510,12 +742,18 @@
   }
 
   .momento-logo {
-    height: 46px;
+    gap: 12px;
+    min-height: 64px;
   }
 
   .momento-logo__image {
-    height: 44px;
-    width: 44px;
+    height: 64px;
+    width: 64px;
+  }
+
+  .momento-logo__label {
+    font-size: 15px;
+    max-width: 112px;
   }
 }
 
