@@ -4,3 +4,57 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# ─── Cache headers ────────────────────────────────────────────────────────────
+# HTML: sem cache (sempre fresco — conteúdo muda a cada deploy).
+[[headers]]
+  for = "/**/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# CSS/JS: 7 dias. Arquivos versionados (ex: ?v=...) são cache-bustados pelo browser.
+[[headers]]
+  for = "/**/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/**/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# Imagens e fontes: 1 ano (ativos raramente mudam; nome do arquivo muda quando mudam).
+[[headers]]
+  for = "/**/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/**/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/**/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/**/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/**/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/**/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
