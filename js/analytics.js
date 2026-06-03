@@ -2,26 +2,8 @@
    PADRÃO INTERROMPIDO™ - ANALYTICS
    ============================================ */
 
-// Google Analytics 4
-// Substitua G-XXXXXXXXXX pelo seu ID de propriedade GA4
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-// gtag('config', 'G-XXXXXXXXXX');
-
-// Meta Pixel
-// Substitua 123456789 pelo seu Pixel ID
-/*
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '123456789');
-fbq('track', 'PageView');
-*/
+// GA4 e Meta Pixel são inicializados pelo GTM no <head> de cada página.
+// Este arquivo só registra eventos de comportamento (cliques, formulários).
 
 // Rastrear cliques em CTAs principais
 document.querySelectorAll('.cta-primary, .cta-secondary').forEach(button => {
@@ -61,4 +43,3 @@ if (window.gtag) {
   });
 }
 
-console.log('✓ Analytics carregado');

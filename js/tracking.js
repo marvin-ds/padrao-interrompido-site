@@ -13,7 +13,10 @@ window.dataLayer = window.dataLayer || [];
     "pagina",
     "status_funil"
   ];
-  const EDuzz_HOSTS = ["chk.eduzz.com", "checkout.eduzz.com"];
+  const EDuzz_HOSTS    = ["chk.eduzz.com", "checkout.eduzz.com"];
+  const QUIZ_HOSTS     = ["teste.padraointerrompido.com.br"];
+  // IDs de clique de plataformas de anúncios — devem ser preservados e repassados ao Quiz.
+  const CLICK_ID_FIELDS = ["gclid", "fbclid", "msclkid"];
 
   function trackEvent(eventName, payload = {}) {
     window.dataLayer.push({
@@ -91,6 +94,15 @@ window.dataLayer = window.dataLayer || [];
       }
     });
 
+    // Captura IDs de clique de plataformas de anúncios (Google Ads, Meta, Microsoft).
+    // Sobrescreve sempre que um novo ID vier na URL — garante atribuição correta do clique atual.
+    CLICK_ID_FIELDS.forEach((field) => {
+      const value = params.get(field);
+      if (value) {
+        next[field] = value;
+      }
+    });
+
     if (!next.pagina) {
       next.pagina = window.location.pathname;
     }
@@ -137,8 +149,9 @@ window.dataLayer = window.dataLayer || [];
     const path = normalizePath(url.pathname);
     const isFunnelPath = ["/quiz", "/quiz-mpi", "/ebook", "/ebook/obrigado.html"].includes(path);
     const isEduzz = EDuzz_HOSTS.includes(url.hostname);
+    const isQuiz  = QUIZ_HOSTS.includes(url.hostname);
 
-    return isEduzz || (isInternal && isFunnelPath);
+    return isEduzz || isQuiz || (isInternal && isFunnelPath);
   }
 
   function appendTrackingParamsToUrl(rawHref, data = readStoredTracking()) {
@@ -151,6 +164,14 @@ window.dataLayer = window.dataLayer || [];
     TRACKING_FIELDS.forEach((field) => {
       const value = data[field];
 
+      if (value && !url.searchParams.has(field)) {
+        url.searchParams.set(field, value);
+      }
+    });
+
+    // Repassa IDs de clique de anúncios ao destino (Quiz, Eduzz).
+    CLICK_ID_FIELDS.forEach((field) => {
+      const value = data[field];
       if (value && !url.searchParams.has(field)) {
         url.searchParams.set(field, value);
       }
@@ -259,6 +280,19 @@ window.dataLayer = window.dataLayer || [];
 
   function trackPageEvents() {
     const path = normalizePath(window.location.pathname);
+
+    if (path === "/teste-momento-invisivel") {
+      trackFunnelEvent(
+        "view_landing",
+        {
+          content_name: "teste_momento_invisivel",
+          content_category: "landing",
+          funnel_step: "landing_view",
+          page: "/teste-momento-invisivel"
+        },
+        "ViewContent"
+      );
+    }
 
     if (path === "/ebook/obrigado.html") {
       trackFunnelEvent(
