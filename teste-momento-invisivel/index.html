@@ -1,68 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Tracking bootstrap: queues events early and loads third-party scripts after first paint. -->
+  <!-- Tracking bootstrap — scripts de marketing só carregam após consentimento LGPD. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     window.gtag = window.gtag || gtag;
 
+    // Configuração GA4 enfileirada — só executa quando o script carregar (pós-consentimento).
     gtag('js', new Date());
     gtag('config', 'G-QJ7PW4HBRQ');
 
+    // Pixel stub — sem envio de dados até o script real carregar.
     !function(f,n){
       if(f.fbq)return;
       n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;
-      n.push=n;
-      n.loaded=!0;
-      n.version='2.0';
-      n.queue=[];
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
     }(window);
 
-    fbq('init', '541342531532855');
-    fbq('track', 'PageView');
-
     (function () {
-      let marketingLoaded = false;
+      var CONSENT_KEY = 'pi_cookie_consent';
+      var marketingLoaded = false;
 
       function loadScript(src, id) {
         if (document.getElementById(id)) return;
-
-        const script = document.createElement('script');
-        script.async = true;
-        script.id = id;
-        script.src = src;
-        document.head.appendChild(script);
+        var s = document.createElement('script');
+        s.async = true; s.id = id; s.src = src;
+        document.head.appendChild(s);
       }
 
       function loadMarketingTags() {
         if (marketingLoaded) return;
         marketingLoaded = true;
 
-        window.dataLayer.push({
-          'gtm.start': new Date().getTime(),
-          event: 'gtm.js'
-        });
+        // Eventos do pixel só disparam aqui, depois do consentimento.
+        fbq('init', '541342531532855');
+        fbq('track', 'PageView');
 
-        loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-TCW949NK', 'gtm-tcw949nk');
-        loadScript('https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ', 'gtag-gqj7pw4hbrq');
-        loadScript('https://connect.facebook.net/en_US/fbevents.js', 'meta-pixel-541342531532855');
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-TCW949NK',         'gtm-tcw949nk');
+        loadScript('https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ',        'gtag-gqj7pw4hbrq');
+        loadScript('https://connect.facebook.net/en_US/fbevents.js',                   'meta-pixel-541342531532855');
       }
 
-      window.addEventListener('load', function () {
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(loadMarketingTags, { timeout: 1800 });
-        } else {
-          window.setTimeout(loadMarketingTags, 800);
-        }
-      }, { once: true });
+      function scheduleLoad() {
+        window.addEventListener('load', function () {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadMarketingTags, { timeout: 1800 });
+          } else {
+            window.setTimeout(loadMarketingTags, 800);
+          }
+        }, { once: true });
+      }
+
+      var consent = localStorage.getItem(CONSENT_KEY);
+      if (consent === 'accepted') {
+        scheduleLoad();
+      } else if (!consent) {
+        // Aguarda o usuário aceitar via cookie banner.
+        window.addEventListener('pi:consent:accepted', scheduleLoad, { once: true });
+      }
+      // Se 'declined': nenhum script de marketing é carregado.
     }());
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
-  </noscript>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,16 +81,16 @@
   <link
     rel="preload"
     as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=optional"
   >
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=optional"
     rel="stylesheet"
     media="print"
     onload="this.media='all'"
   >
   <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=optional" rel="stylesheet">
   </noscript>
 
   <link rel="stylesheet" href="../css/teste-momento-invisivel.css?v=20260523-3">
@@ -375,20 +376,56 @@
       </p>
       <p>
         © 2026 Marcos Vinicius — Todos os direitos reservados.<br>
-        <a href="https://instagram.com/marcosvinicius.mpi">@marcosvinicius.mpi</a> •
-        <a href="https://padraointerrompido.com.br">padraointerrompido.com.br</a>
+        <a href="https://instagram.com/marcosvinicius.mpi" target="_blank" rel="noopener noreferrer">@marcosvinicius.mpi</a> •
+        <a href="https://padraointerrompido.com.br" target="_blank" rel="noopener noreferrer">padraointerrompido.com.br</a>
       </p>
       <p>
         Seus dados são tratados conforme a LGPD e usados apenas para comunicação, entrega de materiais, rastreamento de origem e relacionamento com consentimento. Você pode solicitar atualização ou exclusão pelo e-mail <a href="mailto:contato@padraointerrompido.com.br">contato@padraointerrompido.com.br</a>.
       </p>
       <p>
-        <a href="https://padraointerrompido.com.br/politica-de-privacidade/">Política de Privacidade</a> •
-        <a href="https://padraointerrompido.com.br/termos-de-uso/">Termos de Uso</a>
+        <a href="https://padraointerrompido.com.br/politica-de-privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a> •
+        <a href="https://padraointerrompido.com.br/termos-de-uso/" target="_blank" rel="noopener noreferrer">Termos de Uso</a>
       </p>
     </div>
   </footer>
 
-  <script src="../js/tracking.js"></script>
+  <!-- Cookie Consent Banner (LGPD) -->
+  <div id="pi-cookie-banner" class="pi-cookie" role="dialog" aria-label="Aviso de cookies" hidden>
+    <div class="pi-cookie__inner">
+      <p class="pi-cookie__text">
+        Este site usa cookies de análise (Google Analytics) e rastreamento (Meta Pixel) para entender como você chegou até aqui e melhorar a experiência.
+        <a href="https://padraointerrompido.com.br/politica-de-privacidade/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+      </p>
+      <div class="pi-cookie__actions">
+        <button id="pi-cookie-decline" class="pi-cookie__btn pi-cookie__btn--ghost">Recusar</button>
+        <button id="pi-cookie-accept" class="pi-cookie__btn pi-cookie__btn--primary">Aceitar</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var CONSENT_KEY = 'pi_cookie_consent';
+      if (localStorage.getItem(CONSENT_KEY)) return; // decisão já registrada
+
+      var banner = document.getElementById('pi-cookie-banner');
+
+      // Exibe o banner após 900 ms para não competir com LCP.
+      setTimeout(function () { banner.hidden = false; }, 900);
+
+      document.getElementById('pi-cookie-accept').addEventListener('click', function () {
+        localStorage.setItem(CONSENT_KEY, 'accepted');
+        banner.hidden = true;
+        window.dispatchEvent(new Event('pi:consent:accepted'));
+      });
+
+      document.getElementById('pi-cookie-decline').addEventListener('click', function () {
+        localStorage.setItem(CONSENT_KEY, 'declined');
+        banner.hidden = true;
+      });
+    }());
+  </script>
+
+  <script src="../js/tracking.js" defer></script>
   <script>
     const quizLinks = document.querySelectorAll(".momento-quiz-link");
 
@@ -448,6 +485,78 @@
     } else {
       animatedSections.forEach((section) => section.classList.add("is-visible"));
     }
+
+    // ─── landing_loaded ───────────────────────────────────────────────────────
+    // Dispara quando todos os recursos da página terminaram de carregar.
+    window.addEventListener("load", function () {
+      var payload = {
+        page_path: window.location.pathname,
+        page_title: document.title
+      };
+
+      // Evento para GA4 e GTM.
+      if (window.gtag) {
+        window.gtag("event", "landing_loaded", payload);
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: "landing_loaded" }, payload));
+
+      // Registro no Supabase — só se o usuário aceitou cookies (LGPD).
+      if (localStorage.getItem("pi_cookie_consent") === "accepted") {
+        var t = window.getPadraoInterrompidoTracking ? window.getPadraoInterrompidoTracking() : {};
+        fetch("/.netlify/functions/track-landing-visit", {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            page:         window.location.pathname,
+            utm_source:   t.utm_source   || null,
+            utm_medium:   t.utm_medium   || null,
+            utm_campaign: t.utm_campaign || null,
+            utm_content:  t.utm_content  || null,
+            utm_term:     t.utm_term     || null,
+            gclid:        t.gclid        || null,
+            fbclid:       t.fbclid       || null,
+            msclkid:      t.msclkid      || null,
+            origem:       t.origem       || null,
+            referrer:     document.referrer || null
+          })
+        }).catch(function () { /* falha silenciosa */ });
+      }
+    }, { once: true });
+
+    // ─── Scroll depth (25 / 50 / 75 / 100 %) ────────────────────────────────
+    (function () {
+      var milestones = [25, 50, 75, 100];
+      var fired = {};
+
+      function getScrollPct() {
+        var scrollable = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (scrollable <= 0) return 100;
+        return Math.min(100, Math.round((window.scrollY / scrollable) * 100));
+      }
+
+      function onScroll() {
+        var pct = getScrollPct();
+        milestones.forEach(function (m) {
+          if (!fired[m] && pct >= m) {
+            fired[m] = true;
+            var payload = {
+              percent_scrolled: m,
+              page_path: window.location.pathname
+            };
+            if (window.gtag) {
+              window.gtag("event", "page_scroll", payload);
+            }
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push(Object.assign({ event: "page_scroll" }, payload));
+          }
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      // Verifica também ao carregar (caso a página já esteja scrollada, ex: refresh).
+      onScroll();
+    }());
   </script>
 </body>
 </html>
