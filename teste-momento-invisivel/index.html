@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Tracking bootstrap — scripts de marketing só carregam após consentimento LGPD. -->
+  <!--
+    Tracking bootstrap — dois blocos separados por base legal (LGPD):
+
+    1. META PIXEL — dispara PageView imediatamente, sem consentimento.
+       Base legal: interesse legítimo / análise de tráfego informada na
+       Política de Privacidade (LGPD art. 7º, IX). Eventos de conversão
+       (QuizStarted, Lead, Purchase) continuam dependendo de consentimento.
+
+    2. GTM + GA4 — carregam apenas após o usuário aceitar cookies.
+  -->
   <script>
+    // ── GA4 dataLayer (enfileirado; script real carrega pós-consentimento) ──
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     window.gtag = window.gtag || gtag;
-
-    // Configuração GA4 enfileirada — só executa quando o script carregar (pós-consentimento).
     gtag('js', new Date());
     gtag('config', 'G-QJ7PW4HBRQ');
 
-    // Pixel stub — sem envio de dados até o script real carregar.
+    // ── Meta Pixel stub ──────────────────────────────────────────────────────
     !function(f,n){
       if(f.fbq)return;
       n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -19,9 +27,13 @@
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
     }(window);
 
+    // PageView enfileirado imediatamente — processado quando fbevents.js carregar.
+    fbq('init', '541342531532855');
+    fbq('track', 'PageView');
+
     (function () {
-      var CONSENT_KEY = 'pi_cookie_consent';
-      var marketingLoaded = false;
+      var CONSENT_KEY   = 'pi_cookie_consent';
+      var analyticsLoaded = false;
 
       function loadScript(src, id) {
         if (document.getElementById(id)) return;
@@ -30,40 +42,45 @@
         document.head.appendChild(s);
       }
 
-      function loadMarketingTags() {
-        if (marketingLoaded) return;
-        marketingLoaded = true;
-
-        // Eventos do pixel só disparam aqui, depois do consentimento.
-        fbq('init', '541342531532855');
-        fbq('track', 'PageView');
-
-        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-TCW949NK',         'gtm-tcw949nk');
-        loadScript('https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ',        'gtag-gqj7pw4hbrq');
-        loadScript('https://connect.facebook.net/en_US/fbevents.js',                   'meta-pixel-541342531532855');
-      }
-
-      function scheduleLoad() {
+      function afterLoad(fn) {
         window.addEventListener('load', function () {
           if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadMarketingTags, { timeout: 1800 });
+            window.requestIdleCallback(fn, { timeout: 1800 });
           } else {
-            window.setTimeout(loadMarketingTags, 800);
+            window.setTimeout(fn, 800);
           }
         }, { once: true });
       }
 
+      // fbevents.js carrega sempre (PageView já foi enfileirado acima).
+      afterLoad(function () {
+        loadScript('https://connect.facebook.net/en_US/fbevents.js', 'meta-pixel-541342531532855');
+      });
+
+      // GTM + GA4 só carregam após consentimento.
+      function loadAnalyticsTags() {
+        if (analyticsLoaded) return;
+        analyticsLoaded = true;
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-TCW949NK',  'gtm-tcw949nk');
+        loadScript('https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ', 'gtag-gqj7pw4hbrq');
+      }
+
       var consent = localStorage.getItem(CONSENT_KEY);
       if (consent === 'accepted') {
-        scheduleLoad();
+        afterLoad(loadAnalyticsTags);
       } else if (!consent) {
-        // Aguarda o usuário aceitar via cookie banner.
-        window.addEventListener('pi:consent:accepted', scheduleLoad, { once: true });
+        window.addEventListener('pi:consent:accepted', function () {
+          afterLoad(loadAnalyticsTags);
+        }, { once: true });
       }
-      // Se 'declined': nenhum script de marketing é carregado.
+      // Se 'declined': GTM e GA4 nunca carregam.
     }());
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
+  </noscript>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
