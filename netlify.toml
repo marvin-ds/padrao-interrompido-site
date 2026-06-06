@@ -5,6 +5,13 @@
 [functions]
   node_bundler = "esbuild"
 
+# ─── Redirects ────────────────────────────────────────────────────────────────
+# Navegadores legados pedem favicon.ico; serve o SVG diretamente.
+[[redirects]]
+  from   = "/favicon.ico"
+  to     = "/favicon.svg"
+  status = 200
+
 # ─── Cache headers ────────────────────────────────────────────────────────────
 # HTML: sem cache (sempre fresco — conteúdo muda a cada deploy).
 [[headers]]
