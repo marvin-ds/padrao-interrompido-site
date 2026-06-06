@@ -631,7 +631,7 @@ html {
 
   .momento-hero {
     min-height: auto;
-    padding: 42px 0 58px;
+    padding: 20px 0 48px;
   }
 
   .momento-hero h1 {
@@ -773,11 +773,11 @@ html {
    ============================================ */
 
 .pi-cookie {
-  background: var(--dark-soft);
+  background: rgba(10, 10, 10, 0.97);
   border-top: 1px solid var(--line);
   bottom: 0;
   left: 0;
-  padding: 14px 20px;
+  padding: 10px 20px;
   position: fixed;
   right: 0;
   width: 100%;
@@ -787,38 +787,43 @@ html {
 .pi-cookie__inner {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
+  flex-wrap: nowrap;
+  gap: 8px 20px;
   margin: 0 auto;
   max-width: 1200px;
 }
 
 .pi-cookie__text {
   color: var(--gray);
-  flex: 1 1 260px;
-  font-size: 13px;
-  line-height: 1.6;
+  flex: 1 1 0;
+  font-size: 12px;
+  line-height: 1.4;
   margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pi-cookie__text a {
   color: var(--accent);
   text-decoration: underline;
+  white-space: nowrap;
 }
 
 .pi-cookie__actions {
   display: flex;
   flex-shrink: 0;
-  gap: 8px;
+  gap: 6px;
 }
 
 .pi-cookie__btn {
   border-radius: 4px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 8px 18px;
+  padding: 6px 14px;
   transition: opacity 0.2s;
   white-space: nowrap;
 }
@@ -840,12 +845,16 @@ html {
 }
 
 @media (max-width: 600px) {
-  .pi-cookie__inner {
-    flex-direction: column;
-    align-items: stretch;
+  .pi-cookie {
+    padding: 8px 14px;
   }
 
-  .pi-cookie__actions {
-    justify-content: flex-end;
+  .pi-cookie__text {
+    font-size: 11px;
+  }
+
+  .pi-cookie__btn {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 }
