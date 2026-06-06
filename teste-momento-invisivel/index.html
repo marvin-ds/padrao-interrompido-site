@@ -29,7 +29,10 @@
 
     // PageView enfileirado imediatamente — processado quando fbevents.js carregar.
     fbq('init', '541342531532855');
-    fbq('track', 'PageView');
+    fbq('track', 'PageView', {
+      content_name: 'teste_momento_invisivel',
+      content_category: 'landing'
+    });
 
     (function () {
       var CONSENT_KEY   = 'pi_cookie_consent';

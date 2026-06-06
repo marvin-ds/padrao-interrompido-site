@@ -16,7 +16,8 @@ window.dataLayer = window.dataLayer || [];
   const EDuzz_HOSTS    = ["chk.eduzz.com", "checkout.eduzz.com"];
   const QUIZ_HOSTS     = ["teste.padraointerrompido.com.br"];
   // IDs de clique de plataformas de anúncios — devem ser preservados e repassados ao Quiz.
-  const CLICK_ID_FIELDS = ["gclid", "fbclid", "msclkid"];
+  // brid = Meta Broad ID (substituto do fbclid em iOS 14.5+ com ATT limitado).
+  const CLICK_ID_FIELDS = ["gclid", "fbclid", "msclkid", "brid"];
 
   function trackEvent(eventName, payload = {}) {
     window.dataLayer.push({
