@@ -703,6 +703,10 @@ html {
     width: min(280px, calc(100vw - 64px));
   }
 
+  .momento-hero {
+    padding-top: 0;
+  }
+
   .momento-hero h1,
   .momento-subheadline,
   .momento-scenes,
