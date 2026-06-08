@@ -264,21 +264,13 @@
     .scenes__title {
       font-family: 'Playfair Display', serif;
       font-weight: 400;
-      font-size: clamp(1.5rem, 2.8vw, 2rem;)
-      color: var(--branco);
-      margin-bottom: 64px;
-    }
-
-    .scenes__title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
       font-size: clamp(1.5rem, 2.8vw, 2rem);
       color: var(--branco);
       margin-bottom: 64px;
     }
 
     .scene {
-      padding: 40px 0;
+      padding: 64px 0;
       border-bottom: 1px solid #1e1e1e;
     }
 
@@ -350,7 +342,8 @@
     .pivot__line-amber {
       color: var(--ambar);
       display: block;
-      margin-top: 10px;
+      margin-top: 20px;
+      font-size: 1.15em;
     }
 
     .pivot__support {
@@ -640,7 +633,7 @@
     .for-whom__list li::before {
       position: absolute;
       left: 0;
-      top: 0;
+      top: 2px;
       font-weight: 700;
       font-size: 1rem;
     }
@@ -732,6 +725,13 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       color: var(--branco-suave);
+    }
+
+    /* Cabeçalho ícone + título (empilhado no desktop, inline no mobile) */
+    .guarantee__header {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     /* ============================================================
@@ -899,32 +899,74 @@
     }
 
     .footer__links a {
-      color: var(--ambar);
-      text-decoration: none;
+      color: var(--cinza-medio);
+      text-decoration: underline;
     }
 
-    .footer__links a:hover { text-decoration: underline; }
+    .footer__links a:hover { color: var(--branco-suave); }
 
     /* ============================================================
        RESPONSIVIDADE
     ============================================================ */
+
+    /* ---- ≤ 900px — tablet / hero mobile ---- */
     @media (max-width: 900px) {
+      /* PROBLEMA 1: foto vira background full-width com overlay gradiente */
+      .hero {
+        align-items: flex-end;
+        min-height: 100svh;
+      }
+
+      .hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0,0,0,0.97) 0%,
+          rgba(0,0,0,0.78) 50%,
+          rgba(0,0,0,0.12) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+
       .hero__inner {
-        grid-template-columns: 1fr;
-        padding: 100px 28px 72px;
-        gap: 44px;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        padding: 0 28px 64px;
+        gap: 24px;
+        z-index: 2;
+      }
+
+      .hero__text {
+        position: relative;
+        z-index: 2;
+        gap: 20px;
+      }
+
+      /* PROBLEMA 2: peso visual do headline */
+      .hero__headline {
+        font-weight: 700;
+        font-size: clamp(1.9rem, 8vw, 3.2rem);
       }
 
       .hero__image-wrap {
-        justify-content: center;
-        order: -1;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        display: block;
       }
 
       .hero__img {
-        max-width: 100%;
-        max-height: 280px;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
         object-fit: cover;
         object-position: center 20%;
+        filter: saturate(0.75);
       }
 
       .for-whom__inner {
@@ -933,6 +975,7 @@
       }
     }
 
+    /* ---- ≤ 640px — mobile ---- */
     @media (max-width: 640px) {
       .scenes,
       .pivot,
@@ -951,24 +994,68 @@
         padding-bottom: 80px;
       }
 
-      .guarantee__inner.visible {
-        padding-left: 20px;
-      }
-
+      /* PROBLEMA 3: botões legíveis em mobile */
       .btn-cta {
         width: 100%;
-        font-size: 1rem;
+        font-size: 1.25rem;
+        min-height: 62px;
+        padding: 20px 24px;
       }
 
+      .cta-block .btn-cta {
+        font-size: 1.25rem;
+        padding: 20px 24px;
+      }
+
+      /* PROBLEMA 6: sequência — lista vertical com seta rotacionada */
       .sequence {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
-        padding: 0 16px;
+        gap: 0;
+        padding: 0;
       }
 
-      .seq-arrow { display: none; }
-      .seq-item { width: 100%; }
+      .seq-item {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .seq-label {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+      }
+
+      .seq-arrow {
+        display: inline-block;
+        padding: 2px 18px;
+        font-size: 1.1rem;
+        transform: rotate(90deg);
+        color: rgba(245,245,245,0.35);
+      }
+
+      /* PROBLEMA 9: ícone de garantia inline com título */
+      .guarantee__header {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .guarantee__icon {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .guarantee__title {
+        margin-bottom: 0;
+      }
+
+      .guarantee__inner.visible {
+        padding-left: 20px;
+      }
     }
   </style>
 </head>
@@ -1215,10 +1302,11 @@
         <!-- PDF -->
         <div class="deliverable-card reveal" style="transition-delay:.3s">
           <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <rect x="9" y="5" width="28" height="36" rx="2" stroke="#D47A3B" stroke-width="1.4"/>
-            <path d="M15 15h16" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M15 21h16" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M15 27h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+            <circle cx="23" cy="23" r="22" stroke="#D47A3B" stroke-width="1.4"/>
+            <rect x="14" y="11" width="18" height="24" rx="2" stroke="#D47A3B" stroke-width="1.4"/>
+            <path d="M18 18h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M18 23h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M18 28h6" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
           </svg>
           <div class="deliverable-card__num deliverable-card__num--pdf">PDF</div>
           <div class="deliverable-card__title">Catálogo de Frases Automáticas Alimentares</div>
@@ -1286,12 +1374,13 @@
   <section class="guarantee" aria-label="Garantia de satisfação">
     <div class="guarantee__inner" id="guarantee-inner">
 
-      <svg class="guarantee__icon" viewBox="0 0 52 54" fill="none" aria-hidden="true">
-        <path d="M26 3L5 12v18c0 11.05 8.95 20.57 21 23 12.05-2.43 21-11.95 21-23V12L26 3z" stroke="#F97316" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M17 27l7 7 11-14" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-
-      <h2 class="guarantee__title">Garantia de 7 dias</h2>
+      <div class="guarantee__header">
+        <svg class="guarantee__icon" viewBox="0 0 52 54" fill="none" aria-hidden="true">
+          <path d="M26 3L5 12v18c0 11.05 8.95 20.57 21 23 12.05-2.43 21-11.95 21-23V12L26 3z" stroke="#F97316" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M17 27l7 7 11-14" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2 class="guarantee__title">Garantia de 7 dias</h2>
+      </div>
 
       <p class="guarantee__text">
         Se você ouvir os 3 áudios nos primeiros 7 dias e não reconhecer nada da sua vida no que é entregue — peça reembolso.<br><br>
@@ -1316,7 +1405,7 @@
         id="cta-mid"
         onclick="trackCTA('mid')"
       >
-        QUERO OS ÁUDIOS PARA O INSTANTE ANTERIOR →
+        EU QUERO ISSO PARA HOJE À NOITE →
       </a>
       <p class="cta-block__support reveal" style="transition-delay:.2s">
         Compra 100% segura &nbsp;·&nbsp; Acesso imediato após o pagamento &nbsp;·&nbsp; Garantia de 7 dias
