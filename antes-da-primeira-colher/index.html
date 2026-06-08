@@ -185,6 +185,10 @@
     }
 
     .hero__eyebrow {
+      position: absolute;
+      top: 20px;
+      left: clamp(24px, 4vw, 48px);
+      z-index: 3;
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       font-size: 0.72rem;
@@ -1088,11 +1092,11 @@
        BLOCO 1 — HERO
   ============================================================ -->
   <section class="hero" aria-label="Introdução">
+    <p class="hero__eyebrow reveal">Padrão Interrompido™</p>
     <div class="hero__inner">
 
       <div class="hero__text">
-        <p class="hero__eyebrow reveal">Padrão Interrompido™</p>
-        <h1 class="hero__headline reveal" style="transition-delay:.08s">
+        <h1 class="hero__headline reveal">
           A geladeira já estava aberta<br>antes de você decidir abrir.
         </h1>
         <p class="hero__sub reveal" style="transition-delay:.18s">
