@@ -178,16 +178,25 @@
 
     .hero__headline {
       font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      font-weight: 700;
       font-size: clamp(2rem, 3.8vw, 3.2rem);
       line-height: 1.22;
       color: var(--branco);
     }
 
+    .hero__eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ambar-queimado);
+    }
+
     .hero__sub {
       font-family: 'Inter', sans-serif;
       font-size: 1.05rem;
-      color: var(--cinza-medio);
+      color: rgba(255, 255, 255, 0.72);
       line-height: 1.75;
     }
 
@@ -921,12 +930,10 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(0,0,0,0.97) 0%,
-          rgba(0,0,0,0.78) 50%,
-          rgba(0,0,0,0.12) 100%
-        );
+        background:
+          linear-gradient(to right,  rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.45) 100%),
+          linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0)    35%),
+          linear-gradient(to top,    rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.08) 100%);
         z-index: 1;
         pointer-events: none;
       }
@@ -997,9 +1004,10 @@
       /* PROBLEMA 3: botões legíveis em mobile */
       .btn-cta {
         width: 100%;
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         min-height: 62px;
         padding: 20px 24px;
+        letter-spacing: 0.08em;
       }
 
       .cta-block .btn-cta {
@@ -1083,22 +1091,23 @@
     <div class="hero__inner">
 
       <div class="hero__text">
-        <h1 class="hero__headline reveal">
+        <p class="hero__eyebrow reveal">Padrão Interrompido™</p>
+        <h1 class="hero__headline reveal" style="transition-delay:.08s">
           A geladeira já estava aberta<br>antes de você decidir abrir.
         </h1>
-        <p class="hero__sub reveal" style="transition-delay:.12s">
+        <p class="hero__sub reveal" style="transition-delay:.18s">
           Talvez isso não tenha começado onde você está tentando resolver.
         </p>
         <a
           href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=hero"
           class="btn-cta btn-cta--pulse reveal"
-          style="transition-delay:.24s"
+          style="transition-delay:.30s"
           id="cta-hero"
           onclick="trackCTA('hero')"
         >
           Quero entender o antes →
         </a>
-        <a href="#cenas" class="hero__anchor reveal" style="transition-delay:.36s" aria-label="Continuar lendo">
+        <a href="#cenas" class="hero__anchor reveal" style="transition-delay:.42s" aria-label="Continuar lendo">
           ↓ Continua lendo primeiro
         </a>
       </div>
