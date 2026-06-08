@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TCW949NK');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJ7PW4HBRQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QJ7PW4HBRQ');
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '541342531532855');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Antes da Primeira Colher™ — 3 áudios para o instante anterior à reação automática no território alimentar. Descubra o Momento Invisível™. R$27 com entrega imediata.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Marcos Vinicius">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="A geladeira já estava aberta antes de você decidir abrir.">
+  <meta property="og:description" content="Antes da Primeira Colher™ — 3 áudios para o instante anterior à reação automática. R$27. Entrega imediata.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://padraointerrompido.com.br/antes-da-primeira-colher/">
+
+  <title>Antes da Primeira Colher™ — Padrão Interrompido™</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --preto:         #000000;
+      --preto-quente:  #0B0908;
+      --teal:          #1C4D5C;
+      --branco:        #FFFFFF;
+      --branco-suave:  #F5F5F5;
+      --ambar:         #F97316;
+      --ambar-queimado:#D47A3B;
+      --cinza-medio:   #6B6B6B;
+      --cinza-escuro:  #1A1A1A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--preto);
+      color: var(--branco);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       ANIMAÇÕES — REVEAL + STAGGER
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .reveal.visible,
+      .seq-item,
+      .seq-item.visible,
+      .btn-cta,
+      .btn-cta--pulse,
+      .scene__label::after,
+      .guarantee__inner {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        width: auto !important;
+        border-left-width: 3px !important;
+        padding-left: 32px !important;
+      }
+    }
+
+    /* ============================================================
+       BLOCO 0 — BARRA DE URGÊNCIA
+    ============================================================ */
+    .urgency-bar {
+      background-color: var(--ambar);
+      text-align: center;
+      padding: 10px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--preto);
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    /* ============================================================
+       BLOCO 1 — HERO
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      background-color: var(--preto);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero__inner {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 100px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero__text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .hero__headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 3.8vw, 3.2rem);
+      line-height: 1.22;
+      color: var(--branco);
+    }
+
+    .hero__sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      color: var(--cinza-medio);
+      line-height: 1.75;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--ambar);
+      color: var(--branco);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 36px;
+      min-height: 58px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, letter-spacing 0.2s ease;
+      width: fit-content;
+    }
+
+    .btn-cta:hover {
+      background-color: #e0670e;
+      box-shadow: 0 4px 24px rgba(249, 115, 22, 0.38);
+      letter-spacing: 0.07em;
+    }
+
+    .btn-cta--pulse {
+      animation: ctaPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.02); }
+    }
+
+    .hero__anchor {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--cinza-medio);
+      text-decoration: none;
+      display: block;
+    }
+
+    .hero__image-wrap {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .hero__img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      filter: saturate(0.8);
+      display: block;
+    }
+
+    /* ============================================================
+       BLOCO 2 — AS TRÊS CENAS
+    ============================================================ */
+    .scenes {
+      background-color: var(--preto-quente);
+      padding: 104px 48px;
+    }
+
+    .scenes__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .scenes__title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 2.8vw, 2rem;)
+      color: var(--branco);
+      margin-bottom: 64px;
+    }
+
+    .scenes__title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 2.8vw, 2rem);
+      color: var(--branco);
+      margin-bottom: 64px;
+    }
+
+    .scene {
+      padding: 40px 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .scene:last-of-type {
+      border-bottom: none;
+    }
+
+    .scene__label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .scene__label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 0;
+      background-color: var(--ambar);
+      transition: width 0.35s ease 0.2s;
+    }
+
+    .scene.visible .scene__label::after {
+      width: 40px;
+    }
+
+    .scene__text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      color: var(--branco-suave);
+      line-height: 1.9;
+    }
+
+    .scene__text em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--ambar-queimado);
+    }
+
+    /* ============================================================
+       BLOCO 3 — A VIRADA
+    ============================================================ */
+    .pivot {
+      background-color: var(--preto);
+      padding: 104px 48px;
+    }
+
+    .pivot__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .pivot__main {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+      color: var(--branco);
+      line-height: 1.3;
+      margin-bottom: 36px;
+    }
+
+    .pivot__line-amber {
+      color: var(--ambar);
+      display: block;
+      margin-top: 10px;
+    }
+
+    .pivot__support {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--cinza-medio);
+      line-height: 1.85;
+    }
+
+    .pivot__emphasis {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--branco-suave);
+      line-height: 1.7;
+      margin-top: 28px;
+    }
+
+    /* ============================================================
+       BLOCO 4 — MECANISMO (TEAL)
+    ============================================================ */
+    .mechanism {
+      background-color: var(--teal);
+      padding: 104px 48px;
+    }
+
+    .mechanism__inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .mechanism__eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,0.75);
+      margin-bottom: 16px;
+    }
+
+    .mechanism__name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--ambar-queimado);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 36px;
+      transform: scale(0.85);
+      transition: transform 0.45s ease, opacity 0.45s ease;
+    }
+
+    .mechanism__name.visible {
+      transform: scale(1);
+    }
+
+    .mechanism__def {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      color: var(--branco-suave);
+      line-height: 1.85;
+      max-width: 560px;
+      margin: 0 auto 20px;
+    }
+
+    .mechanism__tag {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--ambar-queimado);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 64px;
+    }
+
+    /* Diagrama sequência */
+    .sequence {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      row-gap: 8px;
+    }
+
+    .seq-item {
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .seq-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .seq-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      color: rgba(245,245,245,0.55);
+      white-space: nowrap;
+    }
+
+    .seq-label--hl {
+      color: var(--ambar-queimado);
+      font-weight: 700;
+      font-size: 0.78rem;
+      border: 1px solid var(--ambar-queimado);
+      border-radius: 2px;
+    }
+
+    .seq-arrow {
+      color: rgba(245,245,245,0.25);
+      font-size: 0.85rem;
+      padding: 0 2px;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       BLOCO 5 — APRESENTAÇÃO DO PRODUTO
+    ============================================================ */
+    .product-intro {
+      background-color: var(--preto);
+      padding: 104px 48px;
+      text-align: center;
+    }
+
+    .product-intro__inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .product-intro__bridge {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: var(--branco);
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+
+    .product-intro__name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      color: var(--branco);
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .product-intro__sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.97rem;
+      color: var(--cinza-medio);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       BLOCO 6 — ENTREGÁVEIS
+    ============================================================ */
+    .deliverables {
+      background-color: var(--cinza-escuro);
+      padding: 104px 48px;
+    }
+
+    .deliverables__inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .deliverables__title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+      color: var(--branco);
+      margin-bottom: 56px;
+    }
+
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .deliverable-card {
+      background-color: #101010;
+      border: 1px solid #222;
+      padding: 32px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .deliverable-card:hover {
+      border-color: var(--ambar);
+      transform: translateY(-4px);
+    }
+
+    .deliverable-card__icon {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .deliverable-card__num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ambar);
+      margin-bottom: 8px;
+    }
+
+    .deliverable-card__num--pdf {
+      color: var(--ambar-queimado);
+    }
+
+    .deliverable-card__title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.97rem;
+      color: var(--branco);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .deliverable-card__desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: var(--cinza-medio);
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+       BLOCO 7 — PARA QUEM É / NÃO É
+    ============================================================ */
+    .for-whom {
+      background-color: var(--preto-quente);
+      padding: 104px 48px;
+    }
+
+    .for-whom__inner {
+      max-width: 880px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+
+    .for-whom__col-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .for-whom__col-label--yes { color: var(--ambar); }
+    .for-whom__col-label--no  { color: var(--cinza-medio); }
+
+    .for-whom__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .for-whom__list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.94rem;
+      color: var(--branco-suave);
+      line-height: 1.65;
+      padding-left: 26px;
+      position: relative;
+    }
+
+    .for-whom__list li::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .for-whom__list--yes li::before { content: '✓'; color: var(--ambar); }
+    .for-whom__list--no  li::before { content: '✗'; color: var(--cinza-medio); }
+
+    /* ============================================================
+       BLOCO 8 — AUTORIDADE
+    ============================================================ */
+    .authority {
+      background-color: var(--preto);
+      padding: 104px 48px;
+    }
+
+    .authority__inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .authority__text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--cinza-medio);
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .authority__text strong { color: var(--branco); }
+
+    .authority__closing {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ambar-queimado);
+      line-height: 1.75;
+      border-top: 1px solid #1a1a1a;
+      padding-top: 32px;
+    }
+
+    /* ============================================================
+       BLOCO 9 — GARANTIA
+    ============================================================ */
+    .guarantee {
+      background-color: var(--cinza-escuro);
+      padding: 104px 48px;
+    }
+
+    .guarantee__inner {
+      max-width: 640px;
+      margin: 0 auto;
+      border-left: 0px solid var(--ambar);
+      padding-left: 0;
+      transition: border-left-width 0.4s ease, padding-left 0.4s ease;
+    }
+
+    .guarantee__inner.visible {
+      border-left-width: 3px;
+      padding-left: 32px;
+    }
+
+    .guarantee__icon {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .guarantee__title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--branco);
+      margin-bottom: 24px;
+    }
+
+    .guarantee__text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.97rem;
+      color: var(--cinza-medio);
+      line-height: 1.9;
+    }
+
+    .guarantee__text strong { color: var(--branco-suave); }
+    .guarantee__text em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--branco-suave);
+    }
+
+    /* ============================================================
+       BLOCO 10 & 12 — CTA BLOCKS
+    ============================================================ */
+    .cta-block {
+      background-color: var(--preto);
+      padding: 104px 48px;
+      text-align: center;
+    }
+
+    .cta-block--alt {
+      background-color: var(--preto-quente);
+    }
+
+    .cta-block__inner {
+      max-width: 560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .cta-block__price {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: var(--cinza-medio);
+      margin-bottom: 20px;
+    }
+
+    .cta-block .btn-cta {
+      width: 100%;
+      max-width: 480px;
+      font-size: 1.1rem;
+      padding: 22px 32px;
+      min-height: 62px;
+    }
+
+    .cta-block__support {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.76rem;
+      color: var(--cinza-medio);
+      margin-top: 16px;
+      line-height: 1.9;
+    }
+
+    .cta-bridge {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: var(--branco);
+      line-height: 1.75;
+      margin-bottom: 44px;
+      text-align: center;
+    }
+
+    .cta-bridge .amber { color: var(--ambar); }
+
+    /* ============================================================
+       BLOCO 11 — FAQ
+    ============================================================ */
+    .faq {
+      background-color: var(--teal);
+      padding: 104px 48px;
+    }
+
+    .faq__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq__title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      color: var(--branco);
+      margin-bottom: 52px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .faq-item:first-of-type {
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .faq-item[aria-expanded="true"] .faq-item__icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-item__btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 0;
+      text-align: left;
+    }
+
+    .faq-item__q {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--branco-suave);
+      line-height: 1.5;
+    }
+
+    .faq-item__icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      color: var(--ambar);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item__answer {
+      display: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: rgba(245,245,245,0.72);
+      line-height: 1.9;
+      padding-bottom: 24px;
+    }
+
+    .faq-item[aria-expanded="true"] .faq-item__answer {
+      display: block;
+    }
+
+    /* ============================================================
+       BLOCO 13 — RODAPÉ
+    ============================================================ */
+    .footer {
+      background-color: var(--preto);
+      border-top: 4px solid var(--ambar);
+      padding: 60px 48px;
+      text-align: center;
+    }
+
+    .footer__disclaimer {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--cinza-medio);
+      line-height: 1.9;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    .footer__brand {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--cinza-medio);
+      margin-bottom: 14px;
+    }
+
+    .footer__links {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--cinza-medio);
+    }
+
+    .footer__links a {
+      color: var(--ambar);
+      text-decoration: none;
+    }
+
+    .footer__links a:hover { text-decoration: underline; }
+
+    /* ============================================================
+       RESPONSIVIDADE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .hero__inner {
+        grid-template-columns: 1fr;
+        padding: 100px 28px 72px;
+        gap: 44px;
+      }
+
+      .hero__image-wrap {
+        justify-content: center;
+        order: -1;
+      }
+
+      .hero__img {
+        max-width: 100%;
+        max-height: 280px;
+        object-fit: cover;
+        object-position: center 20%;
+      }
+
+      .for-whom__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .scenes,
+      .pivot,
+      .mechanism,
+      .product-intro,
+      .deliverables,
+      .for-whom,
+      .authority,
+      .guarantee,
+      .cta-block,
+      .faq,
+      .footer {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .guarantee__inner.visible {
+        padding-left: 20px;
+      }
+
+      .btn-cta {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      .sequence {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 16px;
+      }
+
+      .seq-arrow { display: none; }
+      .seq-item { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCW949NK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- ============================================================
+       BLOCO 0 — BARRA DE URGÊNCIA
+  ============================================================ -->
+  <div class="urgency-bar" role="banner" aria-label="Aviso de disponibilidade">
+    Acesso disponível agora &nbsp;·&nbsp; Entrega imediata após o pagamento
+  </div>
+
+
+  <!-- ============================================================
+       BLOCO 1 — HERO
+  ============================================================ -->
+  <section class="hero" aria-label="Introdução">
+    <div class="hero__inner">
+
+      <div class="hero__text">
+        <h1 class="hero__headline reveal">
+          A geladeira já estava aberta<br>antes de você decidir abrir.
+        </h1>
+        <p class="hero__sub reveal" style="transition-delay:.12s">
+          Talvez isso não tenha começado onde você está tentando resolver.
+        </p>
+        <a
+          href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=hero"
+          class="btn-cta btn-cta--pulse reveal"
+          style="transition-delay:.24s"
+          id="cta-hero"
+          onclick="trackCTA('hero')"
+        >
+          Quero entender o antes →
+        </a>
+        <a href="#cenas" class="hero__anchor reveal" style="transition-delay:.36s" aria-label="Continuar lendo">
+          ↓ Continua lendo primeiro
+        </a>
+      </div>
+
+      <div class="hero__image-wrap">
+        <picture>
+          <source srcset="./geladeira-hero.webp" type="image/webp">
+          <img
+            src="./geladeira-hero.jpg"
+            alt="Silhueta de pessoa de costas na frente da geladeira iluminada"
+            class="hero__img"
+            width="520"
+            height="640"
+            fetchpriority="high"
+          >
+        </picture>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 2 — AS TRÊS CENAS
+  ============================================================ -->
+  <section class="scenes" id="cenas" aria-label="Cenas de identificação">
+    <div class="scenes__inner">
+
+      <h2 class="scenes__title reveal">Alguma dessas cenas é sua?</h2>
+
+      <article class="scene reveal">
+        <div class="scene__label">A geladeira</div>
+        <p class="scene__text">
+          Você foi. Ficou parada na frente dela. Não sabia bem o que procurava. Fechou. Voltou. Ficou de novo.<br>
+          <em>Não era fome.</em>
+        </p>
+      </article>
+
+      <article class="scene reveal" style="transition-delay:.1s">
+        <div class="scene__label">A colher</div>
+        <p class="scene__text">
+          <em>"Era só uma colher."</em> A segunda aconteceu. A terceira não teve aviso.<br>
+          Você só registrou quando viu o fundo.
+        </p>
+      </article>
+
+      <article class="scene reveal" style="transition-delay:.2s">
+        <div class="scene__label">O amanhã</div>
+        <p class="scene__text">
+          <em>"Amanhã eu volto pro eixo."</em> Você disse isso semana passada. E na semana anterior.<br>
+          O amanhã sempre parece mais fácil à noite.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 3 — A VIRADA
+  ============================================================ -->
+  <section class="pivot" aria-label="Reencadramento do problema">
+    <div class="pivot__inner">
+
+      <h2 class="pivot__main reveal">
+        Talvez você não esteja falhando<br>por falta de disciplina.
+        <span class="pivot__line-amber reveal" style="transition-delay:.2s">
+          Talvez esteja tentando perceber tarde demais.
+        </span>
+      </h2>
+
+      <p class="pivot__support reveal" style="transition-delay:.1s">
+        Antes da geladeira, existe um segundo. Um sinal. Uma frase automática. Uma busca de alívio que o corpo já começou antes da mente perceber.
+      </p>
+
+      <p class="pivot__emphasis reveal" style="transition-delay:.3s">
+        A reação é o fim da sequência. Não o começo.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 4 — O MECANISMO
+  ============================================================ -->
+  <section class="mechanism" aria-label="O Momento Invisível">
+    <div class="mechanism__inner">
+
+      <p class="mechanism__eyebrow reveal">O nome desse segundo é</p>
+
+      <h2 class="mechanism__name reveal" style="transition-delay:.2s" id="mechanism-name">
+        MOMENTO INVISÍVEL™
+      </h2>
+
+      <p class="mechanism__def reveal" style="transition-delay:.32s">
+        O instante antes da reação automática, quando o padrão já começou — mas ainda passa despercebido.
+      </p>
+
+      <p class="mechanism__tag reveal" style="transition-delay:.44s">Não é culpa. É pista.</p>
+
+      <!-- Diagrama da sequência -->
+      <div class="sequence" aria-label="Sequência do padrão automático" role="img">
+        <div class="seq-item">
+          <span class="seq-label">CENA</span>
+          <span class="seq-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="seq-item" style="transition-delay:.1s">
+          <span class="seq-label">SINAL</span>
+          <span class="seq-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="seq-item" style="transition-delay:.2s">
+          <span class="seq-label">FRASE</span>
+          <span class="seq-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="seq-item" style="transition-delay:.3s">
+          <span class="seq-label seq-label--hl">MOMENTO INVISÍVEL™</span>
+          <span class="seq-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="seq-item" style="transition-delay:.4s">
+          <span class="seq-label">REAÇÃO</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 5 — APRESENTAÇÃO DO PRODUTO
+  ============================================================ -->
+  <section class="product-intro" aria-label="O produto">
+    <div class="product-intro__inner">
+
+      <p class="product-intro__bridge reveal">
+        Antes da Primeira Colher™ são 3 áudios para esse instante anterior —<br>
+        não para depois do arrependimento.
+      </p>
+
+      <h2 class="product-intro__name reveal" style="transition-delay:.15s">
+        ANTES DA<br>PRIMEIRA COLHER™
+      </h2>
+
+      <p class="product-intro__sub reveal" style="transition-delay:.28s">
+        3 áudios para o instante anterior à reação automática no território alimentar.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 6 — ENTREGÁVEIS
+  ============================================================ -->
+  <section class="deliverables" aria-label="O que você vai receber">
+    <div class="deliverables__inner">
+
+      <h2 class="deliverables__title reveal">O que você vai ouvir</h2>
+
+      <div class="deliverable-grid">
+
+        <!-- Áudio 1 -->
+        <div class="deliverable-card reveal">
+          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
+            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
+            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
+            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
+          </svg>
+          <div class="deliverable-card__num">Áudio 01</div>
+          <div class="deliverable-card__title">Antes da Geladeira</div>
+          <p class="deliverable-card__desc">Para o segundo em que o corpo vai antes de você entender por quê. Antes da decisão. Antes da fome. Antes da colher.</p>
+        </div>
+
+        <!-- Áudio 2 -->
+        <div class="deliverable-card reveal" style="transition-delay:.1s">
+          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
+            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
+            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
+            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
+          </svg>
+          <div class="deliverable-card__num">Áudio 02</div>
+          <div class="deliverable-card__title">Quando o Cansaço Vira Permissão</div>
+          <p class="deliverable-card__desc">Para quando o "dia pesado" começa a parecer uma autorização. Para quando o cansaço vira "eu mereço".</p>
+        </div>
+
+        <!-- Áudio 3 -->
+        <div class="deliverable-card reveal" style="transition-delay:.2s">
+          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
+            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
+            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
+            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
+          </svg>
+          <div class="deliverable-card__num">Áudio 03</div>
+          <div class="deliverable-card__title">Antes do "Amanhã Eu Volto"</div>
+          <p class="deliverable-card__desc">Para quando o recomeço começa a servir de fuga do presente. Para quando o amanhã vira saída para o agora.</p>
+        </div>
+
+        <!-- PDF -->
+        <div class="deliverable-card reveal" style="transition-delay:.3s">
+          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+            <rect x="9" y="5" width="28" height="36" rx="2" stroke="#D47A3B" stroke-width="1.4"/>
+            <path d="M15 15h16" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M15 21h16" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M15 27h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <div class="deliverable-card__num deliverable-card__num--pdf">PDF</div>
+          <div class="deliverable-card__title">Catálogo de Frases Automáticas Alimentares</div>
+          <p class="deliverable-card__desc">25 frases que abrem a sequência antes da comida aparecer. Para você reconhecer qual é a sua.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 7 — PARA QUEM É / NÃO É
+  ============================================================ -->
+  <section class="for-whom" aria-label="Para quem é este produto">
+    <div class="for-whom__inner">
+
+      <div class="reveal">
+        <div class="for-whom__col-label for-whom__col-label--yes">Para você se:</div>
+        <ul class="for-whom__list for-whom__list--yes">
+          <li>Você só percebe depois que aconteceu</li>
+          <li>Uma dessas cenas não sai da cabeça</li>
+          <li>Você já tentou de tudo "depois" e quer tentar o antes</li>
+          <li>Você se reconheceu em alguma das frases: "era só uma colher", "amanhã eu volto", "não era fome"</li>
+          <li>Você quer entender onde a cena começa antes da comida aparecer</li>
+        </ul>
+      </div>
+
+      <div class="reveal" style="transition-delay:.12s">
+        <div class="for-whom__col-label for-whom__col-label--no">Não é para você se:</div>
+        <ul class="for-whom__list for-whom__list--no">
+          <li>Você busca plano alimentar ou reeducação nutricional</li>
+          <li>Você quer emagrecimento ou controle de peso</li>
+          <li>Você busca diagnóstico ou acompanhamento clínico</li>
+          <li>Você espera cura, controle total ou "nunca mais repetir"</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 8 — AUTORIDADE POR PRECISÃO
+  ============================================================ -->
+  <section class="authority" aria-label="Sobre o Padrão Interrompido">
+    <div class="authority__inner">
+
+      <p class="authority__text reveal">
+        <strong>Padrão Interrompido™</strong> não é terapia. Não é dieta. Não é coaching.<br><br>
+        É um mapeamento educativo do instante anterior à reação automática — para quem já tentou resolver no depois e quer entender o antes.
+      </p>
+
+      <p class="authority__closing reveal" style="transition-delay:.15s">
+        Se você chegou até aqui, talvez já soubesse<br>que o problema não começava na comida.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 9 — GARANTIA
+  ============================================================ -->
+  <section class="guarantee" aria-label="Garantia de satisfação">
+    <div class="guarantee__inner" id="guarantee-inner">
+
+      <svg class="guarantee__icon" viewBox="0 0 52 54" fill="none" aria-hidden="true">
+        <path d="M26 3L5 12v18c0 11.05 8.95 20.57 21 23 12.05-2.43 21-11.95 21-23V12L26 3z" stroke="#F97316" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M17 27l7 7 11-14" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <h2 class="guarantee__title">Garantia de 7 dias</h2>
+
+      <p class="guarantee__text">
+        Se você ouvir os 3 áudios nos primeiros 7 dias e não reconhecer nada da sua vida no que é entregue — peça reembolso.<br><br>
+        <strong>Sem perguntas. Sem burocracia.</strong><br><br>
+        Essa garantia existe porque se o produto não fizer você pensar <em>"isso é exatamente o que acontece comigo"</em> — ele não serviu para você.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 10 — CTA PRINCIPAL
+  ============================================================ -->
+  <section class="cta-block" aria-label="Adquirir o produto">
+    <div class="cta-block__inner">
+      <p class="cta-block__price reveal">R$27 — entrega imediata</p>
+      <a
+        href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=mid"
+        class="btn-cta btn-cta--pulse reveal"
+        style="transition-delay:.1s"
+        id="cta-mid"
+        onclick="trackCTA('mid')"
+      >
+        QUERO OS ÁUDIOS PARA O INSTANTE ANTERIOR →
+      </a>
+      <p class="cta-block__support reveal" style="transition-delay:.2s">
+        Compra 100% segura &nbsp;·&nbsp; Acesso imediato após o pagamento &nbsp;·&nbsp; Garantia de 7 dias
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 11 — FAQ
+  ============================================================ -->
+  <section class="faq" aria-label="Perguntas frequentes">
+    <div class="faq__inner">
+
+      <h2 class="faq__title reveal">Perguntas frequentes</h2>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
+          <span class="faq-item__q">Isso é terapia ou acompanhamento psicológico?</span>
+          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <p class="faq-item__answer">Não. É um produto educativo e de autopercepção. Não substitui acompanhamento médico, psicológico ou nutricional.</p>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
+          <span class="faq-item__q">Preciso ter conhecimento prévio sobre padrões?</span>
+          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <p class="faq-item__answer">Não. Os áudios foram criados para quem está percebendo isso pela primeira vez. Você só precisa ter vivido uma das cenas.</p>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
+          <span class="faq-item__q">Funciona para qualquer tipo de cena alimentar?</span>
+          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <p class="faq-item__answer">Os 3 áudios cobrem as cenas mais comuns: a geladeira sem fome clara, o cansaço que vira permissão e o recomeço que nunca chega. Se você se reconheceu em alguma delas, o produto foi feito para você.</p>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
+          <span class="faq-item__q">O que recebo exatamente?</span>
+          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <p class="faq-item__answer">3 áudios de 5 a 7 minutos cada + 1 PDF com 25 frases automáticas alimentares. Tudo entregue imediatamente após o pagamento.</p>
+      </div>
+
+      <div class="faq-item" aria-expanded="false">
+        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
+          <span class="faq-item__q">E se eu não reconhecer nada?</span>
+          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <p class="faq-item__answer">Você tem 7 dias de garantia. Se ouvir os áudios e não se reconhecer em nada do que é entregue, peça o reembolso. Sem perguntas.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 12 — CTA FINAL
+  ============================================================ -->
+  <section class="cta-block cta-block--alt" aria-label="Comprar agora">
+    <div class="cta-block__inner">
+
+      <p class="cta-bridge reveal">
+        A geladeira vai abrir de novo. A colher vai aparecer.<br>
+        O amanhã vai parecer mais fácil.<br><br>
+        <span class="amber">A diferença é o que você vai reconhecer antes.</span>
+      </p>
+
+      <a
+        href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=bottom"
+        class="btn-cta btn-cta--pulse reveal"
+        style="transition-delay:.15s"
+        id="cta-bottom"
+        onclick="trackCTA('bottom')"
+      >
+        COMEÇAR AGORA — R$27 →
+      </a>
+
+      <p class="cta-block__support reveal" style="transition-delay:.28s">
+        Compra 100% segura &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO 13 — RODAPÉ
+  ============================================================ -->
+  <footer class="footer">
+    <p class="footer__disclaimer">
+      Este produto tem finalidade exclusivamente educativa e de autopercepção. Não é diagnóstico, tratamento, terapia ou acompanhamento psicológico, médico ou nutricional. Não promete resultado específico, emagrecimento, controle alimentar ou transformação definitiva. Resultados e experiências individuais variam.
+    </p>
+    <p class="footer__brand">
+      Padrão Interrompido™ &nbsp;·&nbsp; padraointerrompido.com.br
+    </p>
+    <p class="footer__links">
+      <a href="/politica-de-privacidade/">Política de Privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="/termos-de-uso/">Termos de Uso</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:contato@padraointerrompido.com.br">Suporte</a>
+    </p>
+  </footer>
+
+
+  <script>
+    /* ============================================================
+       REVEAL — IntersectionObserver geral
+    ============================================================ */
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    /* Hero — entrada imediata com stagger */
+    document.querySelectorAll('.hero .reveal').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('visible'); }, i * 120 + 80);
+    });
+
+    /* ============================================================
+       SCENES — animação da linha âmbar no label
+    ============================================================ */
+    var sceneObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.28 });
+
+    document.querySelectorAll('.scene').forEach(function(el) {
+      sceneObserver.observe(el);
+    });
+
+    /* ============================================================
+       MECHANISM — escala do nome + sequência com stagger
+    ============================================================ */
+    var mechanismName = document.getElementById('mechanism-name');
+    var seqItems = document.querySelectorAll('.seq-item');
+    var seqWrap = document.querySelector('.sequence');
+
+    if (mechanismName) {
+      var mechObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            mechObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      mechObserver.observe(mechanismName);
+    }
+
+    if (seqWrap) {
+      var seqObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            seqItems.forEach(function(item, i) {
+              setTimeout(function() { item.classList.add('visible'); }, i * 100);
+            });
+            seqObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      seqObserver.observe(seqWrap);
+    }
+
+    /* ============================================================
+       GARANTIA — border-left animado ao entrar na viewport
+    ============================================================ */
+    var guaranteeInner = document.getElementById('guarantee-inner');
+    if (guaranteeInner) {
+      var gObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            gObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      gObserver.observe(guaranteeInner);
+    }
+
+    /* ============================================================
+       FAQ — accordion com tracking
+    ============================================================ */
+    function toggleFaq(btn) {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.getAttribute('aria-expanded') === 'true';
+      item.setAttribute('aria-expanded', String(!isOpen));
+
+      if (!isOpen && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'faq_open',
+          faq_question: btn.querySelector('.faq-item__q').textContent.trim()
+        });
+      }
+    }
+
+    /* ============================================================
+       SCROLL TRACKING — 50% e 80%
+    ============================================================ */
+    var scrollTracked = {};
+    window.addEventListener('scroll', function() {
+      var doc  = document.documentElement;
+      var pct  = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
+
+      if (!scrollTracked[50] && pct >= 50) {
+        scrollTracked[50] = true;
+        if (window.dataLayer) window.dataLayer.push({ event: 'scroll_50' });
+      }
+      if (!scrollTracked[80] && pct >= 80) {
+        scrollTracked[80] = true;
+        if (window.dataLayer) window.dataLayer.push({ event: 'scroll_80' });
+      }
+    }, { passive: true });
+
+    /* ============================================================
+       CTA TRACKING
+    ============================================================ */
+    function trackCTA(position) {
+      var events = { hero: 'cta_click_hero', mid: 'cta_click_mid', bottom: 'cta_click_bottom' };
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: events[position] || 'cta_click', cta_position: position });
+      }
+      if (window.fbq) {
+        window.fbq('track', 'InitiateCheckout', { content_name: 'antes-da-primeira-colher', value: 27, currency: 'BRL' });
+      }
+    }
+  </script>
+
+  <script src="/js/tracking.js" defer></script>
+</body>
+</html>

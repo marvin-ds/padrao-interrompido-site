@@ -7,7 +7,20 @@
       "Bash(git commit *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "Bash(Get-ChildItem -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "Bash(Get-Content \"C:\\\\Projetos\\\\padrao-interrompido-site\\\\css\\\\teste-momento-invisivel.css\")",
+      "Bash(Select-Object -Last 8)",
+      "Bash(tail -8 \"/mnt/c/Projetos/padrao-interrompido-site/css/teste-momento-invisivel.css\")",
+      "mcp__6aea1a4d-727b-4976-b8c3-7acfb09f3b25__list_projects",
+      "mcp__6aea1a4d-727b-4976-b8c3-7acfb09f3b25__list_tables",
+      "mcp__6aea1a4d-727b-4976-b8c3-7acfb09f3b25__get_project_url",
+      "mcp__6aea1a4d-727b-4976-b8c3-7acfb09f3b25__get_publishable_keys",
+      "mcp__6aea1a4d-727b-4976-b8c3-7acfb09f3b25__apply_migration",
+      "mcp__plugin_context-mode_context-mode__ctx_search"
     ]
   }
 }
