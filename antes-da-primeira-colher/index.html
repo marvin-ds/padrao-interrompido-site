@@ -330,6 +330,17 @@
       color: var(--ambar-queimado);
     }
 
+    .scenes__transition {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--branco-suave);
+      line-height: 1.7;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid #1e1e1e;
+    }
+
     /* ============================================================
        BLOCO 3 — A VIRADA
     ============================================================ */
@@ -481,6 +492,42 @@
       font-size: 0.85rem;
       padding: 0 2px;
       flex-shrink: 0;
+    }
+
+    /* ============================================================
+       BLOCO URGÊNCIA PASSIVA
+    ============================================================ */
+    .urgency-passive {
+      background-color: var(--preto-quente);
+      padding: 104px 48px;
+    }
+
+    .urgency-passive__inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .urgency-passive__text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      color: var(--cinza-medio);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .urgency-passive__text em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--ambar-queimado);
+    }
+
+    .urgency-passive__emphasis {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+      color: var(--branco);
+      line-height: 1.5;
+      margin-top: 8px;
     }
 
     /* ============================================================
@@ -1100,7 +1147,7 @@
           A geladeira já estava aberta<br>antes de você decidir abrir.
         </h1>
         <p class="hero__sub reveal" style="transition-delay:.18s">
-          Talvez isso não tenha começado onde você está tentando resolver.
+          Talvez você esteja tentando resolver tarde demais.
         </p>
         <a
           href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=hero"
@@ -1109,7 +1156,7 @@
           id="cta-hero"
           onclick="trackCTA('hero')"
         >
-          Quero entender o antes →
+          QUERO PERCEBER ANTES →
         </a>
         <a href="#cenas" class="hero__anchor reveal" style="transition-delay:.42s" aria-label="Continuar lendo">
           ↓ Continua lendo primeiro
@@ -1140,31 +1187,44 @@
   <section class="scenes" id="cenas" aria-label="Cenas de identificação">
     <div class="scenes__inner">
 
-      <h2 class="scenes__title reveal">Alguma dessas cenas é sua?</h2>
-
       <article class="scene reveal">
-        <div class="scene__label">A geladeira</div>
         <p class="scene__text">
-          Você foi. Ficou parada na frente dela. Não sabia bem o que procurava. Fechou. Voltou. Ficou de novo.<br>
-          <em>Não era fome.</em>
+          Tem um momento em que você ainda não abriu a geladeira.<br>
+          Mas já começou a ir.<br><br>
+          Você foi. Ficou parada. Fechou.<br>
+          Voltou. Ficou de novo.<br><br>
+          <em>Não era fome.</em><br>
+          Você só não sabia ainda o que era.
         </p>
       </article>
 
       <article class="scene reveal" style="transition-delay:.1s">
-        <div class="scene__label">A colher</div>
         <p class="scene__text">
-          <em>"Era só uma colher."</em> A segunda aconteceu. A terceira não teve aviso.<br>
+          <em>"É só uma colher."</em><br>
+          Na hora parecia pequeno.<br>
+          Depois parecia inevitável.<br><br>
+          A segunda aconteceu.<br>
+          A terceira não teve aviso.<br>
           Você só registrou quando viu o fundo.
         </p>
       </article>
 
       <article class="scene reveal" style="transition-delay:.2s">
-        <div class="scene__label">O amanhã</div>
         <p class="scene__text">
-          <em>"Amanhã eu volto pro eixo."</em> Você disse isso semana passada. E na semana anterior.<br>
-          O amanhã sempre parece mais fácil à noite.
+          <em>"Foi um dia pesado. Eu mereço."</em><br>
+          Não foi uma decisão.<br>
+          Foi uma conclusão que já tinha chegado<br>
+          antes de você terminar o raciocínio.<br><br>
+          <em>"Amanhã eu volto pro eixo."</em><br>
+          Você disse isso semana passada.<br>
+          E na semana anterior.
         </p>
       </article>
+
+      <p class="scenes__transition reveal" style="transition-delay:.3s">
+        O problema não começa na colher.<br>
+        A colher só é a parte visível.
+      </p>
 
     </div>
   </section>
@@ -1183,12 +1243,15 @@
         </span>
       </h2>
 
-      <p class="pivot__support reveal" style="transition-delay:.1s">
-        Antes da geladeira, existe um segundo. Um sinal. Uma frase automática. Uma busca de alívio que o corpo já começou antes da mente perceber.
+      <p class="pivot__emphasis reveal" style="transition-delay:.1s">
+        A reação é o fim da sequência. Não o começo.
       </p>
 
-      <p class="pivot__emphasis reveal" style="transition-delay:.3s">
-        A reação é o fim da sequência. Não o começo.
+      <p class="pivot__support reveal" style="transition-delay:.25s">
+        Você não levantou por fome.<br>
+        Você levantou porque precisava de alguma coisa.<br><br>
+        E esse segundo — entre precisar e ir —<br>
+        é onde tudo começa.
       </p>
 
     </div>
@@ -1208,7 +1271,10 @@
       </h2>
 
       <p class="mechanism__def reveal" style="transition-delay:.32s">
-        O instante antes da reação automática, quando o padrão já começou — mas ainda passa despercebido.
+        É o segundo em que o <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--branco-suave)">"só hoje"</em> começa a parecer razoável.<br>
+        Em que <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--branco-suave)">"eu mereço"</em> já decidiu por você.<br>
+        Em que a geladeira ainda não abriu —<br>
+        mas você já está a caminho.
       </p>
 
       <p class="mechanism__tag reveal" style="transition-delay:.44s">Não é culpa. É pista.</p>
@@ -1216,26 +1282,47 @@
       <!-- Diagrama da sequência -->
       <div class="sequence" aria-label="Sequência do padrão automático" role="img">
         <div class="seq-item">
-          <span class="seq-label">CENA</span>
+          <span class="seq-label">VOCÊ VAI</span>
           <span class="seq-arrow" aria-hidden="true">→</span>
         </div>
         <div class="seq-item" style="transition-delay:.1s">
-          <span class="seq-label">SINAL</span>
+          <span class="seq-label">A FRASE APARECE</span>
           <span class="seq-arrow" aria-hidden="true">→</span>
         </div>
         <div class="seq-item" style="transition-delay:.2s">
-          <span class="seq-label">FRASE</span>
-          <span class="seq-arrow" aria-hidden="true">→</span>
-        </div>
-        <div class="seq-item" style="transition-delay:.3s">
           <span class="seq-label seq-label--hl">MOMENTO INVISÍVEL™</span>
           <span class="seq-arrow" aria-hidden="true">→</span>
         </div>
-        <div class="seq-item" style="transition-delay:.4s">
-          <span class="seq-label">REAÇÃO</span>
+        <div class="seq-item" style="transition-delay:.3s">
+          <span class="seq-label">A COLHER JÁ ESTÁ NA MÃO</span>
         </div>
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOCO URGÊNCIA PASSIVA
+  ============================================================ -->
+  <section class="urgency-passive" aria-label="Urgência emocional">
+    <div class="urgency-passive__inner">
+      <p class="urgency-passive__text reveal">
+        Tem noites em que a cozinha parece chamar pelo nome.
+      </p>
+      <p class="urgency-passive__text reveal" style="transition-delay:.1s">
+        Você chama de vontade.<br>
+        Mas talvez ela já estivesse vindo antes.
+      </p>
+      <p class="urgency-passive__text reveal" style="transition-delay:.2s">
+        Antes do <em>"só hoje"</em> virar hoje.<br>
+        Antes do <em>"eu mereço"</em> virar colher.<br>
+        Antes do <em>"amanhã eu volto"</em> virar mais uma semana.
+      </p>
+      <p class="urgency-passive__emphasis reveal" style="transition-delay:.3s">
+        O problema é que quando você percebe —<br>
+        normalmente já aconteceu.
+      </p>
     </div>
   </section>
 
@@ -1247,8 +1334,9 @@
     <div class="product-intro__inner">
 
       <p class="product-intro__bridge reveal">
-        Antes da Primeira Colher™ são 3 áudios para esse instante anterior —<br>
-        não para depois do arrependimento.
+        Hoje à noite a geladeira vai abrir de novo.<br>
+        Antes da Primeira Colher™ existe para esse segundo —<br>
+        não para o peso que vem depois.
       </p>
 
       <h2 class="product-intro__name reveal" style="transition-delay:.15s">
@@ -1283,7 +1371,7 @@
           </svg>
           <div class="deliverable-card__num">Áudio 01</div>
           <div class="deliverable-card__title">Antes da Geladeira</div>
-          <p class="deliverable-card__desc">Para o segundo em que o corpo vai antes de você entender por quê. Antes da decisão. Antes da fome. Antes da colher.</p>
+          <p class="deliverable-card__desc">Para quando você já está a caminho da cozinha e ainda não sabe o que está procurando.</p>
         </div>
 
         <!-- Áudio 2 -->
@@ -1296,7 +1384,7 @@
           </svg>
           <div class="deliverable-card__num">Áudio 02</div>
           <div class="deliverable-card__title">Quando o Cansaço Vira Permissão</div>
-          <p class="deliverable-card__desc">Para quando o "dia pesado" começa a parecer uma autorização. Para quando o cansaço vira "eu mereço".</p>
+          <p class="deliverable-card__desc">Para quando "foi um dia pesado" começa a parecer uma justificativa suficiente.</p>
         </div>
 
         <!-- Áudio 3 -->
@@ -1309,7 +1397,7 @@
           </svg>
           <div class="deliverable-card__num">Áudio 03</div>
           <div class="deliverable-card__title">Antes do "Amanhã Eu Volto"</div>
-          <p class="deliverable-card__desc">Para quando o recomeço começa a servir de fuga do presente. Para quando o amanhã vira saída para o agora.</p>
+          <p class="deliverable-card__desc">Para quando o amanhã começa a parecer mais fácil que agora.</p>
         </div>
 
         <!-- PDF -->
@@ -1323,7 +1411,7 @@
           </svg>
           <div class="deliverable-card__num deliverable-card__num--pdf">PDF</div>
           <div class="deliverable-card__title">Catálogo de Frases Automáticas Alimentares</div>
-          <p class="deliverable-card__desc">25 frases que abrem a sequência antes da comida aparecer. Para você reconhecer qual é a sua.</p>
+          <p class="deliverable-card__desc"><em style="font-style:normal;color:var(--branco-suave)">"Só uma colher." "Eu mereço." "Já que hoje foi assim." "Amanhã eu compenso." "Nem vai fazer diferença."</em><br><br>25 frases. Uma delas é a sua.</p>
         </div>
 
       </div>
@@ -1340,11 +1428,11 @@
       <div class="reveal">
         <div class="for-whom__col-label for-whom__col-label--yes">Para você se:</div>
         <ul class="for-whom__list for-whom__list--yes">
-          <li>Você só percebe depois que aconteceu</li>
-          <li>Uma dessas cenas não sai da cabeça</li>
-          <li>Você já tentou de tudo "depois" e quer tentar o antes</li>
-          <li>Você se reconheceu em alguma das frases: "era só uma colher", "amanhã eu volto", "não era fome"</li>
-          <li>Você quer entender onde a cena começa antes da comida aparecer</li>
+          <li>Você pensa "eu fiz de novo" com mais frequência do que gostaria</li>
+          <li>Uma dessas cenas foi ontem</li>
+          <li>Você já tentou resolver pelo depois. Tantas vezes.</li>
+          <li>Você reconheceu pelo menos uma dessas frases como sua</li>
+          <li>Você quer entender onde começa — antes de virar arrependimento</li>
         </ul>
       </div>
 
@@ -1354,7 +1442,7 @@
           <li>Você busca plano alimentar ou reeducação nutricional</li>
           <li>Você quer emagrecimento ou controle de peso</li>
           <li>Você busca diagnóstico ou acompanhamento clínico</li>
-          <li>Você espera cura, controle total ou "nunca mais repetir"</li>
+          <li>Você está buscando uma solução que promete nunca mais repetir</li>
         </ul>
       </div>
 
@@ -1374,7 +1462,7 @@
       </p>
 
       <p class="authority__closing reveal" style="transition-delay:.15s">
-        Se você chegou até aqui, talvez já soubesse<br>que o problema não começava na comida.
+        Se você chegou até aqui, talvez já soubesse<br>que não era só fome.
       </p>
 
     </div>
@@ -1418,7 +1506,7 @@
         id="cta-mid"
         onclick="trackCTA('mid')"
       >
-        EU QUERO ISSO PARA HOJE À NOITE →
+        QUERO PERCEBER ANTES — R$27 →
       </a>
       <p class="cta-block__support reveal" style="transition-delay:.2s">
         Compra 100% segura &nbsp;·&nbsp; Acesso imediato após o pagamento &nbsp;·&nbsp; Garantia de 7 dias
@@ -1496,9 +1584,9 @@
     <div class="cta-block__inner">
 
       <p class="cta-bridge reveal">
-        A geladeira vai abrir de novo. A colher vai aparecer.<br>
-        O amanhã vai parecer mais fácil.<br><br>
-        <span class="amber">A diferença é o que você vai reconhecer antes.</span>
+        Hoje à noite a geladeira vai abrir de novo.<br>
+        A próxima colher ainda não aconteceu.<br><br>
+        <span class="amber">A diferença é o que você vai perceber antes dela chegar.</span>
       </p>
 
       <a
