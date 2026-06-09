@@ -41,1724 +41,1586 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Antes da Primeira Colher™ — 3 áudios para o instante anterior à reação automática no território alimentar. Descubra o Momento Invisível™. R$27 com entrega imediata.">
+  <meta name="description" content="3 áudios para o instante anterior à reação automática no território alimentar. Antes da Primeira Colher™ — Padrão Interrompido™">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Marcos Vinicius">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="A geladeira já estava aberta antes de você decidir abrir.">
-  <meta property="og:description" content="Antes da Primeira Colher™ — 3 áudios para o instante anterior à reação automática. R$27. Entrega imediata.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:url" content="https://padraointerrompido.com.br/antes-da-primeira-colher/">
-
   <title>Antes da Primeira Colher™ — Padrão Interrompido™</title>
 
-  <!-- Google Fonts -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="Antes da Primeira Colher™">
+  <meta property="og:description" content="3 áudios para o instante anterior — não para depois do arrependimento.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ======= RESET ======= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
+    /* ======= TOKENS ======= */
     :root {
-      --preto:         #000000;
-      --preto-quente:  #0B0908;
-      --teal:          #1C4D5C;
-      --branco:        #FFFFFF;
-      --branco-suave:  #F5F5F5;
-      --ambar:         #F97316;
-      --ambar-queimado:#D47A3B;
-      --cinza-medio:   #6B6B6B;
-      --cinza-escuro:  #1A1A1A;
-    }
+      --preto:        #000000;
+      --preto-quente: #0B0908;
+      --teal:         #1C4D5C;
+      --branco:       #FFFFFF;
+      --branco-suave: #F5F5F5;
+      --ambar:        #F97316;
+      --ambar-q:      #D47A3B;
+      --cinza-esc:    #1A1A1A;
+      --cinza-med:    #6B6B6B;
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
+      --grito:  'Barlow Condensed', sans-serif;
+      --serif:  'Playfair Display', serif;
+      --metodo: 'Montserrat', sans-serif;
+      --corpo:  'Inter', sans-serif;
+
+      --max: 720px;
+      --ph:  clamp(22px, 5vw, 56px);
+      --pv:  clamp(56px, 9vw, 110px);
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--preto);
+      background: var(--preto);
       color: var(--branco);
-      line-height: 1.6;
+      font-family: var(--corpo);
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* ============================================================
-       ANIMAÇÕES — REVEAL + STAGGER
-    ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
+    img { max-width: 100%; height: auto; display: block; }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ======= UTILITIES ======= */
+    .wrap     { max-width: var(--max); margin: 0 auto; padding: 0 var(--ph); }
+    .amber    { color: var(--ambar); }
+    .amber-q  { color: var(--ambar-q); }
+    .gray     { color: var(--cinza-med); }
+    .soft     { color: var(--branco-suave); }
+    .italic   { font-style: italic; }
 
-    @media (prefers-reduced-motion: reduce) {
-      .reveal,
-      .reveal.visible,
-      .seq-item,
-      .seq-item.visible,
-      .btn-cta,
-      .btn-cta--pulse,
-      .scene__label::after,
-      .guarantee__inner {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
-        width: auto !important;
-        border-left-width: 3px !important;
-        padding-left: 32px !important;
+    /* ======= ANIMAÇÕES ======= */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity .55s ease, transform .55s ease;
       }
+      .reveal.on { opacity: 1; transform: none; }
+      .d1 { transition-delay: .08s; }
+      .d2 { transition-delay: .16s; }
+      .d3 { transition-delay: .24s; }
+      .d4 { transition-delay: .32s; }
     }
 
-    /* ============================================================
-       BLOCO 0 — BARRA DE URGÊNCIA
-    ============================================================ */
-    .urgency-bar {
-      background-color: var(--ambar);
-      text-align: center;
-      padding: 10px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+    /* ======= TOP BAR ======= */
+    .top-bar {
+      background: var(--ambar);
       color: var(--preto);
-      text-transform: uppercase;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-    }
-
-    /* ============================================================
-       BLOCO 1 — HERO
-    ============================================================ */
-    .hero {
-      min-height: 100vh;
-      background-color: var(--preto);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero__inner {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 100px 48px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero__text {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .hero__headline {
-      font-family: 'Playfair Display', serif;
+      text-align: center;
+      padding: 11px var(--ph);
+      font-family: var(--metodo);
       font-weight: 700;
-      font-size: clamp(2rem, 3.8vw, 3.2rem);
-      line-height: 1.22;
-      color: var(--branco);
+      font-size: clamp(11px, 1.4vw, 13px);
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
-    .hero__eyebrow {
+    /* ======= HERO ======= */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: clamp(48px, 8vw, 80px);
+      overflow: hidden;
+      background: var(--preto-quente);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: saturate(.65);
+      z-index: 0;
+    }
+
+    /* overlay gradiente triplo: horizontal + topo + base */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(11,9,8,.45) 0%, rgba(11,9,8,0) 35%),
+        linear-gradient(to right,  rgba(11,9,8,.92) 0%, rgba(11,9,8,.65) 50%, rgba(11,9,8,.35) 100%),
+        linear-gradient(to top,    rgba(11,9,8,.97) 0%, rgba(11,9,8,.72) 50%, rgba(11,9,8,.08) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* eyebrow fixado no topo da seção */
+    .hero-eyebrow {
       position: absolute;
       top: 20px;
       left: clamp(24px, 4vw, 48px);
       z-index: 3;
-      font-family: 'Montserrat', sans-serif;
+      font-family: var(--metodo);
+      font-size: 11px;
       font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
+      letter-spacing: .22em;
+      color: var(--ambar-q);
       text-transform: uppercase;
-      color: var(--ambar-queimado);
     }
 
-    .hero__sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      color: rgba(255, 255, 255, 0.72);
-      line-height: 1.75;
-    }
-
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--ambar);
-      color: var(--branco);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 18px 36px;
-      min-height: 58px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease, letter-spacing 0.2s ease;
-      width: fit-content;
-    }
-
-    .btn-cta:hover {
-      background-color: #e0670e;
-      box-shadow: 0 4px 24px rgba(249, 115, 22, 0.38);
-      letter-spacing: 0.07em;
-    }
-
-    .btn-cta--pulse {
-      animation: ctaPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes ctaPulse {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.02); }
-    }
-
-    .hero__anchor {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      color: var(--cinza-medio);
-      text-decoration: none;
-      display: block;
-    }
-
-    .hero__image-wrap {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    .hero__img {
+    .hero-content {
+      position: relative;
+      z-index: 2;
       width: 100%;
-      max-width: 520px;
-      height: auto;
-      filter: saturate(0.8);
-      display: block;
+      padding: 0 var(--ph);
     }
 
-    /* ============================================================
-       BLOCO 2 — AS TRÊS CENAS
-    ============================================================ */
-    .scenes {
-      background-color: var(--preto-quente);
-      padding: 104px 48px;
-    }
-
-    .scenes__inner {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .scenes__title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1.5rem, 2.8vw, 2rem);
+    .hero-hl {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      line-height: 1.12;
       color: var(--branco);
+      margin-bottom: 18px;
+      max-width: 560px;
+    }
+
+    .hero-sub {
+      font-family: var(--corpo);
+      font-size: clamp(1rem, 1.8vw, 1.1rem);
+      color: rgba(255,255,255,.72);
+      margin-bottom: 36px;
+      max-width: 440px;
+      line-height: 1.65;
+    }
+
+    /* ======= BOTÕES ======= */
+    .btn {
+      display: inline-block;
+      font-family: var(--grito);
+      font-size: clamp(17px, 2.2vw, 20px);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--preto);
+      background: var(--ambar);
+      border: none;
+      padding: 19px 36px;
+      min-height: 60px;
+      line-height: 1;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .2s, letter-spacing .2s;
+    }
+    .btn:hover { background: #d95e0a; transform: translateY(-2px); letter-spacing: .11em; }
+
+    .btn-full {
+      display: block;
+      width: 100%;
+      text-align: center;
+      animation: pulse-cta 3s ease-in-out infinite;
+    }
+    .btn-full:hover { animation: none; }
+
+    @keyframes pulse-cta {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.015); }
+    }
+
+    .anchor-scroll {
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .04em;
+    }
+
+    /* ======= SEÇÕES ======= */
+    section { padding: var(--pv) var(--ph); }
+
+    /* ======= CENAS ======= */
+    .cenas { background: var(--preto-quente); }
+
+    .cena-item {
+      padding-left: 24px;
+      border-left: 2px solid rgba(212,122,59,.35);
       margin-bottom: 64px;
     }
+    .cena-item:last-child { margin-bottom: 0; }
 
-    .scene {
-      padding: 64px 0;
-      border-bottom: 1px solid #1e1e1e;
+    .cena-body {
+      font-family: var(--corpo);
+      font-size: clamp(1rem, 1.8vw, 1.12rem);
+      line-height: 2;
+      color: var(--branco-suave);
     }
 
-    .scene:last-of-type {
-      border-bottom: none;
-    }
-
-    .scene__label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ambar);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .scene__label::after {
-      content: '';
+    .cena-frase {
       display: block;
-      height: 1px;
-      width: 0;
-      background-color: var(--ambar);
-      transition: width 0.35s ease 0.2s;
-    }
-
-    .scene.visible .scene__label::after {
-      width: 40px;
-    }
-
-    .scene__text {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      color: var(--branco-suave);
-      line-height: 1.9;
-    }
-
-    .scene__text em {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--serif);
       font-style: italic;
-      color: var(--ambar-queimado);
+      color: var(--ambar-q);
+      font-size: 1.15em;
+      margin-top: 20px;
     }
 
-    .scenes__transition {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--branco-suave);
-      line-height: 1.7;
-      margin-top: 56px;
-      padding-top: 40px;
-      border-top: 1px solid #1e1e1e;
-    }
-
-    /* ============================================================
-       BLOCO 3 — A VIRADA
-    ============================================================ */
-    .pivot {
-      background-color: var(--preto);
-      padding: 104px 48px;
-    }
-
-    .pivot__inner {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .pivot__main {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1.7rem, 3.2vw, 2.5rem);
-      color: var(--branco);
-      line-height: 1.3;
-      margin-bottom: 36px;
-    }
-
-    .pivot__line-amber {
-      color: var(--ambar);
+    .cena-desfecho {
       display: block;
       margin-top: 20px;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--ambar-q);
       font-size: 1.15em;
     }
 
-    .pivot__support {
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      color: var(--cinza-medio);
-      line-height: 1.85;
-    }
-
-    .pivot__emphasis {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--branco-suave);
-      line-height: 1.7;
-      margin-top: 28px;
-    }
-
-    /* ============================================================
-       BLOCO 4 — MECANISMO (TEAL)
-    ============================================================ */
-    .mechanism {
-      background-color: var(--teal);
-      padding: 104px 48px;
-    }
-
-    .mechanism__inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .mechanism__eyebrow {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: rgba(245,245,245,0.75);
-      margin-bottom: 16px;
-    }
-
-    .mechanism__name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(3rem, 8vw, 6rem);
-      color: var(--ambar-queimado);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      margin-bottom: 36px;
-      transform: scale(0.85);
-      transition: transform 0.45s ease, opacity 0.45s ease;
-    }
-
-    .mechanism__name.visible {
-      transform: scale(1);
-    }
-
-    .mechanism__def {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      color: var(--branco-suave);
-      line-height: 1.85;
-      max-width: 560px;
-      margin: 0 auto 20px;
-    }
-
-    .mechanism__tag {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: var(--ambar-queimado);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 64px;
-    }
-
-    /* Diagrama sequência */
-    .sequence {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0;
-      row-gap: 8px;
-    }
-
-    .seq-item {
-      display: flex;
-      align-items: center;
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .seq-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .seq-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      color: rgba(245,245,245,0.55);
-      white-space: nowrap;
-    }
-
-    .seq-label--hl {
-      color: var(--ambar-queimado);
-      font-weight: 700;
-      font-size: 0.78rem;
-      border: 1px solid var(--ambar-queimado);
-      border-radius: 2px;
-    }
-
-    .seq-arrow {
-      color: rgba(245,245,245,0.25);
-      font-size: 0.85rem;
-      padding: 0 2px;
-      flex-shrink: 0;
-    }
-
-    /* ============================================================
-       BLOCO URGÊNCIA PASSIVA
-    ============================================================ */
-    .urgency-passive {
-      background-color: var(--preto-quente);
-      padding: 104px 48px;
-    }
-
-    .urgency-passive__inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .urgency-passive__text {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      color: var(--cinza-medio);
+    .cena-ponte {
+      margin-top: 56px;
+      font-family: var(--corpo);
+      font-size: clamp(1rem, 1.8vw, 1.1rem);
+      color: var(--cinza-med);
       line-height: 1.9;
-      margin-bottom: 24px;
     }
+    .cena-ponte strong { color: var(--branco); font-style: italic; }
 
-    .urgency-passive__text em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--ambar-queimado);
-    }
+    /* ======= VIRADA ======= */
+    .virada { background: var(--preto); text-align: left; }
 
-    .urgency-passive__emphasis {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
-      color: var(--branco);
-      line-height: 1.5;
-      margin-top: 8px;
-    }
-
-    /* ============================================================
-       BLOCO 5 — APRESENTAÇÃO DO PRODUTO
-    ============================================================ */
-    .product-intro {
-      background-color: var(--preto);
-      padding: 104px 48px;
-      text-align: center;
-    }
-
-    .product-intro__inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .product-intro__bridge {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-      color: var(--branco);
-      line-height: 1.75;
-      margin-bottom: 44px;
-    }
-
-    .product-intro__name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      color: var(--branco);
-      letter-spacing: 0.02em;
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-
-    .product-intro__sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.97rem;
-      color: var(--cinza-medio);
-      line-height: 1.75;
-    }
-
-    /* ============================================================
-       BLOCO 6 — ENTREGÁVEIS
-    ============================================================ */
-    .deliverables {
-      background-color: var(--cinza-escuro);
-      padding: 104px 48px;
-    }
-
-    .deliverables__inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .deliverables__title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.3rem, 2.4vw, 1.75rem);
-      color: var(--branco);
-      margin-bottom: 56px;
-    }
-
-    .deliverable-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .deliverable-card {
-      background-color: #101010;
-      border: 1px solid #222;
-      padding: 32px;
-      transition: border-color 0.25s ease, transform 0.25s ease;
-    }
-
-    .deliverable-card:hover {
-      border-color: var(--ambar);
-      transform: translateY(-4px);
-    }
-
-    .deliverable-card__icon {
-      width: 46px;
-      height: 46px;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .deliverable-card__num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ambar);
-      margin-bottom: 8px;
-    }
-
-    .deliverable-card__num--pdf {
-      color: var(--ambar-queimado);
-    }
-
-    .deliverable-card__title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.97rem;
-      color: var(--branco);
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-
-    .deliverable-card__desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      color: var(--cinza-medio);
-      line-height: 1.8;
-    }
-
-    /* ============================================================
-       BLOCO 7 — PARA QUEM É / NÃO É
-    ============================================================ */
-    .for-whom {
-      background-color: var(--preto-quente);
-      padding: 104px 48px;
-    }
-
-    .for-whom__inner {
-      max-width: 880px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-    }
-
-    .for-whom__col-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .for-whom__col-label--yes { color: var(--ambar); }
-    .for-whom__col-label--no  { color: var(--cinza-medio); }
-
-    .for-whom__list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .for-whom__list li {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.94rem;
-      color: var(--branco-suave);
-      line-height: 1.65;
-      padding-left: 26px;
-      position: relative;
-    }
-
-    .for-whom__list li::before {
-      position: absolute;
-      left: 0;
-      top: 2px;
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .for-whom__list--yes li::before { content: '✓'; color: var(--ambar); }
-    .for-whom__list--no  li::before { content: '✗'; color: var(--cinza-medio); }
-
-    /* ============================================================
-       BLOCO 8 — AUTORIDADE
-    ============================================================ */
-    .authority {
-      background-color: var(--preto);
-      padding: 104px 48px;
-    }
-
-    .authority__inner {
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .authority__text {
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      color: var(--cinza-medio);
+    .virada-pre {
+      font-family: var(--corpo);
+      font-size: clamp(1rem, 1.8vw, 1.1rem);
+      color: var(--cinza-med);
       line-height: 1.9;
       margin-bottom: 32px;
     }
+    .virada-pre em { color: var(--branco); font-style: normal; }
 
-    .authority__text strong { color: var(--branco); }
-
-    .authority__closing {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.05rem;
-      color: var(--ambar-queimado);
-      line-height: 1.75;
-      border-top: 1px solid #1a1a1a;
-      padding-top: 32px;
-    }
-
-    /* ============================================================
-       BLOCO 9 — GARANTIA
-    ============================================================ */
-    .guarantee {
-      background-color: var(--cinza-escuro);
-      padding: 104px 48px;
-    }
-
-    .guarantee__inner {
-      max-width: 640px;
-      margin: 0 auto;
-      border-left: 0px solid var(--ambar);
-      padding-left: 0;
-      transition: border-left-width 0.4s ease, padding-left 0.4s ease;
-    }
-
-    .guarantee__inner.visible {
-      border-left-width: 3px;
-      padding-left: 32px;
-    }
-
-    .guarantee__icon {
-      width: 52px;
-      height: 52px;
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    .guarantee__title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--branco);
-      margin-bottom: 24px;
-    }
-
-    .guarantee__text {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.97rem;
-      color: var(--cinza-medio);
-      line-height: 1.9;
-    }
-
-    .guarantee__text strong { color: var(--branco-suave); }
-    .guarantee__text em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--branco-suave);
-    }
-
-    /* Cabeçalho ícone + título (empilhado no desktop, inline no mobile) */
-    .guarantee__header {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    /* ============================================================
-       BLOCO 10 & 12 — CTA BLOCKS
-    ============================================================ */
-    .cta-block {
-      background-color: var(--preto);
-      padding: 104px 48px;
-      text-align: center;
-    }
-
-    .cta-block--alt {
-      background-color: var(--preto-quente);
-    }
-
-    .cta-block__inner {
-      max-width: 560px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    .cta-block__price {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      color: var(--cinza-medio);
-      margin-bottom: 20px;
-    }
-
-    .cta-block .btn-cta {
-      width: 100%;
-      max-width: 480px;
-      font-size: 1.1rem;
-      padding: 22px 32px;
-      min-height: 62px;
-    }
-
-    .cta-block__support {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.76rem;
-      color: var(--cinza-medio);
-      margin-top: 16px;
-      line-height: 1.9;
-    }
-
-    .cta-bridge {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-      color: var(--branco);
-      line-height: 1.75;
-      margin-bottom: 44px;
-      text-align: center;
-    }
-
-    .cta-bridge .amber { color: var(--ambar); }
-
-    /* ============================================================
-       BLOCO 11 — FAQ
-    ============================================================ */
-    .faq {
-      background-color: var(--teal);
-      padding: 104px 48px;
-    }
-
-    .faq__inner {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .faq__title {
-      font-family: 'Montserrat', sans-serif;
+    .virada-hl {
+      font-family: var(--serif);
       font-weight: 700;
-      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      font-size: clamp(1.7rem, 3.8vw, 2.8rem);
+      line-height: 1.22;
       color: var(--branco);
-      margin-bottom: 52px;
+      margin-bottom: 12px;
     }
 
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    .virada-accent {
+      color: var(--ambar);
+      display: block;
+      font-size: clamp(1.75rem, 3.9vw, 2.9rem);
     }
 
-    .faq-item:first-of-type {
-      border-top: 1px solid rgba(255,255,255,0.1);
+    .virada-expand {
+      margin-top: 36px;
+      font-family: var(--corpo);
+      font-size: clamp(.95rem, 1.65vw, 1.05rem);
+      color: var(--cinza-med);
+      line-height: 1.95;
     }
+    .virada-expand em { font-family: var(--serif); font-style: italic; color: var(--ambar-q); }
 
-    .faq-item[aria-expanded="true"] .faq-item__icon {
-      transform: rotate(45deg);
-    }
+    /* ======= FRASES DO CATÁLOGO — prova implícita ======= */
+    .frases-prova { background: var(--preto-quente); }
 
-    .faq-item__btn {
-      width: 100%;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 24px 0;
-      text-align: left;
-    }
-
-    .faq-item__q {
-      font-family: 'Montserrat', sans-serif;
+    .frases-eyebrow {
+      font-family: var(--metodo);
+      font-size: 11px;
       font-weight: 600;
-      font-size: 0.95rem;
+      letter-spacing: .22em;
+      color: var(--ambar-q);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .frases-intro {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      line-height: 1.55;
+      color: var(--branco);
+      margin-bottom: 44px;
+      max-width: 560px;
+    }
+
+    .frases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 36px;
+    }
+
+    .frase-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 20px 22px;
+      transition: border-color .25s, background .25s;
+    }
+    .frase-card:hover { border-color: rgba(212,122,59,.4); background: rgba(212,122,59,.04); }
+
+    .frase-cat {
+      font-family: var(--metodo);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      color: var(--ambar-q);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .frase-texto {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(.95rem, 1.7vw, 1.05rem);
       color: var(--branco-suave);
       line-height: 1.5;
     }
 
-    .faq-item__icon {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-      color: var(--ambar);
-      transition: transform 0.3s ease;
+    .frases-fechamento {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--ambar-q);
+      line-height: 1.7;
+      padding-left: 18px;
+      border-left: 2px solid var(--ambar);
+      margin-top: 8px;
     }
 
-    .faq-item__answer {
-      display: none;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      color: rgba(245,245,245,0.72);
-      line-height: 1.9;
-      padding-bottom: 24px;
-    }
+    /* ======= MECANISMO ======= */
+    .mecanismo { background: var(--teal); }
 
-    .faq-item[aria-expanded="true"] .faq-item__answer {
-      display: block;
-    }
-
-    /* ============================================================
-       BLOCO 13 — RODAPÉ
-    ============================================================ */
-    .footer {
-      background-color: var(--preto);
-      border-top: 4px solid var(--ambar);
-      padding: 60px 48px;
-      text-align: center;
-    }
-
-    .footer__disclaimer {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      color: var(--cinza-medio);
-      line-height: 1.9;
-      max-width: 720px;
-      margin: 0 auto 28px;
-    }
-
-    .footer__brand {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      color: var(--cinza-medio);
+    .mec-eyebrow {
+      font-family: var(--metodo);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .25em;
+      color: rgba(255,255,255,.55);
+      text-transform: uppercase;
       margin-bottom: 14px;
     }
 
-    .footer__links {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      color: var(--cinza-medio);
+    .mec-nome {
+      font-family: var(--grito);
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--ambar-q);
+      line-height: .92;
+      margin-bottom: 28px;
+      letter-spacing: -.01em;
     }
 
-    .footer__links a {
-      color: var(--cinza-medio);
+    .mec-def {
+      font-family: var(--corpo);
+      font-size: clamp(.95rem, 1.7vw, 1.05rem);
+      color: var(--branco-suave);
+      line-height: 1.85;
+      max-width: 520px;
+      margin-bottom: 20px;
+    }
+
+    .mec-tag {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--ambar-q);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      margin-bottom: 44px;
+    }
+
+    /* diagrama vertical */
+    .diagrama {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 320px;
+    }
+
+    .diag-item {
+      font-family: var(--metodo);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.38);
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .diag-item.hi {
+      color: var(--ambar-q);
+      border-color: var(--ambar-q);
+    }
+
+    .diag-sep {
+      display: flex;
+      align-items: center;
+      height: 20px;
+      margin-left: 14px;
+      color: rgba(255,255,255,.25);
+      font-size: 14px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* ======= PRODUTO ======= */
+    .produto { background: var(--preto); text-align: center; }
+
+    .produto-ponte {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--cinza-med);
+      line-height: 1.85;
+      margin-bottom: 36px;
+    }
+    .produto-ponte em { color: var(--ambar-q); }
+
+    .produto-nome {
+      font-family: var(--grito);
+      font-size: clamp(2.4rem, 7.5vw, 5.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--branco);
+      line-height: .95;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+    }
+
+    .produto-sub {
+      font-family: var(--corpo);
+      font-size: clamp(.9rem, 1.6vw, 1rem);
+      color: var(--cinza-med);
+    }
+
+    /* ======= ENTREGÁVEIS ======= */
+    .entregaveis { background: var(--cinza-esc); }
+
+    .ent-title {
+      font-family: var(--metodo);
+      font-weight: 700;
+      font-size: clamp(.85rem, 1.5vw, .95rem);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--cinza-med);
+      margin-bottom: 40px;
+    }
+
+    /* ======= MOCKUPS ======= */
+    .mockups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 0 0 32px;
+    }
+
+    .mockup-phone {
+      background: #111;
+      border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 14px 14px 18px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .mockup-notch {
+      width: 36px; height: 5px;
+      background: rgba(255,255,255,.15);
+      border-radius: 3px;
+      margin: 0 auto 4px;
+    }
+
+    .mockup-waveform {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3px; height: 32px;
+    }
+    .mockup-waveform span {
+      display: block; width: 3px;
+      background: var(--ambar-q);
+      border-radius: 2px; opacity: .7;
+    }
+
+    .mockup-player { display: flex; align-items: center; gap: 8px; }
+
+    .mockup-play {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--ambar);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mockup-track {
+      flex: 1; height: 2px;
+      background: rgba(255,255,255,.12);
+      border-radius: 2px; position: relative;
+    }
+    .mockup-track::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 35%; background: var(--ambar); border-radius: 2px;
+    }
+
+    .mockup-label {
+      font-family: var(--metodo); font-size: 9px; font-weight: 600;
+      color: var(--ambar); letter-spacing: .15em; text-transform: uppercase;
+      text-align: center;
+    }
+
+    .mockup-audio-title {
+      font-family: var(--corpo); font-size: 10px;
+      color: rgba(255,255,255,.6); text-align: center; line-height: 1.4;
+    }
+
+    .mockup-pdf {
+      background: #0B0908;
+      border: 1.5px solid rgba(212,122,59,.3);
+      border-radius: 8px;
+      padding: 16px 14px;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .mockup-pdf::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px; background: var(--ambar);
+    }
+
+    .mockup-pdf-eyebrow {
+      font-family: var(--metodo); font-size: 7px; font-weight: 600;
+      letter-spacing: .2em; color: var(--ambar-q); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .mockup-pdf-title {
+      font-family: var(--serif); font-size: 12px;
+      line-height: 1.3; color: var(--branco);
+    }
+
+    .mockup-pdf-lines {
+      display: flex; flex-direction: column; gap: 5px; margin-top: 14px;
+    }
+
+    .mockup-pdf-line {
+      height: 1px; background: rgba(255,255,255,.06); border-radius: 1px;
+    }
+
+    .mockup-pdf-brand {
+      font-family: var(--metodo); font-size: 7px;
+      letter-spacing: .18em; color: rgba(255,255,255,.18);
+      text-transform: uppercase; margin-top: 12px;
+    }
+
+    @media (max-width: 380px) { .mockups { grid-template-columns: 1fr; } }
+
+    /* ======= AUDIO CARDS ======= */
+    .audio-cards { display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px; }
+
+    .audio-card {
+      border: 1px solid rgba(255,255,255,.07);
+      padding: 24px 28px;
+      background: rgba(255,255,255,.02);
+      position: relative;
+      transition: border-color .3s, transform .3s;
+    }
+    .audio-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--ambar);
+      transform: scaleY(0);
+      transition: transform .3s;
+      transform-origin: bottom;
+    }
+    .audio-card:hover { border-color: rgba(249,115,22,.28); transform: translateY(-3px); }
+    .audio-card:hover::before { transform: scaleY(1); }
+
+    .audio-num {
+      font-family: var(--metodo);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--ambar);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .audio-tit {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+      color: var(--branco);
+      margin-bottom: 9px;
+    }
+
+    .audio-desc {
+      font-family: var(--corpo);
+      font-size: clamp(.88rem, 1.5vw, .95rem);
+      color: var(--cinza-med);
+      line-height: 1.7;
+    }
+
+    .audio-dur {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      font-family: var(--metodo);
+      font-weight: 600;
+      color: var(--ambar-q);
+      letter-spacing: .12em;
+    }
+
+    /* ======= PDF CARD ======= */
+    .pdf-card {
+      border: 1px dashed rgba(212,122,59,.38);
+      padding: 22px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .pdf-icon {
+      flex-shrink: 0;
+      width: 34px; height: 34px;
+      border: 1px solid var(--ambar-q);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .pdf-tit {
+      font-family: var(--metodo);
+      font-weight: 600;
+      color: var(--branco);
+      margin-bottom: 5px;
+      font-size: clamp(.88rem, 1.5vw, .95rem);
+    }
+
+    .pdf-desc {
+      font-size: clamp(.82rem, 1.4vw, .88rem);
+      color: var(--cinza-med);
+      line-height: 1.65;
+    }
+
+    /* ======= BARRA CTA FLUTUANTE MOBILE ======= */
+    .sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(0,0,0,.96);
+      border-top: 1px solid rgba(249,115,22,.25);
+      padding: 10px 16px 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .sticky-cta a {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; min-height: 54px;
+      font-family: var(--grito); font-size: 17px; font-weight: 900;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--preto); background: var(--ambar);
+      text-decoration: none; line-height: 1;
+    }
+    .sticky-cta-sub {
+      text-align: center; font-size: 10px;
+      color: var(--cinza-med); margin-top: 5px; letter-spacing: .04em;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta { display: block; }
+      body { padding-bottom: 88px; }
+    }
+
+    /* ======= URGÊNCIA REAL ======= */
+    .urgencia {
+      background: rgba(249,115,22,.05);
+      border: 1px solid rgba(249,115,22,.18);
+      padding: 14px 18px; margin-bottom: 22px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .urgencia-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ambar); flex-shrink: 0; margin-top: 6px;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .urgencia-texto {
+      font-family: var(--corpo);
+      font-size: clamp(.8rem, 1.4vw, .86rem);
+      color: rgba(255,255,255,.68); line-height: 1.65;
+    }
+    .urgencia-texto strong { color: var(--ambar); }
+
+    /* ======= ANCORAGEM VALOR ======= */
+    .ancora { background: var(--preto); }
+
+    .ancora-inner {
+      border-left: 3px solid rgba(249,115,22,.25);
+      padding: 32px 32px;
+      background: rgba(255,255,255,.015);
+    }
+
+    .ancora-title {
+      font-family: var(--metodo);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      color: var(--cinza-med);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .ancora-linha {
+      font-family: var(--corpo);
+      font-size: clamp(.9rem, 1.6vw, .98rem);
+      color: var(--branco-suave);
+      line-height: 2.1;
+    }
+    .ancora-linha span { color: var(--cinza-med); font-style: italic; }
+
+    .ancora-destaque {
+      margin-top: 20px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: var(--ambar-q);
+    }
+
+    /* ======= PARA QUEM ======= */
+    .para-quem { background: var(--preto-quente); }
+
+    .pq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .pq-label {
+      font-family: var(--metodo);
+      font-weight: 700;
+      font-size: clamp(.8rem, 1.4vw, .88rem);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .pq-label.sim { color: var(--ambar); }
+    .pq-label.nao { color: var(--cinza-med); }
+
+    .pq-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+    .pq-list li {
+      font-family: var(--corpo);
+      font-size: clamp(.88rem, 1.5vw, .95rem);
+      color: var(--branco-suave);
+      line-height: 1.65;
+      padding-left: 18px;
+      position: relative;
+    }
+    .pq-list li::before {
+      content: '—';
+      position: absolute; left: 0; top: 2px;
+      color: var(--cinza-med);
+    }
+    .pq-col.sim .pq-list li::before { color: var(--ambar-q); }
+
+    /* ======= AUTORIDADE ======= */
+    .autoridade { background: var(--preto); text-align: center; }
+
+    .aut-texto {
+      font-family: var(--corpo);
+      font-size: clamp(.95rem, 1.7vw, 1.08rem);
+      color: var(--cinza-med);
+      line-height: 1.95;
+      margin-bottom: 28px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .aut-texto strong { color: var(--branco); font-weight: 600; }
+
+    .aut-linha {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--ambar-q);
+      font-size: clamp(1rem, 1.8vw, 1.12rem);
+    }
+
+    /* ======= GARANTIA ======= */
+    .garantia {
+      background: var(--preto);
+      border-top: 1px solid rgba(249,115,22,.14);
+      border-bottom: 1px solid rgba(249,115,22,.14);
+    }
+
+    .garantia-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .garantia-icone { flex-shrink: 0; }
+
+    .garantia-tit {
+      font-family: var(--grito);
+      font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--branco);
+      margin-bottom: 14px;
+    }
+
+    .garantia-num { color: var(--ambar); }
+
+    .garantia-texto {
+      font-family: var(--corpo);
+      font-size: clamp(.92rem, 1.6vw, 1rem);
+      color: var(--branco-suave);
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .garantia-texto strong { color: var(--branco); }
+
+    .garantia-italic {
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--cinza-med);
+      font-size: clamp(.88rem, 1.5vw, .98rem);
+    }
+
+    /* ======= CTA BLOCK ======= */
+    .cta-block { background: var(--preto); text-align: center; }
+
+    .cta-pre {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+      color: var(--cinza-med);
+      line-height: 1.85;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-pre em { color: var(--ambar-q); font-style: italic; }
+
+    .cta-preco {
+      font-family: var(--corpo);
+      font-size: 13px;
+      color: var(--cinza-med);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .cta-preco strong { color: var(--branco); font-size: 1.6rem; font-weight: 700; }
+
+    .cta-suporte {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--cinza-med);
+      line-height: 1.9;
+    }
+
+    /* ======= FAQ ======= */
+    .faq { background: var(--teal); }
+
+    .faq-title {
+      font-family: var(--metodo);
+      font-weight: 700;
+      font-size: clamp(.8rem, 1.4vw, .9rem);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 36px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,.08); }
+
+    .faq-btn {
+      width: 100%; background: none; border: none;
+      color: var(--branco);
+      font-family: var(--metodo); font-weight: 600;
+      font-size: clamp(.88rem, 1.6vw, .98rem);
+      text-align: left;
+      padding: 18px 0;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      transition: color .2s;
+    }
+    .faq-btn:hover { color: var(--ambar-q); }
+
+    .faq-ico {
+      flex-shrink: 0; width: 20px; height: 20px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; line-height: 1;
+      transition: transform .3s, background .2s, border-color .2s;
+    }
+    .faq-item.open .faq-ico { transform: rotate(45deg); background: var(--ambar-q); border-color: var(--ambar-q); }
+
+    .faq-resp {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding-bottom .3s;
+    }
+    .faq-item.open .faq-resp { max-height: 300px; padding-bottom: 18px; }
+
+    .faq-resp p {
+      font-family: var(--corpo);
+      font-size: clamp(.88rem, 1.5vw, .95rem);
+      color: rgba(255,255,255,.68);
+      line-height: 1.85;
+    }
+
+    /* ======= CTA FINAL ======= */
+    .cta-final { background: var(--preto); text-align: center; }
+
+    .cta-final-texto {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.9;
+      color: var(--cinza-med);
+      margin-bottom: 44px;
+    }
+    .cta-final-texto em { color: var(--ambar-q); font-style: italic; }
+
+    /* ======= RODAPÉ ======= */
+    footer {
+      background: var(--cinza-esc);
+      padding: 44px var(--ph);
+    }
+
+    .disclaimer {
+      font-size: 11px;
+      color: var(--cinza-med);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      max-width: var(--max);
+    }
+
+    .rodape-links { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+
+    .rodape-links a {
+      font-size: 12px;
+      color: var(--cinza-med);
       text-decoration: underline;
+      transition: color .2s;
+    }
+    .rodape-links a:hover { color: var(--branco); }
+
+    .rodape-marca {
+      font-family: var(--metodo);
+      font-size: 11px;
+      letter-spacing: .16em;
+      color: rgba(255,255,255,.18);
+      text-transform: uppercase;
     }
 
-    .footer__links a:hover { color: var(--branco-suave); }
-
-    /* ============================================================
-       RESPONSIVIDADE
-    ============================================================ */
-
-    /* ---- ≤ 900px — tablet / hero mobile ---- */
-    @media (max-width: 900px) {
-      /* PROBLEMA 1: foto vira background full-width com overlay gradiente */
-      .hero {
-        align-items: flex-end;
-        min-height: 100svh;
-      }
-
-      .hero::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(to right,  rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.45) 100%),
-          linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0)    35%),
-          linear-gradient(to top,    rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.08) 100%);
-        z-index: 1;
-        pointer-events: none;
-      }
-
-      .hero__inner {
-        position: static;
-        display: flex;
-        flex-direction: column;
-        padding: 0 28px 64px;
-        gap: 24px;
-        z-index: 2;
-      }
-
-      .hero__text {
-        position: relative;
-        z-index: 2;
-        gap: 20px;
-      }
-
-      /* PROBLEMA 2: peso visual do headline */
-      .hero__headline {
-        font-weight: 700;
-        font-size: clamp(1.9rem, 8vw, 3.2rem);
-      }
-
-      .hero__image-wrap {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        display: block;
-      }
-
-      .hero__img {
-        width: 100%;
-        height: 100%;
-        max-width: none;
-        max-height: none;
-        object-fit: cover;
-        object-position: center 20%;
-        filter: saturate(0.75);
-      }
-
-      .for-whom__inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-    }
-
-    /* ---- ≤ 640px — mobile ---- */
+    /* ======= MOBILE ======= */
     @media (max-width: 640px) {
-      .scenes,
-      .pivot,
-      .mechanism,
-      .product-intro,
-      .deliverables,
-      .for-whom,
-      .authority,
-      .guarantee,
-      .cta-block,
-      .faq,
-      .footer {
-        padding-left: 24px;
-        padding-right: 24px;
-        padding-top: 80px;
-        padding-bottom: 80px;
-      }
-
-      /* PROBLEMA 3: botões legíveis em mobile */
-      .btn-cta {
-        width: 100%;
-        font-size: 1.125rem;
-        min-height: 62px;
-        padding: 20px 24px;
-        letter-spacing: 0.08em;
-      }
-
-      .cta-block .btn-cta {
-        font-size: 1.25rem;
-        padding: 20px 24px;
-      }
-
-      /* PROBLEMA 6: sequência — lista vertical com seta rotacionada */
-      .sequence {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        padding: 0;
-      }
-
-      .seq-item {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .seq-label {
-        font-size: 0.9rem;
-        padding: 10px 14px;
-      }
-
-      .seq-arrow {
-        display: inline-block;
-        padding: 2px 18px;
-        font-size: 1.1rem;
-        transform: rotate(90deg);
-        color: rgba(245,245,245,0.35);
-      }
-
-      /* PROBLEMA 9: ícone de garantia inline com título */
-      .guarantee__header {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 20px;
-      }
-
-      .guarantee__icon {
-        width: 44px;
-        height: 44px;
-        margin-bottom: 0;
-        flex-shrink: 0;
-      }
-
-      .guarantee__title {
-        margin-bottom: 0;
-      }
-
-      .guarantee__inner.visible {
-        padding-left: 20px;
-      }
+      .frases-grid       { grid-template-columns: 1fr; }
+      .pq-grid           { grid-template-columns: 1fr; gap: 36px; }
+      .garantia-inner    { display: flex; flex-direction: row; align-items: center; gap: 16px; }
+      .garantia-icone    { text-align: left; flex-shrink: 0; }
+      .hero-hl           { font-size: clamp(1.9rem, 8vw, 2.4rem); }
     }
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCW949NK"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCW949NK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-  <!-- ============================================================
-       BLOCO 0 — BARRA DE URGÊNCIA
-  ============================================================ -->
-  <div class="urgency-bar" role="banner" aria-label="Aviso de disponibilidade">
-    Acesso disponível agora &nbsp;·&nbsp; Entrega imediata após o pagamento
+<!-- TOP BAR -->
+<div class="top-bar" role="banner">
+  Acesso disponível agora &nbsp;·&nbsp; Entrega imediata após o pagamento
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-label="Início">
+  <img
+    class="hero-bg"
+    src="geladeira-hero.webp"
+    alt="Silhueta de mulher parada na frente da geladeira aberta à noite"
+    width="900" height="1200"
+    fetchpriority="high"
+  >
+  <p class="hero-eyebrow">Padrão Interrompido™</p>
+  <div class="hero-content">
+    <h1 class="hero-hl reveal">
+      Você já sabe<br>que não era fome.<br>
+      O próximo passo<br>é perceber antes<br>de ir até lá.
+    </h1>
+    <p class="hero-sub reveal d1">
+      3 áudios para o instante anterior —<br>não para depois do arrependimento.
+    </p>
+    <a
+      href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=hero"
+      class="btn reveal d2"
+      id="cta-hero"
+      rel="noopener"
+    >
+      Quero perceber antes →
+    </a>
+    <p class="anchor-scroll reveal d3">↓ Continue lendo primeiro</p>
   </div>
+</section>
 
+<!-- CENAS DE IDENTIFICAÇÃO -->
+<section class="cenas" aria-label="Identificação">
+  <div class="wrap">
 
-  <!-- ============================================================
-       BLOCO 1 — HERO
-  ============================================================ -->
-  <section class="hero" aria-label="Introdução">
-    <p class="hero__eyebrow reveal">Padrão Interrompido™</p>
-    <div class="hero__inner">
+    <div class="cena-item reveal">
+      <p class="cena-body">
+        Tem um momento em que você ainda não abriu a geladeira.<br>
+        Mas já começou a ir.<br><br>
+        Você foi. Ficou parada. Fechou.<br>
+        Voltou. Ficou de novo.
+      </p>
+      <em class="cena-desfecho">Não era fome. Você só não sabia ainda o que era.</em>
+    </div>
 
-      <div class="hero__text">
-        <h1 class="hero__headline reveal">
-          A geladeira já estava aberta<br>antes de você decidir abrir.
-        </h1>
-        <p class="hero__sub reveal" style="transition-delay:.18s">
-          Talvez você esteja tentando resolver tarde demais.
-        </p>
-        <a
-          href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=hero"
-          class="btn-cta btn-cta--pulse reveal"
-          style="transition-delay:.30s"
-          id="cta-hero"
-          onclick="trackCTA('hero')"
-        >
-          QUERO PERCEBER ANTES →
-        </a>
-        <a href="#cenas" class="hero__anchor reveal" style="transition-delay:.42s" aria-label="Continuar lendo">
-          ↓ Continua lendo primeiro
-        </a>
+    <div class="cena-item reveal d1">
+      <p class="cena-body">
+        <span class="cena-frase">"Era só uma colher."</span><br>
+        Na hora parecia pequeno.<br>
+        Depois parecia inevitável.<br><br>
+        A segunda aconteceu.<br>
+        A terceira não teve aviso.<br>
+        Você só registrou quando viu o fundo.
+      </p>
+    </div>
+
+    <div class="cena-item reveal d2">
+      <p class="cena-body">
+        <span class="cena-frase">"Foi um dia pesado. Eu mereço."</span><br>
+        Não foi uma decisão.<br>
+        Foi uma conclusão que já tinha chegado<br>
+        antes de você terminar o raciocínio.<br><br>
+        <span class="cena-frase">"Amanhã eu volto pro eixo."</span><br>
+        Você disse isso semana passada.<br>
+        E na semana anterior.
+      </p>
+    </div>
+
+    <div class="cena-ponte reveal d3">
+      O problema não começa na colher.<br>
+      <strong>A colher só é a parte visível.</strong>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIRADA -->
+<section class="virada" aria-label="A perspectiva">
+  <div class="wrap reveal">
+    <p class="virada-pre">
+      Talvez você não esteja falhando por falta de disciplina.<br>
+      Talvez esteja tentando perceber <em>tarde demais.</em>
+    </p>
+    <h2 class="virada-hl">
+      A reação é o fim da sequência.
+      <span class="virada-accent">Não o começo.</span>
+    </h2>
+    <p class="virada-expand">
+      Você não levantou por fome.<br>
+      Você levantou porque precisava de alguma coisa.<br><br>
+      E esse segundo — entre precisar e ir —<br>
+      <em>é onde tudo começa.</em>
+    </p>
+  </div>
+</section>
+
+<!-- FRASES DO CATÁLOGO — prova implícita -->
+<section class="frases-prova" aria-label="Reconhecimento">
+  <div class="wrap">
+    <p class="frases-eyebrow reveal">Alguém te disse isso antes?</p>
+    <p class="frases-intro reveal d1">
+      Essas são frases reais.<br>
+      Do catálogo que acompanha o produto.<br>
+      Se você reconheceu pelo menos uma —<br>
+      <em class="amber-q">o produto foi escrito para você.</em>
+    </p>
+
+    <div class="frases-grid reveal d2">
+      <div class="frase-card">
+        <p class="frase-cat">O corpo foi antes</p>
+        <p class="frase-texto">"Quando vi, já tava na cozinha."</p>
       </div>
-
-      <div class="hero__image-wrap">
-        <picture>
-          <source srcset="./geladeira-hero.webp" type="image/webp">
-          <img
-            src="./geladeira-hero.jpg"
-            alt="Silhueta de pessoa de costas na frente da geladeira iluminada"
-            class="hero__img"
-            width="520"
-            height="640"
-            fetchpriority="high"
-          >
-        </picture>
+      <div class="frase-card">
+        <p class="frase-cat">A comida virou pausa</p>
+        <p class="frase-texto">"Eu só queria desligar."</p>
       </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 2 — AS TRÊS CENAS
-  ============================================================ -->
-  <section class="scenes" id="cenas" aria-label="Cenas de identificação">
-    <div class="scenes__inner">
-
-      <article class="scene reveal">
-        <p class="scene__text">
-          Tem um momento em que você ainda não abriu a geladeira.<br>
-          Mas já começou a ir.<br><br>
-          Você foi. Ficou parada. Fechou.<br>
-          Voltou. Ficou de novo.<br><br>
-          <em>Não era fome.</em><br>
-          Você só não sabia ainda o que era.
-        </p>
-      </article>
-
-      <article class="scene reveal" style="transition-delay:.1s">
-        <p class="scene__text">
-          <em>"É só uma colher."</em><br>
-          Na hora parecia pequeno.<br>
-          Depois parecia inevitável.<br><br>
-          A segunda aconteceu.<br>
-          A terceira não teve aviso.<br>
-          Você só registrou quando viu o fundo.
-        </p>
-      </article>
-
-      <article class="scene reveal" style="transition-delay:.2s">
-        <p class="scene__text">
-          <em>"Foi um dia pesado. Eu mereço."</em><br>
-          Não foi uma decisão.<br>
-          Foi uma conclusão que já tinha chegado<br>
-          antes de você terminar o raciocínio.<br><br>
-          <em>"Amanhã eu volto pro eixo."</em><br>
-          Você disse isso semana passada.<br>
-          E na semana anterior.
-        </p>
-      </article>
-
-      <p class="scenes__transition reveal" style="transition-delay:.3s">
-        O problema não começa na colher.<br>
-        A colher só é a parte visível.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 3 — A VIRADA
-  ============================================================ -->
-  <section class="pivot" aria-label="Reencadramento do problema">
-    <div class="pivot__inner">
-
-      <h2 class="pivot__main reveal">
-        Talvez você não esteja falhando<br>por falta de disciplina.
-        <span class="pivot__line-amber reveal" style="transition-delay:.2s">
-          Talvez esteja tentando perceber tarde demais.
-        </span>
-      </h2>
-
-      <p class="pivot__emphasis reveal" style="transition-delay:.1s">
-        A reação é o fim da sequência. Não o começo.
-      </p>
-
-      <p class="pivot__support reveal" style="transition-delay:.25s">
-        Você não levantou por fome.<br>
-        Você levantou porque precisava de alguma coisa.<br><br>
-        E esse segundo — entre precisar e ir —<br>
-        é onde tudo começa.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 4 — O MECANISMO
-  ============================================================ -->
-  <section class="mechanism" aria-label="O Momento Invisível">
-    <div class="mechanism__inner">
-
-      <p class="mechanism__eyebrow reveal">O nome desse segundo é</p>
-
-      <h2 class="mechanism__name reveal" style="transition-delay:.2s" id="mechanism-name">
-        MOMENTO INVISÍVEL™
-      </h2>
-
-      <p class="mechanism__def reveal" style="transition-delay:.32s">
-        É o segundo em que o <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--branco-suave)">"só hoje"</em> começa a parecer razoável.<br>
-        Em que <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--branco-suave)">"eu mereço"</em> já decidiu por você.<br>
-        Em que a geladeira ainda não abriu —<br>
-        mas você já está a caminho.
-      </p>
-
-      <p class="mechanism__tag reveal" style="transition-delay:.44s">Não é culpa. É pista.</p>
-
-      <!-- Diagrama da sequência -->
-      <div class="sequence" aria-label="Sequência do padrão automático" role="img">
-        <div class="seq-item">
-          <span class="seq-label">VOCÊ VAI</span>
-          <span class="seq-arrow" aria-hidden="true">→</span>
-        </div>
-        <div class="seq-item" style="transition-delay:.1s">
-          <span class="seq-label">A FRASE APARECE</span>
-          <span class="seq-arrow" aria-hidden="true">→</span>
-        </div>
-        <div class="seq-item" style="transition-delay:.2s">
-          <span class="seq-label seq-label--hl">MOMENTO INVISÍVEL™</span>
-          <span class="seq-arrow" aria-hidden="true">→</span>
-        </div>
-        <div class="seq-item" style="transition-delay:.3s">
-          <span class="seq-label">A COLHER JÁ ESTÁ NA MÃO</span>
-        </div>
+      <div class="frase-card">
+        <p class="frase-cat">O merecimento</p>
+        <p class="frase-texto">"Depois do dia que eu tive…"</p>
       </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO URGÊNCIA PASSIVA
-  ============================================================ -->
-  <section class="urgency-passive" aria-label="Urgência emocional">
-    <div class="urgency-passive__inner">
-      <p class="urgency-passive__text reveal">
-        Tem noites em que a cozinha parece chamar pelo nome.
-      </p>
-      <p class="urgency-passive__text reveal" style="transition-delay:.1s">
-        Você chama de vontade.<br>
-        Mas talvez ela já estivesse vindo antes.
-      </p>
-      <p class="urgency-passive__text reveal" style="transition-delay:.2s">
-        Antes do <em>"só hoje"</em> virar hoje.<br>
-        Antes do <em>"eu mereço"</em> virar colher.<br>
-        Antes do <em>"amanhã eu volto"</em> virar mais uma semana.
-      </p>
-      <p class="urgency-passive__emphasis reveal" style="transition-delay:.3s">
-        O problema é que quando você percebe —<br>
-        normalmente já aconteceu.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 5 — APRESENTAÇÃO DO PRODUTO
-  ============================================================ -->
-  <section class="product-intro" aria-label="O produto">
-    <div class="product-intro__inner">
-
-      <p class="product-intro__bridge reveal">
-        Hoje à noite a geladeira vai abrir de novo.<br>
-        Antes da Primeira Colher™ existe para esse segundo —<br>
-        não para o peso que vem depois.
-      </p>
-
-      <h2 class="product-intro__name reveal" style="transition-delay:.15s">
-        ANTES DA<br>PRIMEIRA COLHER™
-      </h2>
-
-      <p class="product-intro__sub reveal" style="transition-delay:.28s">
-        3 áudios para o instante anterior à reação automática no território alimentar.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 6 — ENTREGÁVEIS
-  ============================================================ -->
-  <section class="deliverables" aria-label="O que você vai receber">
-    <div class="deliverables__inner">
-
-      <h2 class="deliverables__title reveal">O que você vai ouvir</h2>
-
-      <div class="deliverable-grid">
-
-        <!-- Áudio 1 -->
-        <div class="deliverable-card reveal">
-          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
-            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
-            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
-            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
-          </svg>
-          <div class="deliverable-card__num">Áudio 01</div>
-          <div class="deliverable-card__title">Antes da Geladeira</div>
-          <p class="deliverable-card__desc">Para quando você já está a caminho da cozinha e ainda não sabe o que está procurando.</p>
-        </div>
-
-        <!-- Áudio 2 -->
-        <div class="deliverable-card reveal" style="transition-delay:.1s">
-          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
-            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
-            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
-            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
-          </svg>
-          <div class="deliverable-card__num">Áudio 02</div>
-          <div class="deliverable-card__title">Quando o Cansaço Vira Permissão</div>
-          <p class="deliverable-card__desc">Para quando "foi um dia pesado" começa a parecer uma justificativa suficiente.</p>
-        </div>
-
-        <!-- Áudio 3 -->
-        <div class="deliverable-card reveal" style="transition-delay:.2s">
-          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <circle cx="23" cy="23" r="22" stroke="#F97316" stroke-width="1.4"/>
-            <rect x="17" y="14" width="3" height="18" rx="1.5" fill="#F97316"/>
-            <rect x="23" y="10" width="3" height="26" rx="1.5" fill="#F97316"/>
-            <rect x="29" y="17" width="3" height="12" rx="1.5" fill="#F97316"/>
-          </svg>
-          <div class="deliverable-card__num">Áudio 03</div>
-          <div class="deliverable-card__title">Antes do "Amanhã Eu Volto"</div>
-          <p class="deliverable-card__desc">Para quando o amanhã começa a parecer mais fácil que agora.</p>
-        </div>
-
-        <!-- PDF -->
-        <div class="deliverable-card reveal" style="transition-delay:.3s">
-          <svg class="deliverable-card__icon" viewBox="0 0 46 46" fill="none" aria-hidden="true">
-            <circle cx="23" cy="23" r="22" stroke="#D47A3B" stroke-width="1.4"/>
-            <rect x="14" y="11" width="18" height="24" rx="2" stroke="#D47A3B" stroke-width="1.4"/>
-            <path d="M18 18h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M18 23h10" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M18 28h6" stroke="#D47A3B" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-          <div class="deliverable-card__num deliverable-card__num--pdf">PDF</div>
-          <div class="deliverable-card__title">Catálogo de Frases Automáticas Alimentares</div>
-          <p class="deliverable-card__desc"><em style="font-style:normal;color:var(--branco-suave)">"Só uma colher." "Eu mereço." "Já que hoje foi assim." "Amanhã eu compenso." "Nem vai fazer diferença."</em><br><br>25 frases. Uma delas é a sua.</p>
-        </div>
-
+      <div class="frase-card">
+        <p class="frase-cat">A permissão pequena</p>
+        <p class="frase-texto">"Já que comecei…"</p>
+      </div>
+      <div class="frase-card">
+        <p class="frase-cat">A invisibilidade</p>
+        <p class="frase-texto">"Nem peguei prato."</p>
+      </div>
+      <div class="frase-card">
+        <p class="frase-cat">O recomeço adiado</p>
+        <p class="frase-texto">"Vai… só hoje."</p>
       </div>
     </div>
-  </section>
 
+    <p class="frases-fechamento reveal d3">
+      Se você pensou "eu falo isso" —<br>
+      o antes já existe. Só ainda não tem nome.
+    </p>
+  </div>
+</section>
 
-  <!-- ============================================================
-       BLOCO 7 — PARA QUEM É / NÃO É
-  ============================================================ -->
-  <section class="for-whom" aria-label="Para quem é este produto">
-    <div class="for-whom__inner">
+<!-- MECANISMO -->
+<section class="mecanismo" aria-label="O mecanismo">
+  <div class="wrap">
+    <p class="mec-eyebrow reveal">O nome desse segundo é</p>
+    <h2 class="mec-nome reveal d1">Momento<br>Invisível™</h2>
+    <p class="mec-def reveal d2">
+      É o segundo em que o <em class="italic amber-q">"só hoje"</em> começa a parecer razoável.<br>
+      Em que o <em class="italic amber-q">"eu mereço"</em> já decidiu por você.<br>
+      Em que a geladeira ainda não abriu —<br>
+      mas você já está a caminho.
+    </p>
+    <p class="mec-tag reveal d3">Não é culpa. É pista.</p>
 
-      <div class="reveal">
-        <div class="for-whom__col-label for-whom__col-label--yes">Para você se:</div>
-        <ul class="for-whom__list for-whom__list--yes">
+    <div class="diagrama reveal d4" aria-label="Sequência do padrão">
+      <div class="diag-item">Você vai</div>
+      <div class="diag-sep">↓</div>
+      <div class="diag-item">A frase aparece</div>
+      <div class="diag-sep">↓</div>
+      <div class="diag-item hi">[ Momento Invisível™ ]</div>
+      <div class="diag-sep">↓</div>
+      <div class="diag-item">A colher já está na mão</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTO -->
+<section class="produto" aria-label="O produto">
+  <div class="wrap">
+    <p class="produto-ponte reveal">
+      Hoje à noite a geladeira vai abrir de novo.<br>
+      <em>Antes da Primeira Colher™</em> existe para esse segundo —<br>
+      não para o peso que vem depois.
+    </p>
+    <h2 class="produto-nome reveal d1">Antes da<br>Primeira<br>Colher™</h2>
+    <p class="produto-sub reveal d2">3 áudios para o instante anterior à reação automática</p>
+  </div>
+</section>
+
+<!-- ENTREGÁVEIS -->
+<section class="entregaveis" aria-label="O que você recebe">
+  <div class="wrap">
+    <p class="ent-title reveal">O que você vai receber</p>
+
+    <!-- MOCKUPS VISUAIS -->
+    <div class="mockups reveal d1" aria-hidden="true">
+      <div class="mockup-phone">
+        <div class="mockup-notch"></div>
+        <p class="mockup-label">Padrão Interrompido™</p>
+        <p class="mockup-audio-title">Antes da Primeira Colher™</p>
+        <div class="mockup-waveform">
+          <span style="height:8px"></span>
+          <span style="height:18px"></span>
+          <span style="height:26px"></span>
+          <span style="height:14px"></span>
+          <span style="height:30px"></span>
+          <span style="height:20px"></span>
+          <span style="height:10px"></span>
+          <span style="height:24px"></span>
+          <span style="height:16px"></span>
+          <span style="height:28px"></span>
+          <span style="height:12px"></span>
+          <span style="height:22px"></span>
+          <span style="height:8px"></span>
+          <span style="height:18px"></span>
+          <span style="height:14px"></span>
+        </div>
+        <div class="mockup-player">
+          <div class="mockup-play">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="#000"><polygon points="2,1 11,6 2,11"/></svg>
+          </div>
+          <div class="mockup-track"></div>
+        </div>
+        <p class="mockup-audio-title" style="font-size:9px;color:rgba(255,255,255,.35)">3 áudios · 5–7 min cada</p>
+      </div>
+
+      <div class="mockup-pdf">
+        <div>
+          <p class="mockup-pdf-eyebrow">Catálogo de frases</p>
+          <p class="mockup-pdf-title">Antes da<br>Primeira<br>Colher™</p>
+          <div class="mockup-pdf-lines">
+            <div class="mockup-pdf-line" style="width:85%"></div>
+            <div class="mockup-pdf-line" style="width:70%"></div>
+            <div class="mockup-pdf-line" style="width:90%"></div>
+            <div class="mockup-pdf-line" style="width:60%"></div>
+            <div class="mockup-pdf-line" style="width:78%"></div>
+          </div>
+        </div>
+        <p class="mockup-pdf-brand">Padrão Interrompido™</p>
+      </div>
+    </div>
+
+    <div class="audio-cards">
+
+      <div class="audio-card reveal">
+        <p class="audio-num">Áudio 1</p>
+        <h3 class="audio-tit">Antes da Geladeira</h3>
+        <p class="audio-desc">Para quando você já está a caminho da cozinha e ainda não sabe o que está procurando.</p>
+        <span class="audio-dur">5–7 minutos</span>
+      </div>
+
+      <div class="audio-card reveal d1">
+        <p class="audio-num">Áudio 2</p>
+        <h3 class="audio-tit">Quando o Cansaço Vira Permissão</h3>
+        <p class="audio-desc">Para quando <em class="italic">"foi um dia pesado"</em> começa a parecer uma justificativa suficiente.</p>
+        <span class="audio-dur">5–7 minutos</span>
+      </div>
+
+      <div class="audio-card reveal d2">
+        <p class="audio-num">Áudio 3</p>
+        <h3 class="audio-tit">Antes do "Amanhã Eu Volto"</h3>
+        <p class="audio-desc">Para quando o amanhã começa a parecer mais fácil que agora.</p>
+        <span class="audio-dur">5–7 minutos</span>
+      </div>
+
+    </div>
+
+    <div class="pdf-card reveal d3">
+      <div class="pdf-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D47A3B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </div>
+      <div>
+        <p class="pdf-tit">PDF — Antes da Primeira Colher™</p>
+        <p class="pdf-desc">
+          <em class="italic" style="color:var(--ambar-q)">"Só uma colher." "Eu mereço." "Já que hoje foi assim."<br>"Amanhã eu compenso." "Nem vai fazer diferença."</em><br>
+          38 frases. 6 categorias. Uma delas é a sua.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANCORAGEM DE VALOR -->
+<section class="ancora" aria-label="Valor">
+  <div class="wrap">
+    <div class="ancora-inner reveal">
+      <p class="ancora-title">O custo de continuar tentando resolver no depois</p>
+      <p class="ancora-linha">
+        Uma consulta com nutricionista: <span>R$200–400</span><br>
+        Um mês de aplicativo de dieta: <span>R$49</span><br>
+        O "amanhã eu volto" de novo: <span>grátis. E pesado.</span>
+      </p>
+      <p class="ancora-destaque">
+        Antes da Primeira Colher™: R$27.<br>
+        Para o instante que nenhuma dessas coisas ainda chegou.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="para-quem" aria-label="Para quem é">
+  <div class="wrap">
+    <div class="pq-grid">
+      <div class="pq-col sim reveal">
+        <p class="pq-label sim">Para você se</p>
+        <ul class="pq-list">
           <li>Você pensa "eu fiz de novo" com mais frequência do que gostaria</li>
           <li>Uma dessas cenas foi ontem</li>
           <li>Você já tentou resolver pelo depois. Tantas vezes.</li>
-          <li>Você reconheceu pelo menos uma dessas frases como sua</li>
-          <li>Você quer entender onde começa — antes de virar arrependimento</li>
+          <li>Você reconheceu pelo menos uma frase como sua</li>
+          <li>Você quer entender onde começa antes de virar arrependimento</li>
         </ul>
       </div>
-
-      <div class="reveal" style="transition-delay:.12s">
-        <div class="for-whom__col-label for-whom__col-label--no">Não é para você se:</div>
-        <ul class="for-whom__list for-whom__list--no">
+      <div class="pq-col reveal d1">
+        <p class="pq-label nao">Não é para você se</p>
+        <ul class="pq-list">
           <li>Você busca plano alimentar ou reeducação nutricional</li>
           <li>Você quer emagrecimento ou controle de peso</li>
           <li>Você busca diagnóstico ou acompanhamento clínico</li>
           <li>Você está buscando uma solução que promete nunca mais repetir</li>
         </ul>
       </div>
-
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- AUTORIDADE -->
+<section class="autoridade" aria-label="Sobre o projeto">
+  <div class="wrap">
+    <p class="aut-texto reveal">
+      <strong>Padrão Interrompido™</strong> não é terapia.<br>
+      Não é dieta. Não é coaching.<br><br>
+      É um mapeamento educativo do instante anterior à reação automática —<br>
+      para quem já tentou resolver no depois e quer entender o antes.
+    </p>
+    <p class="aut-linha reveal d1">
+      Se você chegou até aqui, talvez já soubesse que não era só fome.
+    </p>
+  </div>
+</section>
 
-  <!-- ============================================================
-       BLOCO 8 — AUTORIDADE POR PRECISÃO
-  ============================================================ -->
-  <section class="authority" aria-label="Sobre o Padrão Interrompido">
-    <div class="authority__inner">
-
-      <p class="authority__text reveal">
-        <strong>Padrão Interrompido™</strong> não é terapia. Não é dieta. Não é coaching.<br><br>
-        É um mapeamento educativo do instante anterior à reação automática — para quem já tentou resolver no depois e quer entender o antes.
-      </p>
-
-      <p class="authority__closing reveal" style="transition-delay:.15s">
-        Se você chegou até aqui, talvez já soubesse<br>que não era só fome.
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 9 — GARANTIA
-  ============================================================ -->
-  <section class="guarantee" aria-label="Garantia de satisfação">
-    <div class="guarantee__inner" id="guarantee-inner">
-
-      <div class="guarantee__header">
-        <svg class="guarantee__icon" viewBox="0 0 52 54" fill="none" aria-hidden="true">
-          <path d="M26 3L5 12v18c0 11.05 8.95 20.57 21 23 12.05-2.43 21-11.95 21-23V12L26 3z" stroke="#F97316" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M17 27l7 7 11-14" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- GARANTIA -->
+<section class="garantia" aria-label="Garantia">
+  <div class="wrap">
+    <div class="garantia-inner">
+      <div class="garantia-icone reveal">
+        <svg width="44" height="44" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 4L6 14V28C6 40 17 50 28 52C39 50 50 40 50 28V14L28 4Z" stroke="#F97316" stroke-width="2" stroke-linejoin="round"/>
+          <polyline points="20,28 26,34 37,23" stroke="#F97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <h2 class="guarantee__title">Garantia de 7 dias</h2>
+      </div>
+      <div>
+        <h3 class="garantia-tit reveal">Garantia de <span class="garantia-num">7 dias</span></h3>
+        <p class="garantia-texto reveal d1">
+          Se você ouvir os 3 áudios nos primeiros 7 dias e não reconhecer nada da sua vida no que é entregue — peça reembolso.<br>
+          <strong>Sem perguntas. Sem burocracia.</strong>
+        </p>
+        <p class="garantia-italic reveal d2">
+          Essa garantia existe porque se o produto não fizer você pensar <em>"isso é exatamente o que acontece comigo"</em> — ele não serviu para você.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PRINCIPAL -->
+<section class="cta-block" aria-label="Compra">
+  <div class="wrap">
+    <p class="cta-pre reveal">
+      Hoje à noite a geladeira vai abrir de novo.<br>
+      A próxima colher ainda não aconteceu.<br><br>
+      <em>A diferença é o que você vai perceber antes dela chegar.</em>
+    </p>
+
+    <!-- URGÊNCIA REAL -->
+    <div class="urgencia reveal d1">
+      <div class="urgencia-dot"></div>
+      <p class="urgencia-texto">
+        <strong>Este produto existe para ser usado na vida real, não para ser lembrado amanhã.</strong><br>
+        Hoje à noite vai acontecer de novo. O acesso é imediato após o pagamento — você pode ouvir o primeiro áudio antes de dormir.
+      </p>
+    </div>
+
+    <p class="cta-preco reveal d2">Acesso completo e imediato por <strong>R$27</strong></p>
+    <a
+      href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=mid"
+      class="btn btn-full reveal d2"
+      id="cta-mid"
+      rel="noopener"
+    >
+      Quero perceber antes — R$27 →
+    </a>
+    <p class="cta-suporte reveal d3">
+      🔒 Compra 100% segura &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" aria-label="Perguntas frequentes">
+  <div class="wrap">
+    <p class="faq-title reveal">Perguntas frequentes</p>
+    <div class="faq-list reveal d1">
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          Isso é terapia ou acompanhamento psicológico?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-resp" role="region">
+          <p>Não. É um produto educativo e de autopercepção. Não substitui e não tem relação com acompanhamento médico, psicológico ou nutricional.</p>
+        </div>
       </div>
 
-      <p class="guarantee__text">
-        Se você ouvir os 3 áudios nos primeiros 7 dias e não reconhecer nada da sua vida no que é entregue — peça reembolso.<br><br>
-        <strong>Sem perguntas. Sem burocracia.</strong><br><br>
-        Essa garantia existe porque se o produto não fizer você pensar <em>"isso é exatamente o que acontece comigo"</em> — ele não serviu para você.
-      </p>
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          Preciso ter conhecimento prévio sobre padrões?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-resp" role="region">
+          <p>Não. Os áudios foram criados para quem está percebendo isso pela primeira vez. Você só precisa ter vivido uma das cenas descritas na página.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          O que recebo exatamente?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-resp" role="region">
+          <p>3 áudios de 5 a 7 minutos cada + 1 PDF com 38 frases automáticas alimentares em 6 categorias. Tudo entregue imediatamente após o pagamento, via link de acesso enviado por e-mail.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          Funciona para qualquer tipo de cena alimentar?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-resp" role="region">
+          <p>Os 3 áudios cobrem as cenas mais comuns: a geladeira sem fome clara, o cansaço que vira permissão e o recomeço que nunca chega. Se você se reconheceu em alguma delas aqui, o produto foi feito para você.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false">
+          E se eu não me reconhecer em nada?
+          <span class="faq-ico" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-resp" role="region">
+          <p>Você tem 7 dias de garantia. Se ouvir os áudios e não se reconhecer, peça reembolso. Sem perguntas, sem burocracia.</p>
+        </div>
+      </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- CTA FINAL -->
+<section class="cta-final" aria-label="Encerramento">
+  <div class="wrap">
+    <p class="cta-final-texto reveal">
+      A geladeira vai abrir de novo.<br>
+      A colher vai aparecer.<br>
+      O amanhã vai parecer mais fácil.<br><br>
+      <em>A diferença é o que você vai perceber antes.</em>
+    </p>
+    <a
+      href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=bottom"
+      class="btn btn-full reveal d1"
+      id="cta-bottom"
+      rel="noopener"
+    >
+      Começar agora — R$27 →
+    </a>
+    <p class="cta-suporte reveal d2">
+      3 áudios + PDF &nbsp;·&nbsp; Entrega imediata &nbsp;·&nbsp; Garantia de 7 dias
+    </p>
+  </div>
+</section>
 
-  <!-- ============================================================
-       BLOCO 10 — CTA PRINCIPAL
-  ============================================================ -->
-  <section class="cta-block" aria-label="Adquirir o produto">
-    <div class="cta-block__inner">
-      <p class="cta-block__price reveal">R$27 — entrega imediata</p>
-      <a
-        href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=mid"
-        class="btn-cta btn-cta--pulse reveal"
-        style="transition-delay:.1s"
-        id="cta-mid"
-        onclick="trackCTA('mid')"
-      >
-        QUERO PERCEBER ANTES — R$27 →
-      </a>
-      <p class="cta-block__support reveal" style="transition-delay:.2s">
-        Compra 100% segura &nbsp;·&nbsp; Acesso imediato após o pagamento &nbsp;·&nbsp; Garantia de 7 dias
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 11 — FAQ
-  ============================================================ -->
-  <section class="faq" aria-label="Perguntas frequentes">
-    <div class="faq__inner">
-
-      <h2 class="faq__title reveal">Perguntas frequentes</h2>
-
-      <div class="faq-item" aria-expanded="false">
-        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
-          <span class="faq-item__q">Isso é terapia ou acompanhamento psicológico?</span>
-          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-        </button>
-        <p class="faq-item__answer">Não. É um produto educativo e de autopercepção. Não substitui acompanhamento médico, psicológico ou nutricional.</p>
-      </div>
-
-      <div class="faq-item" aria-expanded="false">
-        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
-          <span class="faq-item__q">Preciso ter conhecimento prévio sobre padrões?</span>
-          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-        </button>
-        <p class="faq-item__answer">Não. Os áudios foram criados para quem está percebendo isso pela primeira vez. Você só precisa ter vivido uma das cenas.</p>
-      </div>
-
-      <div class="faq-item" aria-expanded="false">
-        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
-          <span class="faq-item__q">Funciona para qualquer tipo de cena alimentar?</span>
-          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-        </button>
-        <p class="faq-item__answer">Os 3 áudios cobrem as cenas mais comuns: a geladeira sem fome clara, o cansaço que vira permissão e o recomeço que nunca chega. Se você se reconheceu em alguma delas, o produto foi feito para você.</p>
-      </div>
-
-      <div class="faq-item" aria-expanded="false">
-        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
-          <span class="faq-item__q">O que recebo exatamente?</span>
-          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-        </button>
-        <p class="faq-item__answer">3 áudios de 5 a 7 minutos cada + 1 PDF com 25 frases automáticas alimentares. Tudo entregue imediatamente após o pagamento.</p>
-      </div>
-
-      <div class="faq-item" aria-expanded="false">
-        <button class="faq-item__btn" onclick="toggleFaq(this)" type="button">
-          <span class="faq-item__q">E se eu não reconhecer nada?</span>
-          <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-        </button>
-        <p class="faq-item__answer">Você tem 7 dias de garantia. Se ouvir os áudios e não se reconhecer em nada do que é entregue, peça o reembolso. Sem perguntas.</p>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 12 — CTA FINAL
-  ============================================================ -->
-  <section class="cta-block cta-block--alt" aria-label="Comprar agora">
-    <div class="cta-block__inner">
-
-      <p class="cta-bridge reveal">
-        Hoje à noite a geladeira vai abrir de novo.<br>
-        A próxima colher ainda não aconteceu.<br><br>
-        <span class="amber">A diferença é o que você vai perceber antes dela chegar.</span>
-      </p>
-
-      <a
-        href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=bottom"
-        class="btn-cta btn-cta--pulse reveal"
-        style="transition-delay:.15s"
-        id="cta-bottom"
-        onclick="trackCTA('bottom')"
-      >
-        COMEÇAR AGORA — R$27 →
-      </a>
-
-      <p class="cta-block__support reveal" style="transition-delay:.28s">
-        Compra 100% segura &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       BLOCO 13 — RODAPÉ
-  ============================================================ -->
-  <footer class="footer">
-    <p class="footer__disclaimer">
+<!-- RODAPÉ -->
+<footer role="contentinfo">
+  <div class="wrap">
+    <p class="disclaimer">
       Este produto tem finalidade exclusivamente educativa e de autopercepção. Não é diagnóstico, tratamento, terapia ou acompanhamento psicológico, médico ou nutricional. Não promete resultado específico, emagrecimento, controle alimentar ou transformação definitiva. Resultados e experiências individuais variam.
     </p>
-    <p class="footer__brand">
-      Padrão Interrompido™ &nbsp;·&nbsp; padraointerrompido.com.br
-    </p>
-    <p class="footer__links">
-      <a href="/politica-de-privacidade/">Política de Privacidade</a>
-      &nbsp;·&nbsp;
-      <a href="/termos-de-uso/">Termos de Uso</a>
-      &nbsp;·&nbsp;
+    <nav class="rodape-links" aria-label="Links do rodapé">
+      <a href="https://padraointerrompido.com.br/politica-de-privacidade/">Política de Privacidade</a>
+      <a href="https://padraointerrompido.com.br/termos-de-uso/">Termos de Uso</a>
       <a href="mailto:contato@padraointerrompido.com.br">Suporte</a>
-    </p>
-  </footer>
+    </nav>
+    <p class="rodape-marca">Padrão Interrompido™ · padraointerrompido.com.br</p>
+  </div>
+</footer>
 
+<!-- BARRA CTA FLUTUANTE MOBILE -->
+<div class="sticky-cta" id="sticky-cta" aria-label="Compra rápida">
+  <a
+    href="https://chk.eduzz.com/69K18VX3WO?utm_source=pagina&utm_medium=cta&utm_campaign=antes-primeira-colher&utm_content=sticky"
+    id="cta-sticky"
+    rel="noopener"
+  >
+    Quero perceber antes — R$27 →
+  </a>
+  <p class="sticky-cta-sub">Acesso imediato · Garantia 7 dias</p>
+</div>
 
-  <script>
-    /* ============================================================
-       REVEAL — IntersectionObserver geral
-    ============================================================ */
-    const revealObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.14 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('on'));
+  }
 
-    document.querySelectorAll('.reveal').forEach(function(el) {
-      revealObserver.observe(el);
-    });
-
-    /* Hero — entrada imediata com stagger */
-    document.querySelectorAll('.hero .reveal').forEach(function(el, i) {
-      setTimeout(function() { el.classList.add('visible'); }, i * 120 + 80);
-    });
-
-    /* ============================================================
-       SCENES — animação da linha âmbar no label
-    ============================================================ */
-    var sceneObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+  // FAQ accordion
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
       });
-    }, { threshold: 0.28 });
-
-    document.querySelectorAll('.scene').forEach(function(el) {
-      sceneObserver.observe(el);
+      if (!open) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        if (typeof gtag === 'function') gtag('event', 'faq_open', { q: btn.textContent.trim() });
+      }
     });
+  });
 
-    /* ============================================================
-       MECHANISM — escala do nome + sequência com stagger
-    ============================================================ */
-    var mechanismName = document.getElementById('mechanism-name');
-    var seqItems = document.querySelectorAll('.seq-item');
-    var seqWrap = document.querySelector('.sequence');
-
-    if (mechanismName) {
-      var mechObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            mechObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-      mechObserver.observe(mechanismName);
-    }
-
-    if (seqWrap) {
-      var seqObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            seqItems.forEach(function(item, i) {
-              setTimeout(function() { item.classList.add('visible'); }, i * 100);
-            });
-            seqObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-      seqObserver.observe(seqWrap);
-    }
-
-    /* ============================================================
-       GARANTIA — border-left animado ao entrar na viewport
-    ============================================================ */
-    var guaranteeInner = document.getElementById('guarantee-inner');
-    if (guaranteeInner) {
-      var gObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            gObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.25 });
-      gObserver.observe(guaranteeInner);
-    }
-
-    /* ============================================================
-       FAQ — accordion com tracking
-    ============================================================ */
-    function toggleFaq(btn) {
-      var item = btn.closest('.faq-item');
-      var isOpen = item.getAttribute('aria-expanded') === 'true';
-      item.setAttribute('aria-expanded', String(!isOpen));
-
-      if (!isOpen && window.dataLayer) {
-        window.dataLayer.push({
-          event: 'faq_open',
-          faq_question: btn.querySelector('.faq-item__q').textContent.trim()
-        });
+  // Rastreamento scroll depth
+  let hits = {};
+  window.addEventListener('scroll', () => {
+    const pct = Math.round(window.scrollY / (document.body.scrollHeight - innerHeight) * 100);
+    [50, 80].forEach(m => {
+      if (!hits[m] && pct >= m) {
+        hits[m] = true;
+        if (typeof gtag === 'function') gtag('event', `scroll_${m}`);
       }
-    }
+    });
+  }, { passive: true });
 
-    /* ============================================================
-       SCROLL TRACKING — 50% e 80%
-    ============================================================ */
-    var scrollTracked = {};
-    window.addEventListener('scroll', function() {
-      var doc  = document.documentElement;
-      var pct  = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
-
-      if (!scrollTracked[50] && pct >= 50) {
-        scrollTracked[50] = true;
-        if (window.dataLayer) window.dataLayer.push({ event: 'scroll_50' });
+  // Barra CTA flutuante — aparece após 18% de scroll
+  const stickyCta = document.getElementById('sticky-cta');
+  let stickyVisible = false;
+  if (stickyCta) {
+    stickyCta.style.transform = 'translateY(100%)';
+    stickyCta.style.transition = 'transform .35s ease';
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - innerHeight);
+      if (pct > 0.18 && !stickyVisible) {
+        stickyCta.style.transform = 'translateY(0)';
+        stickyVisible = true;
       }
-      if (!scrollTracked[80] && pct >= 80) {
-        scrollTracked[80] = true;
-        if (window.dataLayer) window.dataLayer.push({ event: 'scroll_80' });
+      if (pct <= 0.18 && stickyVisible) {
+        stickyCta.style.transform = 'translateY(100%)';
+        stickyVisible = false;
       }
     }, { passive: true });
+  }
 
-    /* ============================================================
-       CTA TRACKING
-    ============================================================ */
-    function trackCTA(position) {
-      var events = { hero: 'cta_click_hero', mid: 'cta_click_mid', bottom: 'cta_click_bottom' };
-      if (window.dataLayer) {
-        window.dataLayer.push({ event: events[position] || 'cta_click', cta_position: position });
-      }
-      if (window.fbq) {
-        window.fbq('track', 'InitiateCheckout', { content_name: 'antes-da-primeira-colher', value: 27, currency: 'BRL' });
-      }
-    }
-  </script>
+  // Rastreamento sticky CTA
+  const stickyEl = document.getElementById('cta-sticky');
+  if (stickyEl) stickyEl.addEventListener('click', () => {
+    if (typeof gtag === 'function') gtag('event', 'cta_sticky');
+  });
 
-  <script src="/js/tracking.js" defer></script>
+  // Rastreamento CTAs principais
+  ['cta-hero', 'cta-mid', 'cta-bottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => {
+      if (typeof gtag === 'function') gtag('event', `cta_${id.replace('cta-', '')}`);
+      if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
+    });
+  });
+</script>
 </body>
 </html>
