@@ -52,9 +52,14 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
 
+  <!-- Preload hero image antes das fontes para LCP -->
+  <link rel="preload" as="image" href="geladeira-hero.webp" type="image/webp" fetchpriority="high">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Fontes não-bloqueantes: carregam após first paint, sem bloquear render -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet"></noscript>
 
   <style>
     /* ======= RESET ======= */
@@ -994,7 +999,7 @@
 
     .disclaimer {
       font-size: 11px;
-      color: var(--cinza-med);
+      color: #8C8C8C; /* era #6B6B6B — contraste 3.5:1 falha WCAG AA; #8C8C8C = 5.3:1 ✓ */
       line-height: 1.8;
       margin-bottom: 20px;
       max-width: var(--max);
@@ -1004,7 +1009,7 @@
 
     .rodape-links a {
       font-size: 12px;
-      color: var(--cinza-med);
+      color: #8C8C8C; /* era #6B6B6B — mesmo ajuste de contraste */
       text-decoration: underline;
       transition: color .2s;
     }
@@ -1014,7 +1019,7 @@
       font-family: var(--metodo);
       font-size: 11px;
       letter-spacing: .16em;
-      color: rgba(255,255,255,.18);
+      color: rgba(255,255,255,.45); /* era .18 — contraste 1.5:1 falha; .45 = 4.5:1 ✓ */
       text-transform: uppercase;
     }
 
