@@ -20,24 +20,7 @@
     gtag('config', 'G-QJ7PW4HBRQ');
   </script>
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '541342531532855');
-  fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1" />
-  </noscript>
-  <!-- End Meta Pixel Code -->
+  <!-- Meta Pixel: carregado após window.load para não bloquear FCP/TBT -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1019,7 +1002,7 @@
       font-family: var(--metodo);
       font-size: 11px;
       letter-spacing: .16em;
-      color: rgba(255,255,255,.45); /* era .18 — contraste 1.5:1 falha; .45 = 4.5:1 ✓ */
+      color: #8C8C8C; /* era rgba .18 (1.5:1); #8C8C8C = 5.3:1 sobre #1A1A1A ✓ WCAG AA */
       text-transform: uppercase;
     }
 
@@ -1630,5 +1613,25 @@
     });
   });
 </script>
+
+<!-- Meta Pixel — diferido para após window.load, remove ~305ms de TBT -->
+<script>
+window.addEventListener('load', function() {
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','541342531532855');
+  fbq('track','PageView');
+});
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=541342531532855&ev=PageView&noscript=1">
+</noscript>
 </body>
 </html>
